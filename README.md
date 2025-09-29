@@ -1,10 +1,13 @@
-# schema-spec
+# schemas
 
-This repository contains the specification of the Nextflow schema.
+This repository contains the schemas used by Nextflow.
 
-## Schema
+The following schemas are currently defined:
 
-The `parameters_meta_schema.json` file describes the structure of the `nextflow_schema.json` file.
+- `pipeline-input`: Schema for pipeline input specs
+- `plugin`: Schema for plugin specs
+
+Each folder contains the schema (`schema.json`) and a `tests` folder with test cases.
 
 ## Development
 
@@ -27,12 +30,12 @@ pre-commit run --all-files
 
 This is done automatically when committing.
 
-### Testing the meta-schema
+### Testing schemas
 
-The meta-schema can be tested against a set of test schemas located in the `test_schemas` directory using docker and the `validate.sh` script.
+Schemas can be tested against their test cases using Docker and the `validate-docker.sh` script.
 
 ```bash
-./validate.sh
+./validate-docker.sh
 ```
 
-It is automatically tested in GitHub Actions via the `test-meta-schema.yml` workflow.
+It is automatically tested in GitHub Actions via the `test.yml` workflow.

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/plugin/schema.json",
+  "title": "Nextflow plugin schema",
+  "description": "Schema for Nextflow plugin specs",
+  "type": "object",
+  "properties": {
+    "definitions": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/config_scope"
+          },
+          {
+            "$ref": "#/$defs/function"
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "config_scope": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ConfigScope"]
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/config_scope"
+                  },
+                  {
+                    "$ref": "#/$defs/config_option"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "config_option": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["ConfigOption"]
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "function": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": ["Factory", "Function", "Operator"]
+        },
+        "spec": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "returnType": {
+              "type": "string"
+            },
+            "parameters": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

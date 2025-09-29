@@ -1,0 +1,31 @@
+name: Test schemas
+
+on:
+  push:
+    paths:
+      - "**.json"
+      - ".github/workflows/test.yml"
+      - "validate.sh"
+  pull_request:
+    paths:
+      - "**.json"
+      - ".github/workflows/test.yml"
+      - "validate.sh"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install check-jsonschema
+        run: pip install check-jsonschema
+
+      - name: Validate JSON Schemas
+        run: |
+          ./validate.sh

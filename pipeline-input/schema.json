@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nextflow.io",
-  "title": "Nextflow Schema Meta-schema",
-  "description": "Meta-schema to validate Nextflow parameter schema files",
+  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/pipeline-input/schema.json",
+  "title": "Nextflow pipeline input schema",
+  "description": "Schema to validate Nextflow pipeline input specs",
   "type": "object",
   "properties": {
     "$schema": {

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nextflow-io/schemas/main/plugin/schema.json",
+  "definitions": [
+    {
+      "type": "ConfigScope",
+      "spec": {
+        "name": "hello",
+        "description": "The `hello` scope controls the behavior of the `nf-hello` plugin.",
+        "children": [
+          {
+            "type": "ConfigOption",
+            "spec": {
+              "name": "message",
+              "description": "Message to print to standard output when the plugin is enabled.",
+              "type": "String"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Function",
+      "spec": {
+        "name": "sayHello",
+        "description": "Say hello to the given target",
+        "returnType": "void",
+        "parameters": [
+          {
+            "name": "target",
+            "type": "String"
+          }
+        ]
+      }
+    }
+  ]
+}
