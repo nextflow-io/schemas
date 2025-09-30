@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/plugin/schema.json",
+  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/plugin/v1/schema.json",
   "title": "Nextflow plugin schema",
   "description": "Schema for Nextflow plugin specs",
   "type": "object",

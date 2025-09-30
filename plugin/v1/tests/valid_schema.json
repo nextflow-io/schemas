@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/nextflow-io/schemas/main/plugin/schema.json",
+  "$schema": "https://raw.githubusercontent.com/nextflow-io/schemas/main/plugin/v1/schema.json",
   "definitions": [
     {
       "type": "ConfigScope",
