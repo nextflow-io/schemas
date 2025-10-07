@@ -24,11 +24,16 @@ pre-commit install
 
 To run Prettier on all files, run the following command:
 
+### Building Documentation
+
+Serve documentation locally:
+
 ```bash
-pre-commit run --all-files
+uv sync --extra docs
+uv run mkdocs serve
 ```
 
-This is done automatically when committing.
+Then open `http://127.0.0.1:8000` in your browser.
 
 ### Testing schemas
 
