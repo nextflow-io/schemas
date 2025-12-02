@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for folder in pipeline-input plugin/v1 ; do
+for folder in pipeline/v1 plugin/v1 ; do
   schema="$folder/schema.json"
 
   echo "Validating $schema ..."
