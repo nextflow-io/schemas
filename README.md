@@ -4,7 +4,7 @@ This repository contains the schemas used by Nextflow.
 
 The following schemas are currently defined:
 
-- `pipeline-input`: Schema for pipeline input specs
+- `pipeline`: Schema for pipeline specs
 - `plugin`: Schema for plugin specs
 
 Each folder contains the schema (`schema.json`) and a `tests` folder with test cases.
