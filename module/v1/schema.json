@@ -256,13 +256,7 @@
           "type": "array",
           "description": "List of allowed values for the parameter",
           "items": {
-            "type": [
-              "string",
-              "number",
-              "boolean",
-              "array",
-              "object"
-            ]
+            "type": ["string", "number", "boolean", "array", "object"]
           },
           "uniqueItems": true
         },
