@@ -233,7 +233,16 @@
         "type": {
           "type": "string",
           "description": "Type of the parameter",
-          "enum": ["boolean", "float", "integer", "string", "list", "map", "file", "directory"]
+          "enum": [
+            "boolean",
+            "float",
+            "integer",
+            "string",
+            "list",
+            "map",
+            "file",
+            "directory"
+          ]
         },
         "description": {
           "type": "string",
@@ -247,7 +256,13 @@
           "type": "array",
           "description": "List of allowed values for the parameter",
           "items": {
-            "type": ["string", "number", "boolean", "array", "object"]
+            "type": [
+              "string",
+              "number",
+              "boolean",
+              "array",
+              "object"
+            ]
           },
           "uniqueItems": true
         },
