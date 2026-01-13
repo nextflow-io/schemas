@@ -37,6 +37,9 @@ copyright = """
 Copyright &copy; 2026 The authors
 """
 
+repo_url = "https://github.com/nextflow-io/schemas"
+repo_name = "nextflow-io/schemas"
+
 # Zensical supports both implicit navigation and explicitly defined navigation.
 # If you decide not to define a navigation here then Zensical will simply
 # derive the navigation structure from the directory structure of your
@@ -57,7 +60,7 @@ Copyright &copy; 2026 The authors
 #
 # Read more: https://zensical.org/docs/customization/#additional-css
 #
-#extra_css = ["stylesheets/extra.css"]
+extra_css = ["stylesheets/extra.css"]
 
 # With the `extra_javascript` option you can add your own JavaScript to your
 # project to customize the behavior according to your needs.
@@ -240,7 +243,7 @@ features = [
     # When anchor following for the table of contents is enabled, the sidebar
     # is automatically scrolled so that the active anchor is always visible.
     # https://zensical.org/docs/setup/navigation/#anchor-following
-    # "toc.follow",
+    "toc.follow",
 
     # When navigation integration for the table of contents is enabled, it is
     # always rendered as part of the navigation sidebar on the left.
@@ -257,15 +260,25 @@ features = [
 # Read more:
 # - https://zensical.org/docs/setup/colors/
 # ----------------------------------------------------------------------------
+# Palette toggle for automatic mode
 [[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/eye"
+toggle.name = "Switch to light mode"
+
+# Palette toggle for light mode
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
 scheme = "default"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
+# Palette toggle for dark mode
 [[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
 scheme = "slate"
 toggle.icon = "lucide/moon"
-toggle.name = "Switch to light mode"
+toggle.name = "Switch to system preference"
 
 # ----------------------------------------------------------------------------
 # In the "font" subsection you can configure the fonts used. By default, fonts
@@ -273,9 +286,9 @@ toggle.name = "Switch to light mode"
 # of suitably licensed fonts. There are options for a normal text font and for
 # a monospaced font used in code blocks.
 # ----------------------------------------------------------------------------
-#[project.theme.font]
-#text = "Inter"
-#code = "Jetbrains Mono"
+[project.theme.font]
+text = "Inter"
+code = "Fira Code"
 
 # ----------------------------------------------------------------------------
 # You can configure your own logo to be shown in the header using the "logo"
@@ -292,8 +305,8 @@ toggle.name = "Switch to light mode"
 # - https://zensical.org/docs/setup/logo-and-icons
 # - https://zensical.org/docs/authoring/icons-emojis/#search
 # ----------------------------------------------------------------------------
-#[project.theme.icon]
-#logo = "lucide/smile"
+[project.theme.icon]
+logo = "lucide/braces"
 #repo = "lucide/smile"
 
 # ----------------------------------------------------------------------------
