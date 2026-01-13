@@ -6,5 +6,12 @@
   font-size: 1rem !important;
 }
 .md-typeset h6 code {
-  font-size: 1rem !important;
+  font-size: 0.8rem !important;
+}
+
+/* Hide empty table headers (headers with only whitespace) */
+.md-typeset table thead tr th:empty {
+  visibility: hidden;
+  padding: 0;
+  border: none;
 }
