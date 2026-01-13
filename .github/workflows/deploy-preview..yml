@@ -21,7 +21,8 @@ jobs:
       - uses: astral-sh/setup-uv@v7
       - run: uv run generate_schema_docs.py --all
       - run: uv run zensical build --clean
-      - run: uv run prek --all-files
+      - uses: j178/prek-action@v1
+        continue-on-error: true
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1

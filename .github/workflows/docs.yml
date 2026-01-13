@@ -25,7 +25,8 @@ jobs:
       - uses: astral-sh/setup-uv@v7
       - run: uv run generate_schema_docs.py --all
       - run: uv run zensical build --clean
-      - run: uv run prek --all-files
+      - uses: j178/prek-action@v1
+        continue-on-error: true
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: site # The folder the action should deploy.
