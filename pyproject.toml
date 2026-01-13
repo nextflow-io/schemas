@@ -3,18 +3,11 @@ name = "nextflow-schemas"
 version = "0.1.0"
 description = "JSON schemas for Nextflow pipeline inputs and plugins"
 readme = "README.md"
-requires-python = ">=3.9"
-
-[project.optional-dependencies]
-docs = [
-    "mkdocs>=1.5.0",
-    "mkdocs-material[imaging]>=9.5.0",
-    "pymdown-extensions>=10.0",
-    "pre-commit>=4.3.0"
-]
+requires-python = ">=3.10"
 
 [dependency-groups]
 dev = [
-    "check-jsonschema>=0.27.0",
-    "pre-commit>=4.3.0"
+    "json-schema-for-humans>=1.5.1",
+    "prek>=0.2.27",
+    "zensical>=0.0.2",
 ]
