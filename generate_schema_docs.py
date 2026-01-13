@@ -72,6 +72,9 @@ def generate_docs(schema_path: Path, output_path: Optional[Path] = None) -> str:
         footer_show_time=False
     )
 
+    # Ensure output directory exists before generating
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
     # Generate to temp location
     temp_output = output_path.parent / f"temp_{output_path.name}"
     generate_from_filename(schema_path, str(temp_output), config=config)
@@ -79,9 +82,6 @@ def generate_docs(schema_path: Path, output_path: Optional[Path] = None) -> str:
     # Read and post-process
     markdown = temp_output.read_text()
     markdown = fix_headings(markdown)
-
-    # Write final output
-    output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(markdown)
 
     # Clean up temp file
@@ -117,8 +117,11 @@ def main():
 
         for schema_file in schema_files:
             schema_dir = schema_file.parent.relative_to(repo_root)
-            schema_name = schema_file.stem if str(schema_dir) == "." else str(schema_dir).replace("/", "-")
-            generate_docs(schema_file, output_dir / f"{schema_name}.md")
+            if str(schema_dir) == ".":
+                output_file = output_dir / f"{schema_file.stem}.md"
+            else:
+                output_file = output_dir / schema_dir / f"{schema_file.stem}.md"
+            generate_docs(schema_file, output_file)
     else:
         if not args.schema:
             parser.error("schema argument is required when not using --all")
