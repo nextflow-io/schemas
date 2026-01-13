@@ -1,0 +1,29 @@
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+      - uses: astral-sh/setup-uv@v7
+      - run: uv run zensical build --clean
+      - run: uv run prek --all-files
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./build/
+          preview-branch: gh-pages

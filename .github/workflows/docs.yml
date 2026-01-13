@@ -25,8 +25,6 @@ jobs:
       - uses: astral-sh/setup-uv@v7
       - run: uv run zensical build --clean
       - run: uv run prek --all-files
-      - uses: actions/upload-pages-artifact@v4
+      - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: site
-      - uses: actions/deploy-pages@v4
-        id: deployment
+          folder: docs # The folder the action should deploy.
