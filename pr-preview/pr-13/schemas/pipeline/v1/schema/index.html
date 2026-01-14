@@ -2314,6 +2314,10 @@
 <td><code>object</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -2538,6 +2542,10 @@
 <td><code>object</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -2582,6 +2590,10 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -2694,13 +2706,19 @@ must respect the following conditions</p>
 <td><code>string</code></td>
 </tr>
 <tr>
-<td>Restrictions</td>
-<td></td>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
+</tbody>
+</table>
+<table>
+<thead>
 <tr>
-<td>---------------------------------</td>
-<td>---------------------------------------------------</td>
+<th>Restrictions</th>
+<th></th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><strong>Must match regular expression</strong></td>
 <td><code>^fa</code> <a href="https://regex101.com/?regex=%5Efa">Test</a></td>
@@ -2720,6 +2738,10 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <h4 id="required"><a name="defs_pattern1_required"></a><code>required</code><a class="headerlink" href="#required" title="Permanent link">&para;</a></h4>
@@ -2734,6 +2756,10 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>array</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -2805,6 +2831,10 @@ must respect the following conditions</p>
 <td><code>combining</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -2837,6 +2867,10 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -2937,6 +2971,10 @@ must respect the following conditions</p>
 <td><code>combining</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -2948,8 +2986,8 @@ must respect the following conditions</p>
 <li><code>number</code> (float)</li>
 <li><code>integer</code></li>
 <li><code>boolean</code> (true / false)</li>
-<li><code>object</code> (currently only supported for file validation, see Nested parameters)</li>
-<li><code>array</code> (currently only supported for file validation, see Nested parameters)</li>
+<li><code>object</code> (currently only supported for file validation)</li>
+<li><code>array</code> (currently only supported for file validation)</li>
 </ul>
 <p>Validation checks that the supplied parameter matches the expected type, and will fail with an error if not.</p>
 <p>This JSON schema type is <em>not</em> supported:</p>
@@ -2985,6 +3023,10 @@ must respect the following conditions</p>
 <td><code>enum (of string)</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Defined in</strong></td>
 <td>#/$defs/typeAnnotation</td>
 </tr>
@@ -3012,13 +3054,19 @@ must respect the following conditions</p>
 <td><code>array</code></td>
 </tr>
 <tr>
-<td>Each item of this array must be</td>
-<td>Description</td>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
+</tbody>
+</table>
+<table>
+<thead>
 <tr>
-<td>------------------------------------------------------------------------------------</td>
-<td>-----------</td>
+<th>Each item of this array must be</th>
+<th>Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><a href="#defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i1_items">typeAnnotation</a></td>
 <td>-</td>
@@ -3039,6 +3087,10 @@ must respect the following conditions</p>
 <td><code>enum (of string)</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Same definition as</strong></td>
 <td><a href="#defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i0">defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i0</a></td>
 </tr>
@@ -3056,6 +3108,10 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>enum (of string)</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3109,6 +3165,10 @@ however we primarily use it for validating file / directory path operations with
 <td><code>string</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Format</strong></td>
 <td><code>regex</code></td>
 </tr>
@@ -3153,6 +3213,10 @@ however we primarily use it for validating file / directory path operations with
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong> A short description of what the parameter does, written in markdown.
@@ -3170,6 +3234,10 @@ Should be maximum one short sentence.</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>integer, boolean, string, number or null</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Defined in</strong></td>
@@ -3206,6 +3274,10 @@ in which case try to specify as "sensible" a default within the schema as possib
 <td><strong>Type</strong></td>
 <td><code>array</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong> A list of examples for the current parameter</p>
@@ -3237,6 +3309,10 @@ in which case try to specify as "sensible" a default within the schema as possib
 <td><code>integer, boolean, string, number or null</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Same definition as</strong></td>
 <td><a href="#defs_pattern1_properties_pattern1_pattern2_i0_default">default</a></td>
 </tr>
@@ -3254,6 +3330,10 @@ in which case try to specify as "sensible" a default within the schema as possib
 <tr>
 <td><strong>Type</strong></td>
 <td><code>boolean</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3276,6 +3356,10 @@ in which case try to specify as "sensible" a default within the schema as possib
 <tr>
 <td><strong>Type</strong></td>
 <td><code>integer</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Defined in</strong></td>
@@ -3322,6 +3406,10 @@ in which case try to specify as "sensible" a default within the schema as possib
 <td><code>integer</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Same definition as</strong></td>
 <td><a href="#defs_pattern1_properties_pattern1_pattern2_i0_minLength">minLength</a></td>
 </tr>
@@ -3350,6 +3438,10 @@ in which case try to specify as "sensible" a default within the schema as possib
 <tr>
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3390,6 +3482,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong> Specify a minimum / maximum value for an integer or float number length with <code>minimum</code> and <code>maximum</code>.</p>
@@ -3428,6 +3524,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <tr>
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3468,6 +3568,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong> Specify a minimum / maximum value for an integer or float number length with <code>minimum</code> and <code>maximum</code>.</p>
@@ -3507,6 +3611,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong> The 'integer' or 'number' parameter value should be a multiple of this value</p>
@@ -3522,6 +3630,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <tr>
 <td><strong>Type</strong></td>
 <td><code>array</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3563,6 +3675,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <td><code>integer, boolean, string, number or null</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Same definition as</strong></td>
 <td><a href="#defs_pattern1_properties_pattern1_pattern2_i0_default">default</a></td>
 </tr>
@@ -3580,6 +3696,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <tr>
 <td><strong>Type</strong></td>
 <td><code>integer, boolean, string, number or null</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Same definition as</strong></td>
@@ -3600,6 +3720,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -3663,6 +3787,10 @@ However, they are not officially supported within the Nextflow schema ecosystem 
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong></p>
@@ -3713,6 +3841,10 @@ If validation fails, this <code>errorMessage</code> is printed after the origina
 <td><strong>Type</strong></td>
 <td><code>boolean</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong> When a format is specified for a value, you can provide the key <code>exists</code> set to true in order to validate that the provided path exists. Set this to <code>false</code> to validate that the path does not exist.</p>
@@ -3743,6 +3875,10 @@ If validation fails, this <code>errorMessage</code> is printed after the origina
 <tr>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3794,6 +3930,10 @@ If validation fails, this <code>errorMessage</code> is printed after the origina
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong></p>
@@ -3815,6 +3955,10 @@ Can include newlines with multiple paragraphs and more complex markdown structur
 <tr>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3854,6 +3998,10 @@ Used for easier visual navigation of documentation and pipeline interfaces.</p>
 <td><strong>Type</strong></td>
 <td><code>boolean</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Description:</strong></p>
@@ -3877,6 +4025,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <tr>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3908,6 +4060,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -3943,6 +4099,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <td><code>array of string</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Default</strong></td>
 <td><code>[]</code></td>
 </tr>
@@ -3975,6 +4135,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <h2 id="properties_1"><a name="properties"></a><code>properties</code><a class="headerlink" href="#properties_1" title="Permanent link">&para;</a></h2>
@@ -3989,6 +4153,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -4012,6 +4180,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -4047,6 +4219,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <td><code>array of string</code></td>
 </tr>
 <tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
 <td><strong>Default</strong></td>
 <td><code>[]</code></td>
 </tr>
@@ -4079,6 +4255,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
 </tbody>
 </table>
 <h2 id="allof"><a name="allOf"></a><code>allOf</code><a class="headerlink" href="#allof" title="Permanent link">&para;</a></h2>
@@ -4096,13 +4276,19 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <td><code>array of object</code></td>
 </tr>
 <tr>
-<td>Each item of this array must be</td>
-<td>Description</td>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
+</tbody>
+</table>
+<table>
+<thead>
 <tr>
-<td>-------------------------------</td>
-<td>-----------</td>
+<th>Each item of this array must be</th>
+<th>Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td><a href="#allOf_items">allOf items</a></td>
 <td>-</td>
@@ -4121,6 +4307,10 @@ For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.<
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
