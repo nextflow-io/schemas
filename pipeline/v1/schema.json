@@ -136,7 +136,7 @@
       "description": "Allowed standard JSON Schema properties.",
       "properties": {
         "type": {
-          "description": "Variable type, taken from the [JSON schema keyword vocabulary](https://json-schema.org/understanding-json-schema/reference/type.html):\n\n- `string`\n- `number` (float)\n- `integer`\n- `boolean` (true / false)\n- `object` (currently only supported for file validation, see Nested parameters)\n- `array` (currently only supported for file validation, see Nested parameters)\n\nValidation checks that the supplied parameter matches the expected type, and will fail with an error if not.\n\nThis JSON schema type is _not_ supported:\n\n- `null`",
+          "description": "Variable type, taken from the [JSON schema keyword vocabulary](https://json-schema.org/understanding-json-schema/reference/type.html):\n\n- `string`\n- `number` (float)\n- `integer`\n- `boolean` (true / false)\n- `object` (currently only supported for file validation)\n- `array` (currently only supported for file validation)\n\nValidation checks that the supplied parameter matches the expected type, and will fail with an error if not.\n\nThis JSON schema type is _not_ supported:\n\n- `null`",
           "anyOf": [
             { "$ref": "#/$defs/typeAnnotation" },
             {
