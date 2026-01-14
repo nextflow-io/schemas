@@ -5,6 +5,7 @@ Uses json-schema-for-humans to generate markdown, then post-processes headings.
 """
 
 import re
+import subprocess
 from pathlib import Path
 from typing import Optional
 
@@ -69,7 +70,10 @@ def generate_docs(schema_path: Path, output_path: Optional[Path] = None) -> str:
         show_toc=False,
         collapse_long_descriptions=False,
         link_to_reused_ref=True,
-        footer_show_time=False
+        footer_show_time=False,
+        template_md_options={
+            "show_array_restrictions": False,
+        }
     )
 
     # Ensure output directory exists before generating
@@ -86,6 +90,7 @@ def generate_docs(schema_path: Path, output_path: Optional[Path] = None) -> str:
 
     # Clean up temp file
     temp_output.unlink()
+
 
     print(f"Documentation generated: {output_path}")
     return markdown
@@ -105,6 +110,8 @@ def main():
 
     args = parser.parse_args()
 
+    generated_files = []
+
     if args.all:
         repo_root = Path(__file__).parent
         schema_files = [
@@ -122,10 +129,24 @@ def main():
             else:
                 output_file = output_dir / schema_dir / f"{schema_file.stem}.md"
             generate_docs(schema_file, output_file)
+            generated_files.append(output_file)
     else:
         if not args.schema:
             parser.error("schema argument is required when not using --all")
-        generate_docs(args.schema, args.output or args.schema.with_suffix(".md"))
+        output_file = args.output or args.schema.with_suffix(".md")
+        generate_docs(args.schema, output_file)
+        generated_files.append(output_file)
+
+    # Run prek --files on all generated files
+    if generated_files:
+        print(f"\nRunning prek on {len(generated_files)} generated file(s)...")
+        try:
+            subprocess.run(
+                ["prek", "--files"] + [str(f) for f in generated_files],
+                capture_output=True
+            )
+        except FileNotFoundError:
+            print("Warning: prek not found in PATH, skipping formatting")
 
 
 if __name__ == "__main__":
