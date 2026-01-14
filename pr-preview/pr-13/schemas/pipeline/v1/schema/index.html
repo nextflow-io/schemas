@@ -2314,10 +2314,6 @@
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -2328,85 +2324,45 @@
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>+ <a href="#schema">$schema</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>schema</td>
 </tr>
 <tr>
 <td>+ <a href="#id">$id</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>ID URI</td>
 </tr>
 <tr>
 <td>+ <a href="#title">title</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>Title</td>
 </tr>
 <tr>
 <td>+ <a href="#description">description</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>Description</td>
 </tr>
 <tr>
 <td>+ <a href="#type">type</a></td>
-<td>No</td>
 <td>const</td>
-<td>No</td>
-<td>-</td>
-<td>Top level type</td>
 </tr>
 <tr>
 <td>- <a href="#defs">$defs</a></td>
-<td>No</td>
 <td>object</td>
-<td>No</td>
-<td>-</td>
-<td>Parameter groups</td>
 </tr>
 <tr>
 <td>- <a href="#properties">properties</a></td>
-<td>No</td>
 <td>object</td>
-<td>No</td>
-<td>Same as <a href="#defs_pattern1_properties">properties</a></td>
-<td>-</td>
 </tr>
 <tr>
 <td>- <a href="#dependentRequired">dependentRequired</a></td>
-<td>No</td>
 <td>object</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 <tr>
 <td>- <a href="#allOf">allOf</a></td>
-<td>No</td>
 <td>array of object</td>
-<td>No</td>
-<td>-</td>
-<td>Combine definition groups</td>
 </tr>
 </tbody>
 </table>
@@ -2582,34 +2538,30 @@
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Description:</strong> A slightly strange use of a JSON schema standard that we use for Nextflow schema is <code>$defs</code>.</p>
+<p>JSON schema can group variables together in an <code>object</code>, but then the validation expects this structure to exist in the data that it is validating.
+In reality, we have a very long "flat" list of parameters, all at the top level of <code>params.foo</code>.</p>
+<p>In order to give some structure to log outputs, documentation and so on, we group parameters into <code>$defs</code>.
+Each <code>def</code> is an object with a title, description and so on.
+However, as they are under <code>$defs</code> scope they are effectively ignored by the validation and so their nested nature is not a problem.
+We then bring the contents of each definition object back to the "flat" top level for validation using a series of <code>allOf</code> statements at the end of the schema,
+which reference the specific definition keys.</p>
 <table>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>- <a href="#defs_pattern1">^.*$</a></td>
-<td>Yes</td>
 <td>object</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -2632,10 +2584,6 @@ must respect the following conditions</p>
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -2645,69 +2593,37 @@ must respect the following conditions</p>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>+ <a href="#defs_pattern1_title">title</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 <tr>
 <td>+ <a href="#defs_pattern1_type">type</a></td>
-<td>No</td>
 <td>const</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_fa_icon">fa_icon</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_description">description</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_required">required</a></td>
-<td>No</td>
 <td>array</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 <tr>
 <td>+ <a href="#defs_pattern1_properties">properties</a></td>
-<td>No</td>
 <td>object</td>
-<td>No</td>
-<td>In #/$defs/parameterOptions</td>
-<td>-</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_dependentRequired">dependentRequired</a></td>
-<td>No</td>
 <td>object</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -2778,19 +2694,13 @@ must respect the following conditions</p>
 <td><code>string</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
+<td>Restrictions</td>
+<td></td>
 </tr>
-</tbody>
-</table>
-<table>
-<thead>
 <tr>
-<th>Restrictions</th>
-<th></th>
+<td>---------------------------------</td>
+<td>---------------------------------------------------</td>
 </tr>
-</thead>
-<tbody>
 <tr>
 <td><strong>Must match regular expression</strong></td>
 <td><code>^fa</code> <a href="https://regex101.com/?regex=%5Efa">Test</a></td>
@@ -2810,10 +2720,6 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
 <h4 id="required"><a name="defs_pattern1_required"></a><code>required</code><a class="headerlink" href="#required" title="Permanent link">&para;</a></h4>
@@ -2829,12 +2735,16 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>array</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
+<p><strong>Description:</strong> Any parameters that <em>must</em> be specified should be set as <code>required</code> in the schema.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Make sure you do set <code>null</code> as a default value for the parameter, otherwise it will have a value even if not supplied by the pipeline user and the required property will have no effect.</p>
+</div>
+<p>This is not done with a property key like other things described below, but rather by naming
+the parameter in the <code>required</code> array in the definition object / top-level object.</p>
+<p>For more information, see the <a href="https://json-schema.org/understanding-json-schema/reference/object.html#required-properties">JSON schema documentation</a>.</p>
 <h4 id="properties"><a name="defs_pattern1_properties"></a><code>properties</code><a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -2866,21 +2776,13 @@ must respect the following conditions</p>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1">^.*$</a></td>
-<td>Yes</td>
 <td>Combination</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -2901,10 +2803,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>combining</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -2941,10 +2839,6 @@ must respect the following conditions</p>
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -2959,141 +2853,73 @@ must respect the following conditions</p>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_type">type</a></td>
-<td>No</td>
 <td>Combination</td>
-<td>No</td>
-<td>-</td>
-<td>The type of the parameter value. Can be one or more of these: `['integer', 'boolean', 'number', 'string', 'null']`</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_format">format</a></td>
-<td>No</td>
 <td>enum (of string)</td>
-<td>No</td>
-<td>-</td>
-<td>The format of a parameter value with the 'string' type. This is used for additional validation on the structure of the value.</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_pattern">pattern</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>Check a parameter value of 'string' type against a regex pattern</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_description">description</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>The description of the current parameter</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_default">default</a></td>
-<td>No</td>
 <td>integer, boolean, string, number or null</td>
-<td>No</td>
-<td>In #/$defs/allTypes</td>
-<td>Specifies a default value to use for this parameter</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_examples">examples</a></td>
-<td>No</td>
 <td>array</td>
-<td>No</td>
-<td>-</td>
-<td>A list of examples for the current parameter</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_deprecated">deprecated</a></td>
-<td>No</td>
 <td>boolean</td>
-<td>No</td>
-<td>-</td>
-<td>States that the parameter is deprecated. Please provide a nice deprecation message using 'errorMessage'</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_minLength">minLength</a></td>
-<td>No</td>
 <td>integer</td>
-<td>No</td>
-<td>In #/$defs/nonNegativeInteger</td>
-<td>The minimum length a 'string' parameter value should be</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_maxLength">maxLength</a></td>
-<td>No</td>
 <td>integer</td>
-<td>No</td>
-<td>Same as <a href="#defs_pattern1_properties_pattern1_pattern2_i0_minLength">minLength</a></td>
-<td>The maximum length a 'string' parameter value should be</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_minimum">minimum</a></td>
-<td>No</td>
 <td>number</td>
-<td>No</td>
-<td>-</td>
-<td>The mimimum value an 'integer' or 'number' parameter value should be</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_exclusiveMinimum">exclusiveMinimum</a></td>
-<td>No</td>
 <td>number</td>
-<td>No</td>
-<td>-</td>
-<td>The exclusive mimimum value an 'integer' or 'number' parameter value should be</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_maximum">maximum</a></td>
-<td>No</td>
 <td>number</td>
-<td>No</td>
-<td>-</td>
-<td>The maximum value an 'integer' or 'number' parameter value should be</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_exclusiveMaximum">exclusiveMaximum</a></td>
-<td>No</td>
 <td>number</td>
-<td>No</td>
-<td>-</td>
-<td>The exclusive maximum value an 'integer' or 'number' parameter value should be</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_multipleOf">multipleOf</a></td>
-<td>No</td>
 <td>number</td>
-<td>No</td>
-<td>-</td>
-<td>The 'integer' or 'number' parameter value should be a multiple of this value</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_enum">enum</a></td>
-<td>No</td>
 <td>array</td>
-<td>No</td>
-<td>-</td>
-<td>The parameter value should be one of the values specified in this enum array</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i0_const">const</a></td>
-<td>No</td>
 <td>integer, boolean, string, number or null</td>
-<td>No</td>
-<td>Same as <a href="#defs_pattern1_properties_pattern1_pattern2_i0_default">default</a></td>
-<td>The parameter value should be equal to this value</td>
 </tr>
 </tbody>
 </table>
@@ -3111,16 +2937,25 @@ must respect the following conditions</p>
 <td><code>combining</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The type of the parameter value. Can be one or more of these: <code>['integer', 'boolean', 'number', 'string', 'null']</code></p>
+<p><strong>Description:</strong> Variable type, taken from the <a href="https://json-schema.org/understanding-json-schema/reference/type.html">JSON schema keyword vocabulary</a>:</p>
+<ul>
+<li><code>string</code></li>
+<li><code>number</code> (float)</li>
+<li><code>integer</code></li>
+<li><code>boolean</code> (true / false)</li>
+<li><code>object</code> (currently only supported for file validation, see Nested parameters)</li>
+<li><code>array</code> (currently only supported for file validation, see Nested parameters)</li>
+</ul>
+<p>Validation checks that the supplied parameter matches the expected type, and will fail with an error if not.</p>
+<p>This JSON schema type is <em>not</em> supported:</p>
+<ul>
+<li><code>null</code></li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -3150,10 +2985,6 @@ must respect the following conditions</p>
 <td><code>enum (of string)</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Defined in</strong></td>
 <td>#/$defs/typeAnnotation</td>
 </tr>
@@ -3181,26 +3012,20 @@ must respect the following conditions</p>
 <td><code>array</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
+<td>Each item of this array must be</td>
+<td>Description</td>
 </tr>
-</tbody>
-</table>
-<table>
-<thead>
 <tr>
-<th>Each item of this array must be</th>
-<th>Description</th>
+<td>------------------------------------------------------------------------------------</td>
+<td>-----------</td>
 </tr>
-</thead>
-<tbody>
 <tr>
 <td><a href="#defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i1_items">typeAnnotation</a></td>
 <td>-</td>
 </tr>
 </tbody>
 </table>
-<h6 id="typeannotation_1">typeAnnotation<a class="headerlink" href="#typeannotation_1" title="Permanent link">&para;</a></h6>
+<h6 id="typeannotation_1"><a name="defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i1_items"></a>typeAnnotation<a class="headerlink" href="#typeannotation_1" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
 <tr>
@@ -3212,10 +3037,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>enum (of string)</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Same definition as</strong></td>
@@ -3236,13 +3057,31 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>enum (of string)</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The format of a parameter value with the 'string' type. This is used for additional validation on the structure of the value.</p>
+<p><strong>Description:</strong> Formats can be used to give additional validation checks against <code>string</code> values for certain properties.</p>
+<div class="admonition example">
+<p class="admonition-title">Non-standard key (values)</p>
+<p>The <code>format</code> key is a <a href="https://json-schema.org/understanding-json-schema/reference/string.html#format">standard JSON schema key</a>,
+however we primarily use it for validating file / directory path operations with non-standard schema values.</p>
+</div>
+<p>Example usage is as follows:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>The available <code>format</code> types are below:</p>
+<dl>
+<dt><code>file-path</code></dt>
+<dd>States that the provided value is a file. Does not check its existence, but it does check if the path is not a directory.</dd>
+<dt><code>directory-path</code></dt>
+<dd>States that the provided value is a directory. Does not check its existence, but if it exists, it does check that the path is not a file.</dd>
+<dt><code>path</code></dt>
+<dd>States that the provided value is a path (file or directory). Does not check its existence.</dd>
+<dt><code>file-path-pattern</code></dt>
+<dd>States that the provided value is a glob pattern that will be used to fetch files. Checks that the pattern is valid and that at least one file is found.</dd>
+</dl>
 <p>Must be one of:</p>
 <ul>
 <li>"file-path"</li>
@@ -3270,16 +3109,23 @@ must respect the following conditions</p>
 <td><code>string</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Format</strong></td>
 <td><code>regex</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> Check a parameter value of 'string' type against a regex pattern</p>
+<p><strong>Description:</strong> Regular expression which the string must match in order to pass validation.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/string.html#regular-expressions">JSON schema docs</a>
+  for details.</li>
+<li>Use <a href="https://regex101.com/">https://regex101.com/</a> for help with writing regular expressions.</li>
+</ul>
+<p>For example, this pattern only validates if the supplied string ends in <code>.fastq</code>, <code>.fq</code>, <code>.fastq.gz</code> or <code>.fq.gz</code>:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.*.f(ast)?q(.gz)?$&quot;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -3307,13 +3153,11 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The description of the current parameter</p>
+<p><strong>Description:</strong> A short description of what the parameter does, written in markdown.
+Printed in docs and terminal help text.
+Should be maximum one short sentence.</p>
 <h6 id="default"><a name="defs_pattern1_properties_pattern1_pattern2_i0_default"></a><code>default</code><a class="headerlink" href="#default" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3328,16 +3172,27 @@ must respect the following conditions</p>
 <td><code>integer, boolean, string, number or null</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Defined in</strong></td>
 <td>#/$defs/allTypes</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> Specifies a default value to use for this parameter</p>
+<p><strong>Description:</strong> Default value for the parameter.</p>
+<p>Should match the <code>type</code> and validation patterns set for the parameter in other fields.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If no default should be set, completely omit this key from the schema.
+Do not set it as an empty string, or <code>null</code>.</p>
+<p>However, parameters with no defaults <em>should</em> be set to <code>null</code> within your Nextflow config file.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When creating a schema using <code>nf-core schema build</code>, this field will be automatically created based
+on the default value defined in the pipeline config files.</p>
+<p>Generally speaking, the two should always be kept in sync to avoid unexpected problems and usage errors.
+In some rare cases, this may not be possible (for example, a dynamic groovy expression cannot be encoded in JSON),
+in which case try to specify as "sensible" a default within the schema as possible.</p>
+</div>
 <h6 id="examples"><a name="defs_pattern1_properties_pattern1_pattern2_i0_examples"></a><code>examples</code><a class="headerlink" href="#examples" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3350,10 +3205,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>array</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3372,7 +3223,7 @@ must respect the following conditions</p>
 </tr>
 </tbody>
 </table>
-<h6 id="alltypes">allTypes<a class="headerlink" href="#alltypes" title="Permanent link">&para;</a></h6>
+<h6 id="alltypes"><a name="defs_pattern1_properties_pattern1_pattern2_i0_examples_items"></a>allTypes<a class="headerlink" href="#alltypes" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
 <tr>
@@ -3384,10 +3235,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>integer, boolean, string, number or null</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Same definition as</strong></td>
@@ -3408,13 +3255,15 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>boolean</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> States that the parameter is deprecated. Please provide a nice deprecation message using 'errorMessage'</p>
+<p><strong>Description:</strong> !!! example "Extended key"</p>
+<p>A boolean JSON flag that instructs anything using the schema that this parameter/field is deprecated and should not be used. This can be useful to generate messages telling the user that a parameter has changed between versions.</p>
+<p>JSON schema states that this is an informative key only, but in <a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema</a> this will cause a validation error if the parameter/field is used.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Using the <a href="#errormessage"><code>errorMessage</code></a> keyword can be useful to provide more information about the deprecation and what to use instead.</p>
+</div>
 <h6 id="minlength"><a name="defs_pattern1_properties_pattern1_pattern2_i0_minLength"></a><code>minLength</code><a class="headerlink" href="#minlength" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3429,16 +3278,22 @@ must respect the following conditions</p>
 <td><code>integer</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Defined in</strong></td>
 <td>#/$defs/nonNegativeInteger</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The minimum length a 'string' parameter value should be</p>
+<p><strong>Description:</strong> Specify a minimum / maximum string length with <code>minLength</code> and <code>maxLength</code>.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/string.html#length">JSON schema docs</a>
+  for details.</li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;maxLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -3467,16 +3322,22 @@ must respect the following conditions</p>
 <td><code>integer</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Same definition as</strong></td>
 <td><a href="#defs_pattern1_properties_pattern1_pattern2_i0_minLength">minLength</a></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The maximum length a 'string' parameter value should be</p>
+<p><strong>Description:</strong> Specify a minimum / maximum string length with <code>minLength</code> and <code>maxLength</code>.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/string.html#length">JSON schema docs</a>
+  for details.</li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">&quot;minLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">&quot;maxLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</span></code></pre></div>
 <h6 id="minimum"><a name="defs_pattern1_properties_pattern1_pattern2_i0_minimum"></a><code>minimum</code><a class="headerlink" href="#minimum" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3490,13 +3351,32 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The mimimum value an 'integer' or 'number' parameter value should be</p>
+<p><strong>Description:</strong> Specify a minimum / maximum value for an integer or float number length with <code>minimum</code> and <code>maximum</code>.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/numeric.html#range">JSON schema docs</a>
+  for details.</li>
+</ul>
+<blockquote>
+<p>If x is the value being validated, the following must hold true:</p>
+<ul>
+<li><code>x</code> ≥ <code>minimum</code></li>
+<li><code>x</code> ≤ <code>maximum</code></li>
+</ul>
+</blockquote>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The JSON schema doc also mention <code>exclusiveMinimum</code>, <code>exclusiveMaximum</code> and <code>multipleOf</code> keys.
+Because nf-schema uses stock JSON schema validation libraries, these <em>should</em> work for validating keys.
+However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them.</p>
+</div>
 <h6 id="exclusiveminimum"><a name="defs_pattern1_properties_pattern1_pattern2_i0_exclusiveMinimum"></a><code>exclusiveMinimum</code><a class="headerlink" href="#exclusiveminimum" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3510,13 +3390,32 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The exclusive mimimum value an 'integer' or 'number' parameter value should be</p>
+<p><strong>Description:</strong> Specify a minimum / maximum value for an integer or float number length with <code>minimum</code> and <code>maximum</code>.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/numeric.html#range">JSON schema docs</a>
+  for details.</li>
+</ul>
+<blockquote>
+<p>If x is the value being validated, the following must hold true:</p>
+<ul>
+<li><code>x</code> ≥ <code>minimum</code></li>
+<li><code>x</code> ≤ <code>maximum</code></li>
+</ul>
+</blockquote>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The JSON schema doc also mention <code>exclusiveMinimum</code>, <code>exclusiveMaximum</code> and <code>multipleOf</code> keys.
+Because <a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema</a> uses stock JSON schema validation libraries, these <em>should</em> work for validating keys.
+However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them.</p>
+</div>
 <h6 id="maximum"><a name="defs_pattern1_properties_pattern1_pattern2_i0_maximum"></a><code>maximum</code><a class="headerlink" href="#maximum" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3530,13 +3429,32 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The maximum value an 'integer' or 'number' parameter value should be</p>
+<p><strong>Description:</strong> Specify a minimum / maximum value for an integer or float number length with <code>minimum</code> and <code>maximum</code>.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/numeric.html#range">JSON schema docs</a>
+  for details.</li>
+</ul>
+<blockquote>
+<p>If x is the value being validated, the following must hold true:</p>
+<ul>
+<li><code>x</code> ≥ <code>minimum</code></li>
+<li><code>x</code> ≤ <code>maximum</code></li>
+</ul>
+</blockquote>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The JSON schema doc also mention <code>exclusiveMinimum</code>, <code>exclusiveMaximum</code> and <code>multipleOf</code> keys.
+Because nf-schema uses stock JSON schema validation libraries, these <em>should</em> work for validating keys.
+However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them.</p>
+</div>
 <h6 id="exclusivemaximum"><a name="defs_pattern1_properties_pattern1_pattern2_i0_exclusiveMaximum"></a><code>exclusiveMaximum</code><a class="headerlink" href="#exclusivemaximum" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3550,13 +3468,32 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The exclusive maximum value an 'integer' or 'number' parameter value should be</p>
+<p><strong>Description:</strong> Specify a minimum / maximum value for an integer or float number length with <code>minimum</code> and <code>maximum</code>.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/numeric.html#range">JSON schema docs</a>
+  for details.</li>
+</ul>
+<blockquote>
+<p>If x is the value being validated, the following must hold true:</p>
+<ul>
+<li><code>x</code> ≥ <code>minimum</code></li>
+<li><code>x</code> ≤ <code>maximum</code></li>
+</ul>
+</blockquote>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">&quot;minimum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">&quot;maximum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The JSON schema doc also mention <code>exclusiveMinimum</code>, <code>exclusiveMaximum</code> and <code>multipleOf</code> keys.
+Because nf-schema uses stock JSON schema validation libraries, these <em>should</em> work for validating keys.
+However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them.</p>
+</div>
 <h6 id="multipleof"><a name="defs_pattern1_properties_pattern1_pattern2_i0_multipleOf"></a><code>multipleOf</code><a class="headerlink" href="#multipleof" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3569,10 +3506,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>number</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -3590,13 +3523,18 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>array</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> The parameter value should be one of the values specified in this enum array</p>
+<p><strong>Description:</strong> An array of enumerated values: the parameter must match one of these values exactly to pass validation.</p>
+<ul>
+<li>See the <a href="https://json-schema.org/understanding-json-schema/reference/generic.html#enumerated-values">JSON schema docs</a>
+  for details.</li>
+<li>Available for strings, numbers and integers.</li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">&quot;enum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;amber&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">]</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">}</span>
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -3611,7 +3549,7 @@ must respect the following conditions</p>
 </tr>
 </tbody>
 </table>
-<h6 id="alltypes_1">allTypes<a class="headerlink" href="#alltypes_1" title="Permanent link">&para;</a></h6>
+<h6 id="alltypes_1"><a name="defs_pattern1_properties_pattern1_pattern2_i0_enum_items"></a>allTypes<a class="headerlink" href="#alltypes_1" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
 <tr>
@@ -3623,10 +3561,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>integer, boolean, string, number or null</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Same definition as</strong></td>
@@ -3646,10 +3580,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>integer, boolean, string, number or null</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Same definition as</strong></td>
@@ -3672,10 +3602,6 @@ must respect the following conditions</p>
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -3690,69 +3616,37 @@ must respect the following conditions</p>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i1_errorMessage">errorMessage</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>NON STANDARD OPTION: The custom error message to display in case validation against this parameter fails. Can also be used as a deprecation message if 'deprecated' is true</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i1_exists">exists</a></td>
-<td>No</td>
 <td>boolean</td>
-<td>No</td>
-<td>-</td>
-<td>NON STANDARD OPTION: Check if a file exists. This parameter value needs to be a `string` type with one of these formats: `['path', 'file-path', 'directory-path', 'file-path-pattern']`</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i1_schema">schema</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>NON STANDARD OPTION: Check the given file against a schema passed to this keyword. Will only work when type is `string` and format is `path` or `file-path`</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i1_help_text">help_text</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>NON STANDARD OPTION: A more detailed help text</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i1_fa_icon">fa_icon</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>NON STANDARD OPTION: A font awesome icon to use in the nf-core parameter documentation</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i1_hidden">hidden</a></td>
-<td>No</td>
 <td>boolean</td>
-<td>No</td>
-<td>-</td>
-<td>NON STANDARD OPTION: Hide this parameter from the help message and documentation</td>
 </tr>
 <tr>
 <td>- <a href="#defs_pattern1_properties_pattern1_pattern2_i1_mimetype">mimetype</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>NON STANDARD OPTION: The MIME type of the parameter value</td>
 </tr>
 </tbody>
 </table>
@@ -3769,13 +3663,29 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> NON STANDARD OPTION: The custom error message to display in case validation against this parameter fails. Can also be used as a deprecation message if 'deprecated' is true</p>
+<p><strong>Description:</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Non-standard key</p>
+</div>
+<p>If validation fails, an error message is printed to the terminal, so that the end user knows what to fix.
+However, these messages are not always very clear - especially to newcomers.</p>
+<p>To improve this experience, pipeline developers can set a custom <code>errorMessage</code> for a given parameter in a the schema.
+If validation fails, this <code>errorMessage</code> is printed after the original error message to guide the pipeline users to an easier solution.</p>
+<p>For example, instead of printing:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>* --input (samples.yml): &quot;samples.yml&quot; does not match regular expression [^\S+\.csv$]
+</span></code></pre></div>
+<p>We can set</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="nt">&quot;pattern&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;^\S+\.csv$&quot;</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">&quot;errorMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File name must end in &#39;.csv&#39; cannot contain spaces&quot;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>and get:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>* --input (samples.yml): &quot;samples.yml&quot; does not match regular expression [^\S+\.csv$] (File name must end in &#39;.csv&#39; cannot contain spaces)
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -3803,13 +3713,24 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>boolean</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> NON STANDARD OPTION: Check if a file exists. This parameter value needs to be a <code>string</code> type with one of these formats: <code>['path', 'file-path', 'directory-path', 'file-path-pattern']</code></p>
+<p><strong>Description:</strong> When a format is specified for a value, you can provide the key <code>exists</code> set to true in order to validate that the provided path exists. Set this to <code>false</code> to validate that the path does not exist.</p>
+<p>Example usage is as follows:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">&quot;exists&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the parameter is an S3, Azure or Google Cloud URI path, this validation is ignored.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure to only use the <code>exists</code> keyword in combination with any file path format. Using <code>exists</code> on a normal string will assume that it's a file and will probably fail unexpectedly.</p>
+</div>
 <h6 id="schema_1"><a name="defs_pattern1_properties_pattern1_pattern2_i1_schema"></a><code>schema</code><a class="headerlink" href="#schema_1" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3823,13 +3744,25 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> NON STANDARD OPTION: Check the given file against a schema passed to this keyword. Will only work when type is <code>string</code> and format is <code>path</code> or <code>file-path</code></p>
+<p><strong>Description:</strong> Path to a JSON schema file used to validate <em>the supplied file</em>.</p>
+<p>Should only be set when <code>format</code> is <code>file-path</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Setting this field is key to working with sample sheet validation and channel generation, as described in the sample sheet section of the <a href="https://nextflow-io.github.io/nf-schema/latest/nextflow_schema/sample_sheet_schema_specification/">nf-schema docs</a>.</p>
+</div>
+<p>These schema files are typically stored in the pipeline <code>assets</code> directory, but can be anywhere.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/foo_schema.json&quot;</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the parameter is set to <code>null</code>, <code>false</code> or an empty string, this validation is ignored. The file won't be validated.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -3861,13 +3794,15 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> NON STANDARD OPTION: A more detailed help text</p>
+<p><strong>Description:</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Non-standard key</p>
+</div>
+<p>A longer text with usage help for the parameter, written in markdown.
+Can include newlines with multiple paragraphs and more complex markdown structures.</p>
+<p>Typically hidden by default in documentation and interfaces, unless explicitly clicked / requested.</p>
 <h6 id="fa_icon_1"><a name="defs_pattern1_properties_pattern1_pattern2_i1_fa_icon"></a><code>fa_icon</code><a class="headerlink" href="#fa_icon_1" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3881,13 +3816,17 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> NON STANDARD OPTION: A font awesome icon to use in the nf-core parameter documentation</p>
+<p><strong>Description:</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Non-standard key</p>
+</div>
+<p>A text identifier corresponding to an icon from <a href="https://fontawesome.com/">Font Awesome</a>.
+Used for easier visual navigation of documentation and pipeline interfaces.</p>
+<p>Should be the font-awesome class names, for example:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">&quot;fa_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fas fa-file-csv&quot;</span>
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -3915,13 +3854,17 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>boolean</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> NON STANDARD OPTION: Hide this parameter from the help message and documentation</p>
+<p><strong>Description:</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Non-standard key</p>
+</div>
+<p>A boolean JSON flag that instructs anything using the schema that this is an unimportant parameter.</p>
+<p>Typically used to keep the pipeline docs / UIs uncluttered with common parameters which are not used by the majority of users.
+For example, <code>--plaintext_email</code> and <code>--monochrome_logs</code>.</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">&quot;hidden&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span></code></pre></div>
 <h6 id="mimetype"><a name="defs_pattern1_properties_pattern1_pattern2_i1_mimetype"></a><code>mimetype</code><a class="headerlink" href="#mimetype" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3935,14 +3878,20 @@ must respect the following conditions</p>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
 </tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
 </tbody>
 </table>
-<p><strong>Description:</strong> NON STANDARD OPTION: The MIME type of the parameter value</p>
-<h6 id="the-following-properties-are-required">The following properties are required<a class="headerlink" href="#the-following-properties-are-required" title="Permanent link">&para;</a></h6>
+<p><strong>Description:</strong> MIME type for a file path. Setting this value informs downstream tools about what <em>kind</em> of file is expected.</p>
+<p>Should only be set when <code>format</code> is <code>file-path</code>.</p>
+<ul>
+<li>See a <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">list of common MIME types</a></li>
+</ul>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">{</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;file-path&quot;</span><span class="p">,</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span><span class="nt">&quot;mimetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/csv&quot;</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<h6 id="the-following-properties-are-required"><a name="autogenerated_heading_2"></a>The following properties are required<a class="headerlink" href="#the-following-properties-are-required" title="Permanent link">&para;</a></h6>
 <ul>
 <li>type</li>
 <li>description</li>
@@ -3961,10 +3910,6 @@ must respect the following conditions</p>
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td><a href="#defs_pattern1_dependentRequired_additionalProperties">Each additional property must conform to the schema</a></td>
 </tr>
@@ -3974,21 +3919,13 @@ must respect the following conditions</p>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>- <a href="#defs_pattern1_dependentRequired_additionalProperties"></a></td>
-<td>No</td>
 <td>array of string</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -4004,10 +3941,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>array of string</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Default</strong></td>
@@ -4029,7 +3962,7 @@ must respect the following conditions</p>
 </tr>
 </tbody>
 </table>
-<h6 id="additionalproperties-items">additionalProperties items<a class="headerlink" href="#additionalproperties-items" title="Permanent link">&para;</a></h6>
+<h6 id="additionalproperties-items"><a name="defs_pattern1_dependentRequired_additionalProperties_items"></a>additionalProperties items<a class="headerlink" href="#additionalproperties-items" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
 <tr>
@@ -4041,10 +3974,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -4060,10 +3989,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>object</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Additional properties</strong></td>
@@ -4089,10 +4014,6 @@ must respect the following conditions</p>
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td><a href="#dependentRequired_additionalProperties">Each additional property must conform to the schema</a></td>
 </tr>
@@ -4102,21 +4023,13 @@ must respect the following conditions</p>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>- <a href="#dependentRequired_additionalProperties"></a></td>
-<td>No</td>
 <td>array of string</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 </tbody>
 </table>
@@ -4132,10 +4045,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>array of string</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 <tr>
 <td><strong>Default</strong></td>
@@ -4157,7 +4066,7 @@ must respect the following conditions</p>
 </tr>
 </tbody>
 </table>
-<h4 id="additionalproperties-items_1">additionalProperties items<a class="headerlink" href="#additionalproperties-items_1" title="Permanent link">&para;</a></h4>
+<h4 id="additionalproperties-items_1"><a name="dependentRequired_additionalProperties_items"></a>additionalProperties items<a class="headerlink" href="#additionalproperties-items_1" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
 <tr>
@@ -4169,10 +4078,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Type</strong></td>
 <td><code>string</code></td>
-</tr>
-<tr>
-<td><strong>Required</strong></td>
-<td>No</td>
 </tr>
 </tbody>
 </table>
@@ -4191,26 +4096,20 @@ must respect the following conditions</p>
 <td><code>array of object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
+<td>Each item of this array must be</td>
+<td>Description</td>
 </tr>
-</tbody>
-</table>
-<table>
-<thead>
 <tr>
-<th>Each item of this array must be</th>
-<th>Description</th>
+<td>-------------------------------</td>
+<td>-----------</td>
 </tr>
-</thead>
-<tbody>
 <tr>
 <td><a href="#allOf_items">allOf items</a></td>
 <td>-</td>
 </tr>
 </tbody>
 </table>
-<h3 id="allof-items">allOf items<a class="headerlink" href="#allof-items" title="Permanent link">&para;</a></h3>
+<h3 id="allof-items"><a name="allOf_items"></a>allOf items<a class="headerlink" href="#allof-items" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4224,10 +4123,6 @@ must respect the following conditions</p>
 <td><code>object</code></td>
 </tr>
 <tr>
-<td><strong>Required</strong></td>
-<td>No</td>
-</tr>
-<tr>
 <td><strong>Additional properties</strong></td>
 <td>Any type allowed</td>
 </tr>
@@ -4237,21 +4132,13 @@ must respect the following conditions</p>
 <thead>
 <tr>
 <th>Property</th>
-<th>Pattern</th>
 <th>Type</th>
-<th>Deprecated</th>
-<th>Definition</th>
-<th>Title/Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>+ <a href="#allOf_items_ref">$ref</a></td>
-<td>No</td>
 <td>string</td>
-<td>No</td>
-<td>-</td>
-<td>-</td>
 </tr>
 </tbody>
 </table>
