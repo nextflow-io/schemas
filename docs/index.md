@@ -11,5 +11,5 @@ Welcome to the Nextflow Schemas documentation. This repository contains JSON sch
 
 This repository provides two main schemas:
 
-- **[Pipeline Input Schema](schemas/v1/pipeline-input.md)**: Validates Nextflow pipeline input specifications, including parameter definitions, validation rules, and parameter grouping
-- **[Plugin Schema](schemas/v1/plugin.md)**: Validates Nextflow plugin specifications, including configuration scopes and function definitions
+- **[Pipeline Schema](schemas/pipeline/v1/schema)**: Validates Nextflow pipeline input specifications, including parameter definitions, validation rules, and parameter grouping
+- **[Plugin Schema](schemas/plugin/v1/schema)**: Validates Nextflow plugin specifications, including configuration scopes and function definitions
