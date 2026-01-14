@@ -32,6 +32,7 @@
     },
     "$defs": {
       "title": "Parameter groups",
+      "description": "A slightly strange use of a JSON schema standard that we use for Nextflow schema is `$defs`.\n\nJSON schema can group variables together in an `object`, but then the validation expects this structure to exist in the data that it is validating.\nIn reality, we have a very long \"flat\" list of parameters, all at the top level of `params.foo`.\n\nIn order to give some structure to log outputs, documentation and so on, we group parameters into `$defs`.\nEach `def` is an object with a title, description and so on.\nHowever, as they are under `$defs` scope they are effectively ignored by the validation and so their nested nature is not a problem.\nWe then bring the contents of each definition object back to the \"flat\" top level for validation using a series of `allOf` statements at the end of the schema,\nwhich reference the specific definition keys.",
       "type": "object",
       "patternProperties": {
         "^.*$": {
@@ -53,7 +54,8 @@
               "type": "string"
             },
             "required": {
-              "type": "array"
+              "type": "array",
+              "description": "Any parameters that _must_ be specified should be set as `required` in the schema.\n\n!!! tip\n\n    Make sure you do set `null` as a default value for the parameter, otherwise it will have a value even if not supplied by the pipeline user and the required property will have no effect.\n\nThis is not done with a property key like other things described below, but rather by naming\nthe parameter in the `required` array in the definition object / top-level object.\n\nFor more information, see the [JSON schema documentation](https://json-schema.org/understanding-json-schema/reference/object.html#required-properties)."
             },
             "properties": {
               "$ref": "#/$defs/parameterOptions"
@@ -134,7 +136,7 @@
       "description": "Allowed standard JSON Schema properties.",
       "properties": {
         "type": {
-          "description": "The type of the parameter value. Can be one or more of these: `['integer', 'boolean', 'number', 'string', 'null']`",
+          "description": "Variable type, taken from the [JSON schema keyword vocabulary](https://json-schema.org/understanding-json-schema/reference/type.html):\n\n- `string`\n- `number` (float)\n- `integer`\n- `boolean` (true / false)\n- `object` (currently only supported for file validation, see Nested parameters)\n- `array` (currently only supported for file validation, see Nested parameters)\n\nValidation checks that the supplied parameter matches the expected type, and will fail with an error if not.\n\nThis JSON schema type is _not_ supported:\n\n- `null`",
           "anyOf": [
             { "$ref": "#/$defs/typeAnnotation" },
             {
@@ -145,7 +147,7 @@
         },
         "format": {
           "type": "string",
-          "description": "The format of a parameter value with the 'string' type. This is used for additional validation on the structure of the value.",
+          "description": "Formats can be used to give additional validation checks against `string` values for certain properties.\n\n!!! example \"Non-standard key (values)\"\n\n    The `format` key is a [standard JSON schema key](https://json-schema.org/understanding-json-schema/reference/string.html#format),\n    however we primarily use it for validating file / directory path operations with non-standard schema values.\n\nExample usage is as follows:\n\n```json\n{\n  \"type\": \"string\",\n  \"format\": \"file-path\"\n}\n```\n\nThe available `format` types are below:\n\n`file-path`\n: States that the provided value is a file. Does not check its existence, but it does check if the path is not a directory.\n\n`directory-path`\n: States that the provided value is a directory. Does not check its existence, but if it exists, it does check that the path is not a file.\n\n`path`\n: States that the provided value is a path (file or directory). Does not check its existence.\n\n`file-path-pattern`\n: States that the provided value is a glob pattern that will be used to fetch files. Checks that the pattern is valid and that at least one file is found.",
           "enum": [
             "file-path",
             "directory-path",
@@ -163,15 +165,15 @@
           "type": "string",
           "format": "regex",
           "minLength": 1,
-          "description": "Check a parameter value of 'string' type against a regex pattern"
+          "description": "Regular expression which the string must match in order to pass validation.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/string.html#regular-expressions)\n  for details.\n- Use <https://regex101.com/> for help with writing regular expressions.\n\nFor example, this pattern only validates if the supplied string ends in `.fastq`, `.fq`, `.fastq.gz` or `.fq.gz`:\n\n```json\n{\n  \"type\": \"string\",\n  \"pattern\": \".*.f(ast)?q(.gz)?$\"\n}\n```"
         },
         "description": {
           "type": "string",
-          "description": "The description of the current parameter"
+          "description": "A short description of what the parameter does, written in markdown.\nPrinted in docs and terminal help text.\nShould be maximum one short sentence."
         },
         "default": {
           "$ref": "#/$defs/allTypes",
-          "description": "Specifies a default value to use for this parameter"
+          "description": "Default value for the parameter.\n\nShould match the `type` and validation patterns set for the parameter in other fields.\n\n!!! tip\n\n    If no default should be set, completely omit this key from the schema.\n    Do not set it as an empty string, or `null`.\n\n    However, parameters with no defaults _should_ be set to `null` within your Nextflow config file.\n\n!!! note\n\n    When creating a schema using `nf-core schema build`, this field will be automatically created based\n    on the default value defined in the pipeline config files.\n\n    Generally speaking, the two should always be kept in sync to avoid unexpected problems and usage errors.\n    In some rare cases, this may not be possible (for example, a dynamic groovy expression cannot be encoded in JSON),\n    in which case try to specify as \"sensible\" a default within the schema as possible."
         },
         "examples": {
           "type": "array",
@@ -182,31 +184,31 @@
         },
         "deprecated": {
           "type": "boolean",
-          "description": "States that the parameter is deprecated. Please provide a nice deprecation message using 'errorMessage'"
+          "description": "!!! example \"Extended key\"\n\nA boolean JSON flag that instructs anything using the schema that this parameter/field is deprecated and should not be used. This can be useful to generate messages telling the user that a parameter has changed between versions.\n\nJSON schema states that this is an informative key only, but in [nf-schema](https://nextflow-io.github.io/nf-schema/latest/) this will cause a validation error if the parameter/field is used.\n\n!!! tip\n\n    Using the [`errorMessage`](#errormessage) keyword can be useful to provide more information about the deprecation and what to use instead."
         },
         "minLength": {
           "$ref": "#/$defs/nonNegativeInteger",
-          "description": "The minimum length a 'string' parameter value should be"
+          "description": "Specify a minimum / maximum string length with `minLength` and `maxLength`.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/string.html#length)\n  for details.\n\n```json\n{\n  \"type\": \"string\",\n  \"minLength\": 2,\n  \"maxLength\": 3\n}\n```"
         },
         "maxLength": {
           "$ref": "#/$defs/nonNegativeInteger",
-          "description": "The maximum length a 'string' parameter value should be"
+          "description": "Specify a minimum / maximum string length with `minLength` and `maxLength`.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/string.html#length)\n  for details.\n\n```json\n{\n  \"type\": \"string\",\n  \"minLength\": 2,\n  \"maxLength\": 3\n}\n```"
         },
         "minimum": {
           "type": "number",
-          "description": "The mimimum value an 'integer' or 'number' parameter value should be"
+          "description": "Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/numeric.html#range)\n  for details.\n\n> If x is the value being validated, the following must hold true:\n>\n> - `x` ≥ `minimum`\n> - `x` ≤ `maximum`\n\n```json\n{\n  \"type\": \"number\",\n  \"minimum\": 0,\n  \"maximum\": 100\n}\n```\n\n!!! note\n\n    The JSON schema doc also mention `exclusiveMinimum`, `exclusiveMaximum` and `multipleOf` keys.\n    Because nf-schema uses stock JSON schema validation libraries, these _should_ work for validating keys.\n    However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them."
         },
         "exclusiveMinimum": {
           "type": "number",
-          "description": "The exclusive mimimum value an 'integer' or 'number' parameter value should be"
+          "description": "Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/numeric.html#range)\n  for details.\n\n> If x is the value being validated, the following must hold true:\n>\n> - `x` ≥ `minimum`\n> - `x` ≤ `maximum`\n\n```json\n{\n  \"type\": \"number\",\n  \"minimum\": 0,\n  \"maximum\": 100\n}\n```\n\n!!! note\n\n    The JSON schema doc also mention `exclusiveMinimum`, `exclusiveMaximum` and `multipleOf` keys.\n    Because [nf-schema](https://nextflow-io.github.io/nf-schema/latest/) uses stock JSON schema validation libraries, these _should_ work for validating keys.\n    However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them."
         },
         "maximum": {
           "type": "number",
-          "description": "The maximum value an 'integer' or 'number' parameter value should be"
+          "description": "Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/numeric.html#range)\n  for details.\n\n> If x is the value being validated, the following must hold true:\n>\n> - `x` ≥ `minimum`\n> - `x` ≤ `maximum`\n\n```json\n{\n  \"type\": \"number\",\n  \"minimum\": 0,\n  \"maximum\": 100\n}\n```\n\n!!! note\n\n    The JSON schema doc also mention `exclusiveMinimum`, `exclusiveMaximum` and `multipleOf` keys.\n    Because nf-schema uses stock JSON schema validation libraries, these _should_ work for validating keys.\n    However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them."
         },
         "exclusiveMaximum": {
           "type": "number",
-          "description": "The exclusive maximum value an 'integer' or 'number' parameter value should be"
+          "description": "Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/numeric.html#range)\n  for details.\n\n> If x is the value being validated, the following must hold true:\n>\n> - `x` ≥ `minimum`\n> - `x` ≤ `maximum`\n\n```json\n{\n  \"type\": \"number\",\n  \"minimum\": 0,\n  \"maximum\": 100\n}\n```\n\n!!! note\n\n    The JSON schema doc also mention `exclusiveMinimum`, `exclusiveMaximum` and `multipleOf` keys.\n    Because nf-schema uses stock JSON schema validation libraries, these _should_ work for validating keys.\n    However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them."
         },
         "multipleOf": {
           "type": "number",
@@ -218,7 +220,7 @@
           "items": {
             "$ref": "#/$defs/allTypes"
           },
-          "description": "The parameter value should be one of the values specified in this enum array"
+          "description": "An array of enumerated values: the parameter must match one of these values exactly to pass validation.\n\n- See the [JSON schema docs](https://json-schema.org/understanding-json-schema/reference/generic.html#enumerated-values)\n  for details.\n- Available for strings, numbers and integers.\n\n```json\n{\n  \"enum\": [\"red\", \"amber\", \"green\"]\n}\n```"
         },
         "const": {
           "$ref": "#/$defs/allTypes",
@@ -233,34 +235,34 @@
         "errorMessage": {
           "type": "string",
           "minLength": 1,
-          "description": "NON STANDARD OPTION: The custom error message to display in case validation against this parameter fails. Can also be used as a deprecation message if 'deprecated' is true"
+          "description": "\n!!! example \"Non-standard key\"\n\nIf validation fails, an error message is printed to the terminal, so that the end user knows what to fix.\nHowever, these messages are not always very clear - especially to newcomers.\n\nTo improve this experience, pipeline developers can set a custom `errorMessage` for a given parameter in a the schema.\nIf validation fails, this `errorMessage` is printed after the original error message to guide the pipeline users to an easier solution.\n\nFor example, instead of printing:\n\n```\n* --input (samples.yml): \"samples.yml\" does not match regular expression [^\\S+\\.csv$]\n```\n\nWe can set\n\n```json\n\"input\": {\n  \"type\": \"string\",\n  \"pattern\": \"^\\S+\\.csv$\",\n  \"errorMessage\": \"File name must end in '.csv' cannot contain spaces\"\n}\n```\n\nand get:\n\n```\n* --input (samples.yml): \"samples.yml\" does not match regular expression [^\\S+\\.csv$] (File name must end in '.csv' cannot contain spaces)\n```"
         },
         "exists": {
           "type": "boolean",
-          "description": "NON STANDARD OPTION: Check if a file exists. This parameter value needs to be a `string` type with one of these formats: `['path', 'file-path', 'directory-path', 'file-path-pattern']`"
+          "description": "When a format is specified for a value, you can provide the key `exists` set to true in order to validate that the provided path exists. Set this to `false` to validate that the path does not exist.\n\nExample usage is as follows:\n\n```json\n{\n  \"type\": \"string\",\n  \"format\": \"file-path\",\n  \"exists\": true\n}\n```\n\n!!! note\n\n    If the parameter is an S3, Azure or Google Cloud URI path, this validation is ignored.\n\n!!! warning\n\n    Make sure to only use the `exists` keyword in combination with any file path format. Using `exists` on a normal string will assume that it's a file and will probably fail unexpectedly."
         },
         "schema": {
           "type": "string",
           "minLength": 1,
           "pattern": "\\.json$",
-          "description": "NON STANDARD OPTION: Check the given file against a schema passed to this keyword. Will only work when type is `string` and format is `path` or `file-path`"
+          "description": "Path to a JSON schema file used to validate _the supplied file_.\n\nShould only be set when `format` is `file-path`.\n\n!!! tip\n\n    Setting this field is key to working with sample sheet validation and channel generation, as described in the sample sheet section of the [nf-schema docs](https://nextflow-io.github.io/nf-schema/latest/nextflow_schema/sample_sheet_schema_specification/).\n\nThese schema files are typically stored in the pipeline `assets` directory, but can be anywhere.\n\n```json\n{\n  \"type\": \"string\",\n  \"format\": \"file-path\",\n  \"schema\": \"assets/foo_schema.json\"\n}\n```\n\n!!! note\n\n    If the parameter is set to `null`, `false` or an empty string, this validation is ignored. The file won't be validated."
         },
         "help_text": {
           "type": "string",
-          "description": "NON STANDARD OPTION: A more detailed help text"
+          "description": "\n!!! example \"Non-standard key\"\n\nA longer text with usage help for the parameter, written in markdown.\nCan include newlines with multiple paragraphs and more complex markdown structures.\n\nTypically hidden by default in documentation and interfaces, unless explicitly clicked / requested."
         },
         "fa_icon": {
           "type": "string",
           "pattern": "^fa",
-          "description": "NON STANDARD OPTION: A font awesome icon to use in the nf-core parameter documentation"
+          "description": "\n!!! example \"Non-standard key\"\n\nA text identifier corresponding to an icon from [Font Awesome](https://fontawesome.com/).\nUsed for easier visual navigation of documentation and pipeline interfaces.\n\nShould be the font-awesome class names, for example:\n\n```json\n\"fa_icon\": \"fas fa-file-csv\"\n```"
         },
         "hidden": {
           "type": "boolean",
-          "description": "NON STANDARD OPTION: Hide this parameter from the help message and documentation"
+          "description": "\n!!! example \"Non-standard key\"\n\nA boolean JSON flag that instructs anything using the schema that this is an unimportant parameter.\n\nTypically used to keep the pipeline docs / UIs uncluttered with common parameters which are not used by the majority of users.\nFor example, `--plaintext_email` and `--monochrome_logs`.\n\n```json\n\"hidden\": true\n```"
         },
         "mimetype": {
           "type": "string",
-          "description": "NON STANDARD OPTION: The MIME type of the parameter value",
+          "description": "MIME type for a file path. Setting this value informs downstream tools about what _kind_ of file is expected.\n\nShould only be set when `format` is `file-path`.\n\n- See a [list of common MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)\n\n```json\n{\n  \"type\": \"string\",\n  \"format\": \"file-path\",\n  \"mimetype\": \"text/csv\"\n}\n```",
           "deprecated": true,
           "errorMessage": "The 'mimetype' keyword is deprecated. Use 'pattern' or 'format' instead."
         }
