@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Super simple schema documentation generator.
-Uses json-schema-for-humans to generate markdown, then post-processes headings.
+Uses json-schema-for-humans to generate markdown.
 """
 
 import re
@@ -13,52 +13,43 @@ from json_schema_for_humans.generate import generate_from_filename
 from json_schema_for_humans.generation_configuration import GenerationConfiguration
 
 
-def fix_headings(markdown: str) -> str:
+def clean_headings(markdown: str) -> str:
     """
-    Post-process markdown to fix headings:
-    - Remove numbering from headings
-    - Keep only leaf property names
-    - Wrap property names in backticks
+    Remove "Property " and "Pattern Property " prefixes from markdown headings.
+    Converts: ###### <a name="..."></a>Property `name`
+    To:       ###### <a name="..."></a>`name`
     """
-    lines = []
+    # Remove "Property " prefix from headings
+    markdown = re.sub(
+        r'(#{2,})\s+<a name="([^"]+)"></a>Property\s+(.*)$',
+        r'\1 <a name="\2"></a>\3',
+        markdown,
+        flags=re.MULTILINE
+    )
 
-    for line in markdown.split('\n'):
-        # Fix headings: ## 1.2.3 Property `name` or ## 1. Property `name`
-        heading_match = re.match(r'^(#{2,})\s+<a name="([^"]+)"></a>[\d.]+\.\s+(.*)$', line)
-        if not heading_match:
-            heading_match = re.match(r'^(#{2,})\s+[\d.]+\.\s+(.*)$', line)
+    # Remove "Pattern Property " prefix from headings
+    markdown = re.sub(
+        r'(#{2,})\s+<a name="([^"]+)"></a>Pattern Property\s+(.*)$',
+        r'\1 <a name="\2"></a>\3',
+        markdown,
+        flags=re.MULTILINE
+    )
 
-        if heading_match:
-            if len(heading_match.groups()) == 3:
-                level, anchor, rest = heading_match.groups()
-            else:
-                level, rest = heading_match.groups()
-                anchor = None
+    # Remove "Required | No" table rows
+    markdown = re.sub(
+        r'^\|\s*\*\*Required\*\*\s*\|\s*No\s*\|\s*$\n',
+        '',
+        markdown,
+        flags=re.MULTILINE
+    )
 
-
-            # Extract property name
-            # Patterns: "Property `name`" or just "`name`" or "name items"
-            prop_match = re.search(r'Property\s+`([^`]+)`|`([^`]+)`', rest)
-            if prop_match:
-                prop_name = prop_match.group(1) or prop_match.group(2)
-                # Just use the property name as-is (already a leaf in jsfh output)
-                if anchor:
-                    line = f"{level} <a name=\"{anchor}\"></a>`{prop_name}`"
-                else:
-                    line = f"{level} `{prop_name}`"
-            else:
-                # Handle "xxx items" headings - keep them as-is but remove numbering
-                line = f"{level} {rest}"
-
-        lines.append(line)
-
-    return '\n'.join(lines)
+    return markdown
 
 
 def generate_docs(schema_path: Path, output_path: Optional[Path] = None) -> str:
     """
     Generate documentation for a JSON schema file.
-    Uses json-schema-for-humans, then fixes the headings.
+    Uses json-schema-for-humans with standard md template.
     """
     if not output_path:
         output_path = schema_path.with_suffix('.md')
@@ -73,7 +64,10 @@ def generate_docs(schema_path: Path, output_path: Optional[Path] = None) -> str:
         footer_show_time=False,
         template_md_options={
             "show_array_restrictions": False,
-        }
+            "properties_table_columns": ['Property','Type'],
+            "show_heading_numbers": False,
+        },
+        expand_buttons=True
     )
 
     # Ensure output directory exists before generating
@@ -83,14 +77,13 @@ def generate_docs(schema_path: Path, output_path: Optional[Path] = None) -> str:
     temp_output = output_path.parent / f"temp_{output_path.name}"
     generate_from_filename(schema_path, str(temp_output), config=config)
 
-    # Read and post-process
+    # Read, clean up, and write final output
     markdown = temp_output.read_text()
-    markdown = fix_headings(markdown)
+    markdown = clean_headings(markdown)
     output_path.write_text(markdown)
 
     # Clean up temp file
     temp_output.unlink()
-
 
     print(f"Documentation generated: {output_path}")
     return markdown
