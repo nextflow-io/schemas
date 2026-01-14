@@ -5,6 +5,7 @@
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 **Description:** Schema to validate Nextflow pipeline input specs
@@ -91,6 +92,7 @@ Specific value: `"object"`
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 **Description:** A slightly strange use of a JSON schema standard that we use for Nextflow schema is `$defs`.
@@ -117,6 +119,7 @@ which reference the specific definition keys.
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Property                                                | Type   |
@@ -151,24 +154,28 @@ Specific value: `"object"`
 
 #### <a name="defs_pattern1_fa_icon"></a>`fa_icon`
 
-|                                   |                                                     |
-| --------------------------------- | --------------------------------------------------- |
-| **Type**                          | `string`                                            |
-| Restrictions                      |                                                     |
-| --------------------------------- | --------------------------------------------------- |
-| **Must match regular expression** | `^fa` [Test](https://regex101.com/?regex=%5Efa)     |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+| Restrictions                      |                                                 |
+| --------------------------------- | ----------------------------------------------- |
+| **Must match regular expression** | `^fa` [Test](https://regex101.com/?regex=%5Efa) |
 
 #### <a name="defs_pattern1_description"></a>`description`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 #### <a name="defs_pattern1_required"></a>`required`
 
-|          |         |
-| -------- | ------- |
-| **Type** | `array` |
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
 
 **Description:** Any parameters that _must_ be specified should be set as `required` in the schema.
 
@@ -203,6 +210,7 @@ For more information, see the [JSON schema documentation](https://json-schema.or
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `combining`      |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | All of(Requirement)                                                |
@@ -215,6 +223,7 @@ For more information, see the [JSON schema documentation](https://json-schema.or
 |                           |                          |
 | ------------------------- | ------------------------ |
 | **Type**                  | `object`                 |
+| **Required**              | No                       |
 | **Additional properties** | Any type allowed         |
 | **Defined in**            | #/$defs/standardKeywords |
 
@@ -244,6 +253,7 @@ For more information, see the [JSON schema documentation](https://json-schema.or
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `combining`      |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 **Description:** Variable type, taken from the [JSON schema keyword vocabulary](https://json-schema.org/understanding-json-schema/reference/type.html):
@@ -252,8 +262,8 @@ For more information, see the [JSON schema documentation](https://json-schema.or
 - `number` (float)
 - `integer`
 - `boolean` (true / false)
-- `object` (currently only supported for file validation, see Nested parameters)
-- `array` (currently only supported for file validation, see Nested parameters)
+- `object` (currently only supported for file validation)
+- `array` (currently only supported for file validation)
 
 Validation checks that the supplied parameter matches the expected type, and will fail with an error if not.
 
@@ -271,6 +281,7 @@ This JSON schema type is _not_ supported:
 |                |                        |
 | -------------- | ---------------------- |
 | **Type**       | `enum (of string)`     |
+| **Required**   | No                     |
 | **Defined in** | #/$defs/typeAnnotation |
 
 Must be one of:
@@ -283,9 +294,11 @@ Must be one of:
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i1"></a>`item 1`
 
-|                                                                                      |             |
-| ------------------------------------------------------------------------------------ | ----------- |
-| **Type**                                                                             | `array`     |
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
+
 | Each item of this array must be                                                      | Description |
 | ------------------------------------------------------------------------------------ | ----------- |
 | [typeAnnotation](#defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i1_items) | -           |
@@ -295,13 +308,15 @@ Must be one of:
 |                        |                                                                                                                             |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | **Type**               | `enum (of string)`                                                                                                          |
+| **Required**           | No                                                                                                                          |
 | **Same definition as** | [defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i0](#defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i0) |
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_format"></a>`format`
 
-|          |                    |
-| -------- | ------------------ |
-| **Type** | `enum (of string)` |
+|              |                    |
+| ------------ | ------------------ |
+| **Type**     | `enum (of string)` |
+| **Required** | No                 |
 
 **Description:** Formats can be used to give additional validation checks against `string` values for certain properties.
 
@@ -348,10 +363,11 @@ Must be one of:
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_pattern"></a>`pattern`
 
-|            |          |
-| ---------- | -------- |
-| **Type**   | `string` |
-| **Format** | `regex`  |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+| **Format**   | `regex`  |
 
 **Description:** Regular expression which the string must match in order to pass validation.
 
@@ -374,9 +390,10 @@ For example, this pattern only validates if the supplied string ends in `.fastq`
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_description"></a>`description`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 **Description:** A short description of what the parameter does, written in markdown.
 Printed in docs and terminal help text.
@@ -387,6 +404,7 @@ Should be maximum one short sentence.
 |                |                                            |
 | -------------- | ------------------------------------------ |
 | **Type**       | `integer, boolean, string, number or null` |
+| **Required**   | No                                         |
 | **Defined in** | #/$defs/allTypes                           |
 
 **Description:** Default value for the parameter.
@@ -411,9 +429,10 @@ Should match the `type` and validation patterns set for the parameter in other f
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_examples"></a>`examples`
 
-|          |         |
-| -------- | ------- |
-| **Type** | `array` |
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
 
 **Description:** A list of examples for the current parameter
 
@@ -426,19 +445,21 @@ Should match the `type` and validation patterns set for the parameter in other f
 |                        |                                                                   |
 | ---------------------- | ----------------------------------------------------------------- |
 | **Type**               | `integer, boolean, string, number or null`                        |
+| **Required**           | No                                                                |
 | **Same definition as** | [default](#defs_pattern1_properties_pattern1_pattern2_i0_default) |
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_deprecated"></a>`deprecated`
 
-|          |           |
-| -------- | --------- |
-| **Type** | `boolean` |
+|              |           |
+| ------------ | --------- |
+| **Type**     | `boolean` |
+| **Required** | No        |
 
 **Description:** !!! example "Extended key"
 
 A boolean JSON flag that instructs anything using the schema that this parameter/field is deprecated and should not be used. This can be useful to generate messages telling the user that a parameter has changed between versions.
 
-JSON schema states that this is an informative key only, but in `nf-schema` this will cause a validation error if the parameter/field is used.
+JSON schema states that this is an informative key only, but in [nf-schema](https://nextflow-io.github.io/nf-schema/latest/) this will cause a validation error if the parameter/field is used.
 
 !!! tip
 
@@ -449,6 +470,7 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 |                |                            |
 | -------------- | -------------------------- |
 | **Type**       | `integer`                  |
+| **Required**   | No                         |
 | **Defined in** | #/$defs/nonNegativeInteger |
 
 **Description:** Specify a minimum / maximum string length with `minLength` and `maxLength`.
@@ -473,6 +495,7 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 |                        |                                                                       |
 | ---------------------- | --------------------------------------------------------------------- |
 | **Type**               | `integer`                                                             |
+| **Required**           | No                                                                    |
 | **Same definition as** | [minLength](#defs_pattern1_properties_pattern1_pattern2_i0_minLength) |
 
 **Description:** Specify a minimum / maximum string length with `minLength` and `maxLength`.
@@ -490,9 +513,10 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_minimum"></a>`minimum`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `number` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `number` |
+| **Required** | No       |
 
 **Description:** Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.
 
@@ -520,9 +544,10 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_exclusiveMinimum"></a>`exclusiveMinimum`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `number` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `number` |
+| **Required** | No       |
 
 **Description:** Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.
 
@@ -545,14 +570,15 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 !!! note
 
     The JSON schema doc also mention `exclusiveMinimum`, `exclusiveMaximum` and `multipleOf` keys.
-    Because nf-schema uses stock JSON schema validation libraries, these _should_ work for validating keys.
+    Because [nf-schema](https://nextflow-io.github.io/nf-schema/latest/) uses stock JSON schema validation libraries, these _should_ work for validating keys.
     However, they are not officially supported within the Nextflow schema ecosystem and so some interfaces may not recognise them.
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_maximum"></a>`maximum`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `number` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `number` |
+| **Required** | No       |
 
 **Description:** Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.
 
@@ -580,9 +606,10 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_exclusiveMaximum"></a>`exclusiveMaximum`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `number` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `number` |
+| **Required** | No       |
 
 **Description:** Specify a minimum / maximum value for an integer or float number length with `minimum` and `maximum`.
 
@@ -610,17 +637,19 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_multipleOf"></a>`multipleOf`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `number` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `number` |
+| **Required** | No       |
 
 **Description:** The 'integer' or 'number' parameter value should be a multiple of this value
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_enum"></a>`enum`
 
-|          |         |
-| -------- | ------- |
-| **Type** | `array` |
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
 
 **Description:** An array of enumerated values: the parameter must match one of these values exactly to pass validation.
 
@@ -643,6 +672,7 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 |                        |                                                                   |
 | ---------------------- | ----------------------------------------------------------------- |
 | **Type**               | `integer, boolean, string, number or null`                        |
+| **Required**           | No                                                                |
 | **Same definition as** | [default](#defs_pattern1_properties_pattern1_pattern2_i0_default) |
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i0_const"></a>`const`
@@ -650,6 +680,7 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 |                        |                                                                   |
 | ---------------------- | ----------------------------------------------------------------- |
 | **Type**               | `integer, boolean, string, number or null`                        |
+| **Required**           | No                                                                |
 | **Same definition as** | [default](#defs_pattern1_properties_pattern1_pattern2_i0_default) |
 
 **Description:** The parameter value should be equal to this value
@@ -659,6 +690,7 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 |                           |                        |
 | ------------------------- | ---------------------- |
 | **Type**                  | `object`               |
+| **Required**              | No                     |
 | **Additional properties** | Any type allowed       |
 | **Defined in**            | #/$defs/customKeywords |
 
@@ -676,9 +708,10 @@ JSON schema states that this is an informative key only, but in `nf-schema` this
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i1_errorMessage"></a>`errorMessage`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 **Description:**
 !!! example "Non-standard key"
@@ -717,9 +750,10 @@ and get:
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i1_exists"></a>`exists`
 
-|          |           |
-| -------- | --------- |
-| **Type** | `boolean` |
+|              |           |
+| ------------ | --------- |
+| **Type**     | `boolean` |
+| **Required** | No        |
 
 **Description:** When a format is specified for a value, you can provide the key `exists` set to true in order to validate that the provided path exists. Set this to `false` to validate that the path does not exist.
 
@@ -743,9 +777,10 @@ Example usage is as follows:
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i1_schema"></a>`schema`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 **Description:** Path to a JSON schema file used to validate _the supplied file_.
 
@@ -753,7 +788,7 @@ Should only be set when `format` is `file-path`.
 
 !!! tip
 
-    Setting this field is key to working with sample sheet validation and channel generation, as described in the next section of the nf-schema docs.
+    Setting this field is key to working with sample sheet validation and channel generation, as described in the sample sheet section of the [nf-schema docs](https://nextflow-io.github.io/nf-schema/latest/nextflow_schema/sample_sheet_schema_specification/).
 
 These schema files are typically stored in the pipeline `assets` directory, but can be anywhere.
 
@@ -776,9 +811,10 @@ These schema files are typically stored in the pipeline `assets` directory, but 
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i1_help_text"></a>`help_text`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 **Description:**
 !!! example "Non-standard key"
@@ -790,9 +826,10 @@ Typically hidden by default in documentation and interfaces, unless explicitly c
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i1_fa_icon"></a>`fa_icon`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 **Description:**
 !!! example "Non-standard key"
@@ -812,9 +849,10 @@ Should be the font-awesome class names, for example:
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i1_hidden"></a>`hidden`
 
-|          |           |
-| -------- | --------- |
-| **Type** | `boolean` |
+|              |           |
+| ------------ | --------- |
+| **Type**     | `boolean` |
+| **Required** | No        |
 
 **Description:**
 !!! example "Non-standard key"
@@ -830,9 +868,10 @@ For example, `--plaintext_email` and `--monochrome_logs`.
 
 ###### <a name="defs_pattern1_properties_pattern1_pattern2_i1_mimetype"></a>`mimetype`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 **Description:** MIME type for a file path. Setting this value informs downstream tools about what _kind_ of file is expected.
 
@@ -858,6 +897,7 @@ Should only be set when `format` is `file-path`.
 |                           |                                                                                                              |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | **Type**                  | `object`                                                                                                     |
+| **Required**              | No                                                                                                           |
 | **Additional properties** | [Each additional property must conform to the schema](#defs_pattern1_dependentRequired_additionalProperties) |
 
 | Property                                                    | Type            |
@@ -866,10 +906,11 @@ Should only be set when `format` is `file-path`.
 
 ##### <a name="defs_pattern1_dependentRequired_additionalProperties"></a>`additionalProperties`
 
-|             |                   |
-| ----------- | ----------------- |
-| **Type**    | `array of string` |
-| **Default** | `[]`              |
+|              |                   |
+| ------------ | ----------------- |
+| **Type**     | `array of string` |
+| **Required** | No                |
+| **Default**  | `[]`              |
 
 | Each item of this array must be                                                           | Description |
 | ----------------------------------------------------------------------------------------- | ----------- |
@@ -877,15 +918,17 @@ Should only be set when `format` is `file-path`.
 
 ###### <a name="defs_pattern1_dependentRequired_additionalProperties_items"></a>additionalProperties items
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ## <a name="properties"></a>`properties`
 
 |                           |                                         |
 | ------------------------- | --------------------------------------- |
 | **Type**                  | `object`                                |
+| **Required**              | No                                      |
 | **Additional properties** | Any type allowed                        |
 | **Same definition as**    | [properties](#defs_pattern1_properties) |
 
@@ -894,6 +937,7 @@ Should only be set when `format` is `file-path`.
 |                           |                                                                                                |
 | ------------------------- | ---------------------------------------------------------------------------------------------- |
 | **Type**                  | `object`                                                                                       |
+| **Required**              | No                                                                                             |
 | **Additional properties** | [Each additional property must conform to the schema](#dependentRequired_additionalProperties) |
 
 | Property                                      | Type            |
@@ -902,10 +946,11 @@ Should only be set when `format` is `file-path`.
 
 ### <a name="dependentRequired_additionalProperties"></a>`additionalProperties`
 
-|             |                   |
-| ----------- | ----------------- |
-| **Type**    | `array of string` |
-| **Default** | `[]`              |
+|              |                   |
+| ------------ | ----------------- |
+| **Type**     | `array of string` |
+| **Required** | No                |
+| **Default**  | `[]`              |
 
 | Each item of this array must be                                             | Description |
 | --------------------------------------------------------------------------- | ----------- |
@@ -913,26 +958,30 @@ Should only be set when `format` is `file-path`.
 
 #### <a name="dependentRequired_additionalProperties_items"></a>additionalProperties items
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ## <a name="allOf"></a>`allOf`
 
 **Title:** Combine definition groups
 
-|                                 |                   |
-| ------------------------------- | ----------------- |
-| **Type**                        | `array of object` |
-| Each item of this array must be | Description       |
-| ------------------------------- | -----------       |
-| [allOf items](#allOf_items)     | -                 |
+|              |                   |
+| ------------ | ----------------- |
+| **Type**     | `array of object` |
+| **Required** | No                |
+
+| Each item of this array must be | Description |
+| ------------------------------- | ----------- |
+| [allOf items](#allOf_items)     | -           |
 
 ### <a name="allOf_items"></a>allOf items
 
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Property                   | Type   |

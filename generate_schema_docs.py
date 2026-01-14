@@ -35,13 +35,6 @@ def clean_headings(markdown: str) -> str:
         flags=re.MULTILINE
     )
 
-    # Remove "Required | No" table rows
-    markdown = re.sub(
-        r'^\|\s*\*\*Required\*\*\s*\|\s*No\s*\|\s*$\n',
-        '',
-        markdown,
-        flags=re.MULTILINE
-    )
 
     return markdown
 

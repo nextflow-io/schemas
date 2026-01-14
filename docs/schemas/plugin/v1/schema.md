@@ -5,6 +5,7 @@
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 **Description:** Schema for Nextflow plugin specs
@@ -15,9 +16,11 @@
 
 ## <a name="definitions"></a>`definitions`
 
-|                                         |             |
-| --------------------------------------- | ----------- |
-| **Type**                                | `array`     |
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
+
 | Each item of this array must be         | Description |
 | --------------------------------------- | ----------- |
 | [definitions items](#definitions_items) | -           |
@@ -27,6 +30,7 @@
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `combining`      |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Any of(Option)                              |
@@ -39,6 +43,7 @@
 |                           |                      |
 | ------------------------- | -------------------- |
 | **Type**                  | `object`             |
+| **Required**              | No                   |
 | **Additional properties** | Any type allowed     |
 | **Defined in**            | #/$defs/config_scope |
 
@@ -49,9 +54,10 @@
 
 ##### <a name="definitions_items_anyOf_i0_type"></a>`type`
 
-|          |                    |
-| -------- | ------------------ |
-| **Type** | `enum (of string)` |
+|              |                    |
+| ------------ | ------------------ |
+| **Type**     | `enum (of string)` |
+| **Required** | No                 |
 
 Must be one of:
 
@@ -62,6 +68,7 @@ Must be one of:
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Property                                                      | Type   |
@@ -72,21 +79,25 @@ Must be one of:
 
 ###### <a name="definitions_items_anyOf_i0_spec_name"></a>`name`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i0_spec_description"></a>`description`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i0_spec_children"></a>`children`
 
-|                                                                   |             |
-| ----------------------------------------------------------------- | ----------- |
-| **Type**                                                          | `array`     |
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
+
 | Each item of this array must be                                   | Description |
 | ----------------------------------------------------------------- | ----------- |
 | [children items](#definitions_items_anyOf_i0_spec_children_items) | -           |
@@ -96,6 +107,7 @@ Must be one of:
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `combining`      |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Any of(Option)                                                            |
@@ -108,6 +120,7 @@ Must be one of:
 |                           |                                                           |
 | ------------------------- | --------------------------------------------------------- |
 | **Type**                  | `object`                                                  |
+| **Required**              | No                                                        |
 | **Additional properties** | Any type allowed                                          |
 | **Same definition as**    | [definitions_items_anyOf_i0](#definitions_items_anyOf_i0) |
 
@@ -116,6 +129,7 @@ Must be one of:
 |                           |                       |
 | ------------------------- | --------------------- |
 | **Type**                  | `object`              |
+| **Required**              | No                    |
 | **Additional properties** | Any type allowed      |
 | **Defined in**            | #/$defs/config_option |
 
@@ -126,9 +140,10 @@ Must be one of:
 
 ###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_type"></a>`type`
 
-|          |                    |
-| -------- | ------------------ |
-| **Type** | `enum (of string)` |
+|              |                    |
+| ------------ | ------------------ |
+| **Type**     | `enum (of string)` |
+| **Required** | No                 |
 
 Must be one of:
 
@@ -139,6 +154,7 @@ Must be one of:
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Property                                                                                   | Type   |
@@ -149,27 +165,31 @@ Must be one of:
 
 ###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_name"></a>`name`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_description"></a>`description`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_type"></a>`type`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 #### <a name="definitions_items_anyOf_i1"></a>`function`
 
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 | **Defined in**            | #/$defs/function |
 
@@ -180,9 +200,10 @@ Must be one of:
 
 ##### <a name="definitions_items_anyOf_i1_type"></a>`type`
 
-|          |                    |
-| -------- | ------------------ |
-| **Type** | `enum (of string)` |
+|              |                    |
+| ------------ | ------------------ |
+| **Type**     | `enum (of string)` |
+| **Required** | No                 |
 
 Must be one of:
 
@@ -195,6 +216,7 @@ Must be one of:
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Property                                                      | Type            |
@@ -206,36 +228,42 @@ Must be one of:
 
 ###### <a name="definitions_items_anyOf_i1_spec_name"></a>`name`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i1_spec_description"></a>`description`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i1_spec_returnType"></a>`returnType`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i1_spec_parameters"></a>`parameters`
 
-|                                                                       |                   |
-| --------------------------------------------------------------------- | ----------------- |
-| **Type**                                                              | `array of object` |
-| Each item of this array must be                                       | Description       |
-| --------------------------------------------------------------------- | -----------       |
-| [parameters items](#definitions_items_anyOf_i1_spec_parameters_items) | -                 |
+|              |                   |
+| ------------ | ----------------- |
+| **Type**     | `array of object` |
+| **Required** | No                |
+
+| Each item of this array must be                                       | Description |
+| --------------------------------------------------------------------- | ----------- |
+| [parameters items](#definitions_items_anyOf_i1_spec_parameters_items) | -           |
 
 ###### <a name="definitions_items_anyOf_i1_spec_parameters_items"></a>parameters items
 
 |                           |                  |
 | ------------------------- | ---------------- |
 | **Type**                  | `object`         |
+| **Required**              | No               |
 | **Additional properties** | Any type allowed |
 
 | Property                                                         | Type   |
@@ -245,15 +273,17 @@ Must be one of:
 
 ###### <a name="definitions_items_anyOf_i1_spec_parameters_items_name"></a>`name`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ###### <a name="definitions_items_anyOf_i1_spec_parameters_items_type"></a>`type`
 
-|          |          |
-| -------- | -------- |
-| **Type** | `string` |
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
 
 ---
 
