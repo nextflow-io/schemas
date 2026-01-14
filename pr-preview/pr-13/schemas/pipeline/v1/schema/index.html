@@ -16,7 +16,7 @@
         <link rel="prev" href="../../../..">
       
       
-        <link rel="next" href="../../../pipeline-input/v1/schema/">
+        <link rel="next" href="../../../plugin/v1/schema/">
       
       
         
@@ -381,8 +381,6 @@
   
     
     
-      
-        
       
         
       
@@ -1349,7 +1347,7 @@
   <span class="md-ellipsis">
     
   
-    Pipeline input
+    Plugin
   
 
     
@@ -1365,7 +1363,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Pipeline input
+    Plugin
   
 
           </label>
@@ -1418,165 +1416,6 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2_1">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    V1
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../pipeline-input/v1/schema/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Nextflow pipeline input schema
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plugin
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Plugin
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    V1
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3_1">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2996,36 +2835,6 @@ must respect the following conditions</p>
 </tr>
 </tbody>
 </table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Array restrictions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Min items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Max items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Items unicity</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Additional items</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Tuple validation</strong></td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table>
 <h4 id="properties"><a name="defs_pattern1_properties"></a><code>properties</code><a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -3350,12 +3159,14 @@ must respect the following conditions</p>
 </tr>
 </tbody>
 </table>
-<p>Must be one of:
-* "string"
-* "boolean"
-* "integer"
-* "number"
-* "null"</p>
+<p>Must be one of:</p>
+<ul>
+<li>"string"</li>
+<li>"boolean"</li>
+<li>"integer"</li>
+<li>"number"</li>
+<li>"null"</li>
+</ul>
 <h6 id="item-1"><a name="defs_pattern1_properties_pattern1_pattern2_i0_type_anyOf_i1"></a><code>item 1</code><a class="headerlink" href="#item-1" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3372,36 +3183,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Required</strong></td>
 <td>No</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Array restrictions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Min items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Max items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Items unicity</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Additional items</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Tuple validation</strong></td>
-<td>See below</td>
 </tr>
 </tbody>
 </table>
@@ -3462,17 +3243,19 @@ must respect the following conditions</p>
 </tbody>
 </table>
 <p><strong>Description:</strong> The format of a parameter value with the 'string' type. This is used for additional validation on the structure of the value.</p>
-<p>Must be one of:
-* "file-path"
-* "directory-path"
-* "path"
-* "file-path-pattern"
-* "date-time"
-* "date"
-* "time"
-* "email"
-* "uri"
-* "regex"</p>
+<p>Must be one of:</p>
+<ul>
+<li>"file-path"</li>
+<li>"directory-path"</li>
+<li>"path"</li>
+<li>"file-path-pattern"</li>
+<li>"date-time"</li>
+<li>"date"</li>
+<li>"time"</li>
+<li>"email"</li>
+<li>"uri"</li>
+<li>"regex"</li>
+</ul>
 <h6 id="pattern"><a name="defs_pattern1_properties_pattern1_pattern2_i0_pattern"></a><code>pattern</code><a class="headerlink" href="#pattern" title="Permanent link">&para;</a></h6>
 <table>
 <thead>
@@ -3575,36 +3358,6 @@ must respect the following conditions</p>
 </tbody>
 </table>
 <p><strong>Description:</strong> A list of examples for the current parameter</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Array restrictions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Min items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Max items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Items unicity</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Additional items</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Tuple validation</strong></td>
-<td>See below</td>
-</tr>
-</tbody>
-</table>
 <table>
 <thead>
 <tr>
@@ -3844,36 +3597,6 @@ must respect the following conditions</p>
 </tbody>
 </table>
 <p><strong>Description:</strong> The parameter value should be one of the values specified in this enum array</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Array restrictions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Min items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Max items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Items unicity</strong></td>
-<td>True</td>
-</tr>
-<tr>
-<td><strong>Additional items</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Tuple validation</strong></td>
-<td>See below</td>
-</tr>
-</tbody>
-</table>
 <table>
 <thead>
 <tr>
@@ -4295,36 +4018,6 @@ must respect the following conditions</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>Array restrictions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Min items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Max items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Items unicity</strong></td>
-<td>True</td>
-</tr>
-<tr>
-<td><strong>Additional items</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Tuple validation</strong></td>
-<td>See below</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
 <th>Each item of this array must be</th>
 <th>Description</th>
 </tr>
@@ -4453,36 +4146,6 @@ must respect the following conditions</p>
 <table>
 <thead>
 <tr>
-<th></th>
-<th>Array restrictions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Min items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Max items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Items unicity</strong></td>
-<td>True</td>
-</tr>
-<tr>
-<td><strong>Additional items</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Tuple validation</strong></td>
-<td>See below</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
 <th>Each item of this array must be</th>
 <th>Description</th>
 </tr>
@@ -4530,36 +4193,6 @@ must respect the following conditions</p>
 <tr>
 <td><strong>Required</strong></td>
 <td>No</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Array restrictions</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Min items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Max items</strong></td>
-<td>N/A</td>
-</tr>
-<tr>
-<td><strong>Items unicity</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Additional items</strong></td>
-<td>False</td>
-</tr>
-<tr>
-<td><strong>Tuple validation</strong></td>
-<td>See below</td>
 </tr>
 </tbody>
 </table>
@@ -4713,13 +4346,13 @@ must respect the following conditions</p>
         
         
           
-          <a href="../../../pipeline-input/v1/schema/" class="md-footer__link md-footer__link--next" aria-label="Next: Nextflow pipeline input schema">
+          <a href="../../../plugin/v1/schema/" class="md-footer__link md-footer__link--next" aria-label="Next: Nextflow plugin schema">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Nextflow pipeline input schema
+                Nextflow plugin schema
               </div>
             </div>
             <div class="md-footer__button md-icon">
