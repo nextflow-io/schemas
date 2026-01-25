@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v1/schema.json",
   "title": "Nextflow module schema",
   "description": "Schema to validate Nextflow module specs",
@@ -43,35 +43,21 @@
       "type": "array",
       "description": "Inputs of the module",
       "items": {
-        "oneOf": [
-          {
-            "$ref": "#/definitions/parameter"
-          },
-          {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/parameter"
-            }
-          }
-        ]
+        "$ref": "#/$defs/structuredParameter"
       }
     },
     "output": {
-      "type": "object",
+      "type": "array",
       "description": "Outputs of the module",
-      "patternProperties": {
-        ".*": {
-          "$ref": "#/definitions/tupleParameter"
-        }
+      "items": {
+        "$ref": "#/$defs/structuredParameter"
       }
     },
     "topics": {
-      "type": "object",
+      "type": "array",
       "description": "Topics of the module",
-      "patternProperties": {
-        ".*": {
-          "$ref": "#/definitions/tupleParameter"
-        }
+      "items": {
+        "$ref": "#/$defs/structuredParameter"
       }
     },
     "tools": {
@@ -80,159 +66,107 @@
       "items": {
         "type": "object",
         "patternProperties": {
-          ".*": {
-            "type": "object",
-            "properties": {
-              "description": {
-                "type": "string",
-                "description": "Description of the tool"
-              },
-              "homepage": {
-                "type": "string",
-                "description": "Homepage of the tool",
-                "pattern": "^https?://.*$"
-              },
-              "documentation": {
-                "type": "string",
-                "description": "Documentation of the tool",
-                "pattern": "^(https?|ftp)://.*$"
-              },
-              "tool_dev_url": {
-                "type": "string",
-                "description": "URL of the development version of the tool's documentation",
-                "pattern": "^https?://.*$"
-              },
-              "doi": {
-                "description": "DOI of the tool",
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "pattern": "^10\\.\\d{4,9}\\/[^,]+$"
-                  },
-                  {
-                    "type": "string",
-                    "enum": ["no DOI available"]
-                  }
-                ]
-              },
-              "licence": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "Licence of the tool",
-                "minItems": 1,
-                "uniqueItems": true
-              },
-              "identifier": {
-                "type": "string",
-                "description": "bio.tools identifier of the tool",
-                "pattern": "^(biotools:.*)?$"
-              }
-            },
-            "required": ["description"],
-            "anyOf": [
-              {
-                "required": ["homepage"]
-              },
-              {
-                "required": ["documentation"]
-              },
-              {
-                "required": ["tool_dev_url"]
-              },
-              {
-                "required": ["doi"]
-              }
-            ]
-          }
-        }
-      }
-    },
-    "extra_args": {
-      "type": "array",
-      "description": "Extra arguments for the module",
-      "items": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "Description of the argument"
-          }
-        }
-      }
-    },
-    "containers": {
-      "type": "object",
-      "description": "Container images for the module",
-      "properties": {
-        "docker": {
-          "type": "object",
-          "description": "Docker containers for different architectures",
-          "additionalProperties": {
-            "$ref": "#/definitions/container"
-          }
-        },
-        "singularity": {
-          "type": "object",
-          "description": "Singularity containers for different architectures",
-          "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/container"
-              },
-              {
-                "properties": {
-                  "name": {
-                    "pattern": "^oras://.*$"
-                  }
-                },
-                "required": ["https"]
-              }
-            ]
-          }
-        },
-        "conda": {
-          "type": "object",
-          "description": "Conda lock files for different architectures",
-          "additionalProperties": {
-            "$ref": "#/definitions/condaLockFile"
+          "^[a-zA-Z][a-zA-Z0-9_-]*$": {
+            "$ref": "#/$defs/toolSpec"
           }
         }
       }
     }
   },
-  "definitions": {
-    "parameter": {
+  "$defs": {
+    "toolSpec": {
       "type": "object",
-      "patternProperties": {
-        ".*": {
-          "$ref": "#/definitions/parameterProperties"
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the tool"
+        },
+        "homepage": {
+          "type": "string",
+          "description": "Homepage of the tool",
+          "pattern": "^https?://.*$"
+        },
+        "documentation": {
+          "type": "string",
+          "description": "Documentation of the tool",
+          "pattern": "^(https?|ftp)://.*$"
+        },
+        "tool_dev_url": {
+          "type": "string",
+          "description": "URL of the development version of the tool's documentation",
+          "pattern": "^https?://.*$"
+        },
+        "doi": {
+          "description": "DOI of the tool",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^10\\.\\d{4,9}\\/[^,]+$"
+            },
+            {
+              "type": "string",
+              "const": "no DOI available"
+            }
+          ]
+        },
+        "licence": {
+          "type": "array",
+          "description": "Licence of the tool",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "identifier": {
+          "type": "string",
+          "description": "bio.tools identifier of the tool",
+          "pattern": "^(biotools:.*)?$"
         }
-      }
+      },
+      "required": ["description"],
+      "anyOf": [
+        {
+          "required": ["homepage"]
+        },
+        {
+          "required": ["documentation"]
+        },
+        {
+          "required": ["tool_dev_url"]
+        },
+        {
+          "required": ["doi"]
+        }
+      ]
     },
-    "tupleParameter": {
+    "structuredParameter": {
       "type": "array",
       "items": {
         "oneOf": [
           {
-            "$ref": "#/definitions/parameter"
+            "$ref": "#/$defs/paramSpec"
           },
           {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/parameter"
+              "$ref": "#/$defs/paramSpec"
             }
           }
         ]
       }
     },
-    "parameterProperties": {
+    "paramSpec": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter identifier",
+          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        },
         "type": {
           "type": "string",
-          "description": "Type of the parameter",
+          "description": "Data type of the parameter",
           "enum": [
             "boolean",
             "float",
@@ -246,7 +180,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Description of the parameter"
+          "description": "Human-readable description of the parameter"
         },
         "pattern": {
           "type": "string",
@@ -275,7 +209,7 @@
           }
         }
       },
-      "required": ["type", "description"]
+      "required": ["name", "type", "description"]
     },
     "container": {
       "type": "object",
