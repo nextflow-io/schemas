@@ -1,6 +1,8 @@
 #!/bin/bash
 
-for folder in pipeline/v1 plugin/v1 ; do
+shopt -s nullglob
+
+for folder in module/v1 pipeline/v1 plugin/v1 ; do
   schema="$folder/schema.json"
 
   echo "Validating $schema ..."
@@ -8,7 +10,7 @@ for folder in pipeline/v1 plugin/v1 ; do
 
   echo -e "\nValidating test cases..."
   failed=0
-  for spec in $folder/tests/*.json ; do
+  for spec in $folder/tests/*.json $folder/tests/*.yml ; do
     echo "Testing $spec:"
 
     if check-jsonschema --schemafile "$schema" "$spec"; then
