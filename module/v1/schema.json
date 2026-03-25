@@ -166,20 +166,17 @@
       ]
     },
     "structuredParameter": {
-      "type": "array",
-      "items": {
-        "oneOf": [
-          {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/paramSpec"
+        },
+        {
+          "type": "array",
+          "items": {
             "$ref": "#/$defs/paramSpec"
-          },
-          {
-            "type": "array",
-            "items": {
-              "$ref": "#/$defs/paramSpec"
-            }
           }
-        ]
-      }
+        }
+      ]
     },
     "paramSpec": {
       "type": "object",
@@ -192,7 +189,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Parameter input/output",
+          "description": "Parameter type",
           "enum": [
             "boolean",
             "float",
@@ -233,7 +230,7 @@
           "uniqueItems": true
         }
       },
-      "required": ["name", "type", "description"]
+      "required": ["type", "description"]
     }
   }
 }
