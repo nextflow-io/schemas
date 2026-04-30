@@ -1,0 +1,10 @@
+# Should fail v2 validation: parameter description still contains the placeholder
+# emitted by `nextflow module spec` and must be filled in before publishing.
+name: nf-core/fastqc
+version: 1.0.0
+description: Run FastQC on sequenced reads
+license: MIT
+input:
+  - name: reads
+    type: file
+    description: "TODO: Add description"

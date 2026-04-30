@@ -1,0 +1,241 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v1.1/schema.json",
+  "title": "Nextflow module schema (v1.1)",
+  "description": "Schema for Nextflow module specs. v1.1 tightens v1 by requiring `version` and `license`, enforcing semantic versioning and namespace/name patterns, and rejecting placeholder parameter descriptions.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Module name in `namespace/name` form (e.g., 'nf-core/fastqc') or with nested path (e.g., 'nf-core/gfatools/gfa2fa').",
+      "pattern": "^[a-zA-Z0-9._-]+/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the module (MAJOR.MINOR.PATCH or MAJOR.MINOR.PATCH-SUFFIX).",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[\\w.-]+)?$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the module"
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Keywords for the module",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier for the module source code"
+    },
+    "authors": {
+      "type": "array",
+      "description": "Original authors of the module (GitHub handles preferred)",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "Current maintainers of the module (GitHub handles preferred)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires": {
+      "type": "object",
+      "description": "Runtime requirements for the module",
+      "properties": {
+        "nextflow": {
+          "type": "string",
+          "description": "Nextflow version constraint"
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "array",
+      "description": "Inputs of the module",
+      "items": {
+        "$ref": "#/$defs/structuredParameter"
+      }
+    },
+    "output": {
+      "type": "array",
+      "description": "Outputs of the module",
+      "items": {
+        "$ref": "#/$defs/structuredParameter"
+      }
+    },
+    "topics": {
+      "type": "array",
+      "description": "Topics of the module",
+      "items": {
+        "$ref": "#/$defs/structuredParameter"
+      }
+    },
+    "tools": {
+      "type": "array",
+      "description": "Tools used by the module",
+      "items": {
+        "type": "object",
+        "minProperties": 1,
+        "maxProperties": 1,
+        "patternProperties": {
+          "^[a-zA-Z][a-zA-Z0-9_-]*$": {
+            "$ref": "#/$defs/toolSpec"
+          }
+        }
+      }
+    }
+  },
+  "required": ["name", "version", "description", "license"],
+  "$defs": {
+    "toolSpec": {
+      "type": "object",
+      "description": "Specification for a software tool used by the module",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the tool"
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri",
+          "description": "Homepage URL",
+          "pattern": "^https?://.*$"
+        },
+        "documentation": {
+          "type": "string",
+          "format": "uri",
+          "description": "Documentation URL",
+          "pattern": "^(https?|ftp)://.*$"
+        },
+        "tool_dev_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Development/source code URL",
+          "pattern": "^https?://.*$"
+        },
+        "doi": {
+          "description": "Digital Object Identifier for the tool's publication",
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^10\\.\\d{4,9}\\/[^,]+$"
+            },
+            {
+              "type": "string",
+              "const": "no DOI available"
+            }
+          ]
+        },
+        "licence": {
+          "type": "array",
+          "description": "SPDX license identifier(s) for the tool",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "identifier": {
+          "type": "string",
+          "description": "bio.tools identifier of the tool",
+          "pattern": "^(biotools:.*)?$"
+        }
+      },
+      "required": ["description"],
+      "anyOf": [
+        {
+          "required": ["homepage"]
+        },
+        {
+          "required": ["documentation"]
+        },
+        {
+          "required": ["tool_dev_url"]
+        },
+        {
+          "required": ["doi"]
+        }
+      ]
+    },
+    "structuredParameter": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/paramSpec"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/paramSpec"
+          }
+        }
+      ]
+    },
+    "paramSpec": {
+      "type": "object",
+      "description": "Specification for a module input/output",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter identifier",
+          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+        },
+        "type": {
+          "type": "string",
+          "description": "Parameter type",
+          "enum": [
+            "boolean",
+            "float",
+            "integer",
+            "string",
+            "list",
+            "map",
+            "file",
+            "directory"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the parameter",
+          "not": {
+            "const": "TODO: Add description"
+          }
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Glob pattern for file/directory parameters"
+        },
+        "enum": {
+          "type": "array",
+          "description": "List of allowed values for the parameter",
+          "uniqueItems": true
+        },
+        "ontologies": {
+          "type": "array",
+          "description": "List of ontologies for the parameter",
+          "items": {
+            "type": "object",
+            "patternProperties": {
+              ".*": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https?://.*"
+              }
+            }
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["type", "description"]
+    }
+  }
+}
