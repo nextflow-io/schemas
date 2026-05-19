@@ -1,1 +1,29 @@
-{"version":"lineage/v1beta1","kind":"TaskRun","spec":{"sessionId":"07f90f21-844e-4b68-a36f-ba1de8340e44","name":"NFCORE_RNASEQ:PREPARE_GENOME:CUSTOM_GETCHROMSIZES (genome_gfp.fasta)","codeChecksum":{"value":"a0a24b0f99a8d2f3e1a1e9a788042910","algorithm":"nextflow","mode":"standard"},"script":"\n    samtools faidx genome_gfp.fasta\n    cut -f 1,2 genome_gfp.fasta.fai \u003e genome_gfp.fasta.sizes\n\n    cat \u003c\u003c-END_VERSIONS \u003e versions.yml\n    \"NFCORE_RNASEQ:PREPARE_GENOME:CUSTOM_GETCHROMSIZES\":\n        getchromsizes: $(echo $(samtools --version 2\u003e\u00261) | sed \u0027s/^.*samtools //; s/Using.*$//\u0027)\n    END_VERSIONS\n    ","input":[{"type":"val","name":"meta","value":{}},{"type":"path","name":"fasta","value":["lid://f2189a2c424c6ad40c8a334d4e90c93c/out/genome_gfp.fasta"]}],"container":"quay.io/biocontainers/samtools:1.21--h50ea8bc_0","conda":null,"spack":null,"architecture":null,"globalVars":{"task.ext.args":null},"binEntries":[],"workflowRun":"lid://49cdd59aeb45dde9bcdaecf488c1f442"}}
+{
+  "version": "lineage/v1beta1",
+  "kind": "TaskRun",
+  "spec": {
+    "sessionId": "07f90f21-844e-4b68-a36f-ba1de8340e44",
+    "name": "NFCORE_RNASEQ:PREPARE_GENOME:CUSTOM_GETCHROMSIZES (genome_gfp.fasta)",
+    "codeChecksum": {
+      "value": "a0a24b0f99a8d2f3e1a1e9a788042910",
+      "algorithm": "nextflow",
+      "mode": "standard"
+    },
+    "script": "\n    samtools faidx genome_gfp.fasta\n    cut -f 1,2 genome_gfp.fasta.fai \u003e genome_gfp.fasta.sizes\n\n    cat \u003c\u003c-END_VERSIONS \u003e versions.yml\n    \"NFCORE_RNASEQ:PREPARE_GENOME:CUSTOM_GETCHROMSIZES\":\n        getchromsizes: $(echo $(samtools --version 2\u003e\u00261) | sed \u0027s/^.*samtools //; s/Using.*$//\u0027)\n    END_VERSIONS\n    ",
+    "input": [
+      { "type": "val", "name": "meta", "value": {} },
+      {
+        "type": "path",
+        "name": "fasta",
+        "value": ["lid://f2189a2c424c6ad40c8a334d4e90c93c/out/genome_gfp.fasta"]
+      }
+    ],
+    "container": "quay.io/biocontainers/samtools:1.21--h50ea8bc_0",
+    "conda": null,
+    "spack": null,
+    "architecture": null,
+    "globalVars": { "task.ext.args": null },
+    "binEntries": [],
+    "workflowRun": "lid://49cdd59aeb45dde9bcdaecf488c1f442"
+  }
+}

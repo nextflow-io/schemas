@@ -1,1 +1,41 @@
-{"version":"lineage/v1beta1","kind":"TaskOutput","spec":{"taskRun":"lid://bc56d4b63062e684dd5513090ae0d0e1","workflowRun":"lid://49cdd59aeb45dde9bcdaecf488c1f442","createdAt":"2026-01-14T15:16:30.415620390+01:00","output":[{"type":"val","name":"meta","value":{"id":"WT_REP1","strandedness":"reverse","single_end":false,"has_genome_bam":false,"has_transcriptome_bam":false,"original_genome_bam":null,"original_transcriptome_bam":null,"salmon_strand_analysis":{"inferred_strandedness":"reverse","forwardFragments":10.819737646339743,"reverseFragments":89.18026235366025,"unstrandedFragments":0.0}}},{"type":"path","name":null,"value":"lid://bc56d4b63062e684dd5513090ae0d0e1/WT_REP1.clip.forward.bedGraph"},{"type":"path","name":null,"value":"lid://bc56d4b63062e684dd5513090ae0d0e1/versions.yml"}],"labels":null}}
+{
+  "version": "lineage/v1beta1",
+  "kind": "TaskOutput",
+  "spec": {
+    "taskRun": "lid://bc56d4b63062e684dd5513090ae0d0e1",
+    "workflowRun": "lid://49cdd59aeb45dde9bcdaecf488c1f442",
+    "createdAt": "2026-01-14T15:16:30.415620390+01:00",
+    "output": [
+      {
+        "type": "val",
+        "name": "meta",
+        "value": {
+          "id": "WT_REP1",
+          "strandedness": "reverse",
+          "single_end": false,
+          "has_genome_bam": false,
+          "has_transcriptome_bam": false,
+          "original_genome_bam": null,
+          "original_transcriptome_bam": null,
+          "salmon_strand_analysis": {
+            "inferred_strandedness": "reverse",
+            "forwardFragments": 10.819737646339743,
+            "reverseFragments": 89.18026235366025,
+            "unstrandedFragments": 0.0
+          }
+        }
+      },
+      {
+        "type": "path",
+        "name": null,
+        "value": "lid://bc56d4b63062e684dd5513090ae0d0e1/WT_REP1.clip.forward.bedGraph"
+      },
+      {
+        "type": "path",
+        "name": null,
+        "value": "lid://bc56d4b63062e684dd5513090ae0d0e1/versions.yml"
+      }
+    ],
+    "labels": null
+  }
+}

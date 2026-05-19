@@ -1,1 +1,19 @@
-{"version":"lineage/v1beta1","kind":"FileOutput","spec":{"path":"/home/jorgee/lineage-bench/nf-core-rnaseq/test/work/3c/f7a0e35e88bf747ad1a3d4ec34ebc5/versions.yml","checksum":{"value":"22c3f548264a763cfe9b5fc498d450d4","algorithm":"nextflow","mode":"standard"},"source":"lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5","workflowRun":"lid://49cdd59aeb45dde9bcdaecf488c1f442","taskRun":"lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5","size":100,"createdAt":"2026-01-14T15:14:33.824338726+01:00","modifiedAt":"2026-01-14T15:14:33.826338701+01:00","labels":null}}
+{
+  "version": "lineage/v1beta1",
+  "kind": "FileOutput",
+  "spec": {
+    "path": "/home/jorgee/lineage-bench/nf-core-rnaseq/test/work/3c/f7a0e35e88bf747ad1a3d4ec34ebc5/versions.yml",
+    "checksum": {
+      "value": "22c3f548264a763cfe9b5fc498d450d4",
+      "algorithm": "nextflow",
+      "mode": "standard"
+    },
+    "source": "lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5",
+    "workflowRun": "lid://49cdd59aeb45dde9bcdaecf488c1f442",
+    "taskRun": "lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5",
+    "size": 100,
+    "createdAt": "2026-01-14T15:14:33.824338726+01:00",
+    "modifiedAt": "2026-01-14T15:14:33.826338701+01:00",
+    "labels": null
+  }
+}

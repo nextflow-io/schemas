@@ -7,22 +7,13 @@
       "type": "object",
       "properties": {
         "algorithm": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "mode": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "value": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "Checksum",
@@ -42,10 +33,7 @@
           ]
         },
         "path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "DataPath",
@@ -75,10 +63,7 @@
           ]
         },
         "labels": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string"
           }
@@ -94,31 +79,19 @@
           ]
         },
         "path": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "size": {
           "type": "integer"
         },
         "source": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "taskRun": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "workflowRun": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "FileOutput",
@@ -135,16 +108,10 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "type": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "value": {}
       },
@@ -165,34 +132,22 @@
           ]
         },
         "labels": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "type": "string"
           }
         },
         "output": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
           }
         },
         "taskRun": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "workflowRun": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "TaskOutput",
@@ -202,16 +157,10 @@
       "type": "object",
       "properties": {
         "architecture": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "binEntries": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/DataPath"
           }
@@ -227,16 +176,10 @@
           ]
         },
         "conda": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "container": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "globalVars": {
           "anyOf": [
@@ -249,43 +192,25 @@
           ]
         },
         "input": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
           }
         },
         "name": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "script": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "sessionId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "spack": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "workflowRun": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "TaskRun",
@@ -295,22 +220,13 @@
       "type": "object",
       "properties": {
         "commitId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "repository": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "scriptFiles": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/DataPath"
           }
@@ -333,19 +249,13 @@
           ]
         },
         "output": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
           }
         },
         "workflowRun": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "title": "WorkflowOutput",
@@ -375,25 +285,16 @@
           ]
         },
         "name": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "params": {
-          "type": [
-            "array",
-            "null"
-          ],
+          "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
           }
         },
         "sessionId": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "workflow": {
           "anyOf": [
@@ -424,11 +325,7 @@
           "$ref": "#/$defs/WorkflowRun"
         }
       },
-      "required": [
-        "version",
-        "kind",
-        "spec"
-      ],
+      "required": ["version", "kind", "spec"],
       "additionalProperties": false
     },
     {
@@ -444,11 +341,7 @@
           "$ref": "#/$defs/WorkflowOutput"
         }
       },
-      "required": [
-        "version",
-        "kind",
-        "spec"
-      ],
+      "required": ["version", "kind", "spec"],
       "additionalProperties": false
     },
     {
@@ -464,11 +357,7 @@
           "$ref": "#/$defs/Workflow"
         }
       },
-      "required": [
-        "version",
-        "kind",
-        "spec"
-      ],
+      "required": ["version", "kind", "spec"],
       "additionalProperties": false
     },
     {
@@ -484,11 +373,7 @@
           "$ref": "#/$defs/TaskRun"
         }
       },
-      "required": [
-        "version",
-        "kind",
-        "spec"
-      ],
+      "required": ["version", "kind", "spec"],
       "additionalProperties": false
     },
     {
@@ -504,11 +389,7 @@
           "$ref": "#/$defs/TaskOutput"
         }
       },
-      "required": [
-        "version",
-        "kind",
-        "spec"
-      ],
+      "required": ["version", "kind", "spec"],
       "additionalProperties": false
     },
     {
@@ -524,11 +405,7 @@
           "$ref": "#/$defs/FileOutput"
         }
       },
-      "required": [
-        "version",
-        "kind",
-        "spec"
-      ],
+      "required": ["version", "kind", "spec"],
       "additionalProperties": false
     }
   ]
