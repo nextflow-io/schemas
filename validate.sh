@@ -2,7 +2,7 @@
 
 shopt -s nullglob
 
-for folder in module/v1 pipeline/v1 plugin/v1 ; do
+for folder in lineage/v1beta1 module/v1 pipeline/v1 plugin/v1 ; do
   schema="$folder/schema.json"
 
   echo "Validating $schema ..."

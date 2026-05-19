@@ -4,6 +4,8 @@ This repository contains the schemas used by Nextflow.
 
 The following schemas are currently defined:
 
+- `lineage`: Schema for the lineage data model wire format emitted by `nf-lineage` (`LinEncoder`)
+- `module`: Schema for module specs
 - `pipeline`: Schema for pipeline specs
 - `plugin`: Schema for plugin specs
 
