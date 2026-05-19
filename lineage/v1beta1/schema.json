@@ -4,6 +4,8 @@
   "title": "Nextflow Lineage Model v1beta1",
   "$defs": {
     "Checksum": {
+      "title": "Checksum",
+      "description": "Models a checksum, with the value, algorithm and mode used to compute it.",
       "type": "object",
       "properties": {
         "algorithm": {
@@ -15,11 +17,11 @@
         "value": {
           "type": ["string", "null"]
         }
-      },
-      "title": "Checksum",
-      "description": "Models a checksum, with the value, algorithm and mode used to compute it."
+      }
     },
     "DataPath": {
+      "title": "DataPath",
+      "description": "Models a data path with a checksum to validate its contents.",
       "type": "object",
       "properties": {
         "checksum": {
@@ -35,11 +37,11 @@
         "path": {
           "type": ["string", "null"]
         }
-      },
-      "title": "DataPath",
-      "description": "Models a data path with a checksum to validate its contents."
+      }
     },
     "FileOutput": {
+      "title": "FileOutput",
+      "description": "Models a file produced by a workflow or task.",
       "type": "object",
       "properties": {
         "checksum": {
@@ -93,9 +95,7 @@
         "workflowRun": {
           "type": ["string", "null"]
         }
-      },
-      "title": "FileOutput",
-      "description": "Models a file produced by a workflow or task."
+      }
     },
     "Map": {
       "type": "object"
@@ -105,6 +105,8 @@
       "format": "date-time"
     },
     "Parameter": {
+      "title": "Parameter",
+      "description": "Models a workflow or task parameter.",
       "type": "object",
       "properties": {
         "name": {
@@ -114,11 +116,11 @@
           "type": ["string", "null"]
         },
         "value": {}
-      },
-      "title": "Parameter",
-      "description": "Models a workflow or task parameter."
+      }
     },
     "TaskOutput": {
+      "title": "TaskOutput",
+      "description": "Models task results.",
       "type": "object",
       "properties": {
         "createdAt": {
@@ -149,11 +151,11 @@
         "workflowRun": {
           "type": ["string", "null"]
         }
-      },
-      "title": "TaskOutput",
-      "description": "Models task results."
+      }
     },
     "TaskRun": {
+      "title": "TaskRun",
+      "description": "Models a task execution.",
       "type": "object",
       "properties": {
         "architecture": {
@@ -212,11 +214,11 @@
         "workflowRun": {
           "type": ["string", "null"]
         }
-      },
-      "title": "TaskRun",
-      "description": "Models a task execution."
+      }
     },
     "Workflow": {
+      "title": "Workflow",
+      "description": "Models a workflow definition.",
       "type": "object",
       "properties": {
         "commitId": {
@@ -231,11 +233,11 @@
             "$ref": "#/$defs/DataPath"
           }
         }
-      },
-      "title": "Workflow",
-      "description": "Models a workflow definition."
+      }
     },
     "WorkflowOutput": {
+      "title": "WorkflowOutput",
+      "description": "Models the results of a workflow execution.",
       "type": "object",
       "properties": {
         "createdAt": {
@@ -257,11 +259,11 @@
         "workflowRun": {
           "type": ["string", "null"]
         }
-      },
-      "title": "WorkflowOutput",
-      "description": "Models the results of a workflow execution."
+      }
     },
     "WorkflowRun": {
+      "title": "WorkflowRun",
+      "description": "Models a workflow execution.",
       "type": "object",
       "properties": {
         "config": {
@@ -306,9 +308,7 @@
             }
           ]
         }
-      },
-      "title": "WorkflowRun",
-      "description": "Models a workflow execution."
+      }
     }
   },
   "oneOf": [
