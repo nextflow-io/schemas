@@ -1,4 +1,4 @@
-# Should fail v2 validation: parameter description still contains the placeholder
+# Should fail validation: parameter description still contains the placeholder
 # emitted by `nextflow module spec` and must be filled in before publishing.
 name: nf-core/fastqc
 version: 1.0.0

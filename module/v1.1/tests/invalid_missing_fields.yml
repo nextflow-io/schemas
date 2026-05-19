@@ -1,3 +1,0 @@
-# Should fail v2 validation: missing the newly required `version` and `license` fields.
-name: nf-core/fastqc
-description: Run FastQC on sequenced reads

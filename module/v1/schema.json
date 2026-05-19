@@ -1,17 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v1/schema.json",
+  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v1.1/schema.json",
   "title": "Nextflow module schema",
-  "description": "Schema for Nextflow module specs, supporting both nf-core community patterns and the Nextflow module system",
+  "description": "Schema for Nextflow module specs",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "description": "Module name. Can be a simple identifier (e.g., 'fastqc', 'bwa_mem') for local modules, or a scoped name (e.g., 'nf-core/fastqc', 'myorg/custom') for registry modules."
+      "description": "Module name in `namespace/name` form (e.g., 'nf-core/fastqc', 'nf-core/gfatools/gfa2fa').",
+      "pattern": "^[a-zA-Z0-9._-]+/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$"
     },
     "version": {
       "type": "string",
-      "description": "Semantic version of the module (MAJOR.MINOR.PATCH-SUFFIX). Required for registry publication."
+      "description": "Semantic version of the module (MAJOR.MINOR.PATCH or MAJOR.MINOR.PATCH-SUFFIX).",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[\\w.-]+)?$"
     },
     "description": {
       "type": "string",
@@ -93,7 +95,7 @@
       }
     }
   },
-  "required": ["name", "description"],
+  "required": ["name", "version", "description", "license"],
   "$defs": {
     "toolSpec": {
       "type": "object",
