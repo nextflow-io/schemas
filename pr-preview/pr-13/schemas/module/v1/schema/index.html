@@ -1,0 +1,4152 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Specifications of Nextflow schemas">
+      
+      
+        <meta name="author" content="Matthias Hörtenhuber">
+      
+      
+      
+        <link rel="prev" href="../../../..">
+      
+      
+        <link rel="next" href="../../../pipeline/v1/schema/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.15">
+    
+    
+      
+        <title>Nextflow module schema - Nextflow schemas</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../../../assets/stylesheets/modern/main.f1b6466b.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  
+  <style>:root{}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CFira+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Fira Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,a=__md_scope)=>JSON.parse(t.getItem(a.pathname+"."+e)),__md_set=(e,t,a=localStorage,_=__md_scope)=>{try{a.setItem(_.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nextflow-module-schema" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Nextflow schemas" class="md-header__button md-logo" aria-label="Nextflow schemas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-braces" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nextflow schemas
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Nextflow module schema
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+        <a href="https://github.com/nextflow-io/schemas" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nextflow-io/schemas
+  </div>
+</a>
+      
+    </div>
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  Introduction
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  Schemas
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Nextflow schemas" class="md-nav__button md-logo" aria-label="Nextflow schemas" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-braces" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+
+    </a>
+    Nextflow schemas
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nextflow-io/schemas" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nextflow-io/schemas
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schemas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Schemas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Module
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Module
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    V1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nextflow module schema
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nextflow module schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        version
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        keywords
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="keywords">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keywords-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        keywords items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        license
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        authors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="authors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authors-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        authors items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintainers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        maintainers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="maintainers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maintainers-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        maintainers items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        requires
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="requires">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nextflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nextflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        input
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="input">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structuredparameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        structuredParameter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="structuredParameter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paramspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        paramSpec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="paramSpec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        enum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ontologies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ontologies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ontologies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ontologies-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ontologies items
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .*
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paramspec_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        paramSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structuredparameter_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        structuredParameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        topics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structuredparameter_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        structuredParameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tools-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tools items
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tools items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toolspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        toolSpec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="toolSpec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#homepage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        homepage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool_dev_url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tool_dev_url
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#doi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        doi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="doi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-0_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        licence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="licence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#licence-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        licence items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        identifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pipeline
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    V1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../pipeline/v1/schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema for Nextflow pipeline specs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Plugin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3_1" id="__nav_2_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    V1
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    V1
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../plugin/v1/schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nextflow plugin schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#name" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        name
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        version
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        description
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        keywords
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="keywords">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keywords-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        keywords items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        license
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        authors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="authors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authors-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        authors items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maintainers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        maintainers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="maintainers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maintainers-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        maintainers items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requires" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        requires
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="requires">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nextflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nextflow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        input
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="input">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structuredparameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        structuredParameter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="structuredParameter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paramspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        paramSpec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="paramSpec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#name_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        name
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        type
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        enum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ontologies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ontologies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ontologies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ontologies-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ontologies items
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .*
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paramspec_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        paramSpec
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structuredparameter_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        structuredParameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        topics
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="topics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#structuredparameter_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        structuredParameter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tools-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tools items
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="tools items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#toolspec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        toolSpec
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="toolSpec">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 0
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 2
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 3
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="item 3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-following-properties-are-required_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The following properties are required
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        description
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#homepage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        homepage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool_dev_url" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tool_dev_url
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#doi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        doi
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="doi">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-0_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 0
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#item-1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        item 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#licence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        licence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="licence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#licence-items" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        licence items
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        identifier
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Schemas
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Module
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    V1
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+    <a href="https://github.com/nextflow-io/schemas/edit/master/docs/schemas/module/v1/schema.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-file-pen" viewBox="0 0 24 24"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="nextflow-module-schema">Nextflow module schema<a class="headerlink" href="#nextflow-module-schema" title="Permanent link">&para;</a></h1>
+<p><strong>Title:</strong> Nextflow module schema</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Schema for Nextflow module specs</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+ <a href="#name">name</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>+ <a href="#version">version</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>+ <a href="#description">description</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#keywords">keywords</a></td>
+<td>array of string</td>
+</tr>
+<tr>
+<td>+ <a href="#license">license</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#authors">authors</a></td>
+<td>array of string</td>
+</tr>
+<tr>
+<td>- <a href="#maintainers">maintainers</a></td>
+<td>array of string</td>
+</tr>
+<tr>
+<td>- <a href="#requires">requires</a></td>
+<td>object</td>
+</tr>
+<tr>
+<td>- <a href="#input">input</a></td>
+<td>array</td>
+</tr>
+<tr>
+<td>- <a href="#output">output</a></td>
+<td>array</td>
+</tr>
+<tr>
+<td>- <a href="#topics">topics</a></td>
+<td>array</td>
+</tr>
+<tr>
+<td>- <a href="#tools">tools</a></td>
+<td>array of object</td>
+</tr>
+</tbody>
+</table>
+<h2 id="name"><a name="name"></a><code>name</code><a class="headerlink" href="#name" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Module name in <code>namespace/name</code> form (e.g., 'nf-core/fastqc', 'nf-core/gfatools/gfa2fa').</p>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^[a-zA-Z0-9._-]+/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$</code> <a href="https://regex101.com/?regex=%5E%5Ba-zA-Z0-9._-%5D%2B%2F%5Ba-zA-Z0-9_-%5D%2B%28%3F%3A%2F%5Ba-zA-Z0-9_-%5D%2B%29%2A%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="version"><a name="version"></a><code>version</code><a class="headerlink" href="#version" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Semantic version of the module (MAJOR.MINOR.PATCH or MAJOR.MINOR.PATCH-SUFFIX).</p>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^\d+\.\d+\.\d+(-[\w.-]+)?$</code> <a href="https://regex101.com/?regex=%5E%5Cd%2B%5C.%5Cd%2B%5C.%5Cd%2B%28-%5B%5Cw.-%5D%2B%29%3F%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="description"><a name="description"></a><code>description</code><a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Description of the module</p>
+<h2 id="keywords"><a name="keywords"></a><code>keywords</code><a class="headerlink" href="#keywords" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array of string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Keywords for the module</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#keywords_items">keywords items</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="keywords-items"><a name="keywords_items"></a>keywords items<a class="headerlink" href="#keywords-items" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Min length</strong></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="license"><a name="license"></a><code>license</code><a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> SPDX license identifier for the module source code</p>
+<h2 id="authors"><a name="authors"></a><code>authors</code><a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array of string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Original authors of the module (GitHub handles preferred)</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#authors_items">authors items</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="authors-items"><a name="authors_items"></a>authors items<a class="headerlink" href="#authors-items" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h2 id="maintainers"><a name="maintainers"></a><code>maintainers</code><a class="headerlink" href="#maintainers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array of string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Current maintainers of the module (GitHub handles preferred)</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#maintainers_items">maintainers items</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maintainers-items"><a name="maintainers_items"></a>maintainers items<a class="headerlink" href="#maintainers-items" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h2 id="requires"><a name="requires"></a><code>requires</code><a class="headerlink" href="#requires" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Not allowed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Runtime requirements for the module</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- <a href="#requires_nextflow">nextflow</a></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nextflow"><a name="requires_nextflow"></a><code>nextflow</code><a class="headerlink" href="#nextflow" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Nextflow version constraint</p>
+<h2 id="input"><a name="input"></a><code>input</code><a class="headerlink" href="#input" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Inputs of the module</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#input_items">structuredParameter</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="structuredparameter"><a name="input_items"></a>structuredParameter<a class="headerlink" href="#structuredparameter" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>combining</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+<tr>
+<td><strong>Defined in</strong></td>
+<td>#/$defs/structuredParameter</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>One of(Option)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#input_items_oneOf_i0">paramSpec</a></td>
+</tr>
+<tr>
+<td><a href="#input_items_oneOf_i1">item 1</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="paramspec"><a name="input_items_oneOf_i0"></a><code>paramSpec</code><a class="headerlink" href="#paramspec" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+<tr>
+<td><strong>Defined in</strong></td>
+<td>#/$defs/paramSpec</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Specification for a module input/output</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- <a href="#input_items_oneOf_i0_name">name</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>+ <a href="#input_items_oneOf_i0_type">type</a></td>
+<td>enum (of string)</td>
+</tr>
+<tr>
+<td>+ <a href="#input_items_oneOf_i0_description">description</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#input_items_oneOf_i0_pattern">pattern</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#input_items_oneOf_i0_enum">enum</a></td>
+<td>array</td>
+</tr>
+<tr>
+<td>- <a href="#input_items_oneOf_i0_ontologies">ontologies</a></td>
+<td>array of object</td>
+</tr>
+</tbody>
+</table>
+<h5 id="name_1"><a name="input_items_oneOf_i0_name"></a><code>name</code><a class="headerlink" href="#name_1" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Parameter identifier</p>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^[a-zA-Z_][a-zA-Z0-9_]*$</code> <a href="https://regex101.com/?regex=%5E%5Ba-zA-Z_%5D%5Ba-zA-Z0-9_%5D%2A%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h5 id="type"><a name="input_items_oneOf_i0_type"></a><code>type</code><a class="headerlink" href="#type" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>enum (of string)</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Parameter type</p>
+<p>Must be one of:</p>
+<ul>
+<li>"boolean"</li>
+<li>"float"</li>
+<li>"integer"</li>
+<li>"string"</li>
+<li>"list"</li>
+<li>"map"</li>
+<li>"file"</li>
+<li>"directory"</li>
+</ul>
+<h5 id="description_1"><a name="input_items_oneOf_i0_description"></a><code>description</code><a class="headerlink" href="#description_1" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Human-readable description of the parameter</p>
+<h5 id="pattern"><a name="input_items_oneOf_i0_pattern"></a><code>pattern</code><a class="headerlink" href="#pattern" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Glob pattern for file/directory parameters</p>
+<h5 id="enum"><a name="input_items_oneOf_i0_enum"></a><code>enum</code><a class="headerlink" href="#enum" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> List of allowed values for the parameter</p>
+<h5 id="ontologies"><a name="input_items_oneOf_i0_ontologies"></a><code>ontologies</code><a class="headerlink" href="#ontologies" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array of object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> List of ontologies for the parameter</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#input_items_oneOf_i0_ontologies_items">ontologies items</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h6 id="ontologies-items"><a name="input_items_oneOf_i0_ontologies_items"></a>ontologies items<a class="headerlink" href="#ontologies-items" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- <a href="#input_items_oneOf_i0_ontologies_items_pattern1">.*</a></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h6 id="_1"><a name="input_items_oneOf_i0_ontologies_items_pattern1"></a><code>.*</code><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h6>
+<blockquote>
+<p>All properties whose name matches the regular expression
+<code>.*</code> (<a href="https://regex101.com/?regex=.%2A">Test</a>)
+must respect the following conditions</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td><code>uri</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^https?://.*</code> <a href="https://regex101.com/?regex=%5Ehttps%3F%3A%2F%2F.%2A">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="item-1"><a name="input_items_oneOf_i1"></a><code>item 1</code><a class="headerlink" href="#item-1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#input_items_oneOf_i1_items">paramSpec</a></td>
+<td>Specification for a module input/output</td>
+</tr>
+</tbody>
+</table>
+<h5 id="paramspec_1"><a name="input_items_oneOf_i1_items"></a>paramSpec<a class="headerlink" href="#paramspec_1" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+<tr>
+<td><strong>Same definition as</strong></td>
+<td><a href="#input_items_oneOf_i0">input_items_oneOf_i0</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Specification for a module input/output</p>
+<h2 id="output"><a name="output"></a><code>output</code><a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Outputs of the module</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#output_items">structuredParameter</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="structuredparameter_1"><a name="output_items"></a>structuredParameter<a class="headerlink" href="#structuredparameter_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>combining</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+<tr>
+<td><strong>Same definition as</strong></td>
+<td><a href="#input_items">input_items</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="topics"><a name="topics"></a><code>topics</code><a class="headerlink" href="#topics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Topics of the module</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#topics_items">structuredParameter</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="structuredparameter_2"><a name="topics_items"></a>structuredParameter<a class="headerlink" href="#structuredparameter_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>combining</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+<tr>
+<td><strong>Same definition as</strong></td>
+<td><a href="#input_items">input_items</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tools"><a name="tools"></a><code>tools</code><a class="headerlink" href="#tools" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array of object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Tools used by the module</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#tools_items">tools items</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tools-items"><a name="tools_items"></a>tools items<a class="headerlink" href="#tools-items" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- <a href="#tools_items_pattern1">^[a-zA-Z][a-zA-Z0-9_-]*$</a></td>
+<td>object</td>
+</tr>
+</tbody>
+</table>
+<h4 id="toolspec"><a name="tools_items_pattern1"></a><code>toolSpec</code><a class="headerlink" href="#toolspec" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>All properties whose name matches the regular expression
+<code>^[a-zA-Z][a-zA-Z0-9_-]*$</code> (<a href="https://regex101.com/?regex=%5E%5Ba-zA-Z%5D%5Ba-zA-Z0-9_-%5D%2A%24">Test</a>)
+must respect the following conditions</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>combining</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+<tr>
+<td><strong>Defined in</strong></td>
+<td>#/$defs/toolSpec</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Specification for a software tool used by the module</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+ <a href="#tools_items_pattern1_description">description</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#tools_items_pattern1_homepage">homepage</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#tools_items_pattern1_documentation">documentation</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#tools_items_pattern1_tool_dev_url">tool_dev_url</a></td>
+<td>string</td>
+</tr>
+<tr>
+<td>- <a href="#tools_items_pattern1_doi">doi</a></td>
+<td>Combination</td>
+</tr>
+<tr>
+<td>- <a href="#tools_items_pattern1_licence">licence</a></td>
+<td>array of string</td>
+</tr>
+<tr>
+<td>- <a href="#tools_items_pattern1_identifier">identifier</a></td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Any of(Option)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#tools_items_pattern1_pattern4_i0">item 0</a></td>
+</tr>
+<tr>
+<td><a href="#tools_items_pattern1_pattern4_i1">item 1</a></td>
+</tr>
+<tr>
+<td><a href="#tools_items_pattern1_pattern4_i2">item 2</a></td>
+</tr>
+<tr>
+<td><a href="#tools_items_pattern1_pattern4_i3">item 3</a></td>
+</tr>
+</tbody>
+</table>
+<h5 id="item-0"><a name="tools_items_pattern1_pattern4_i0"></a><code>item 0</code><a class="headerlink" href="#item-0" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<h6 id="the-following-properties-are-required"><a name="autogenerated_heading_2"></a>The following properties are required<a class="headerlink" href="#the-following-properties-are-required" title="Permanent link">&para;</a></h6>
+<ul>
+<li>homepage</li>
+</ul>
+<h5 id="item-1_1"><a name="tools_items_pattern1_pattern4_i1"></a><code>item 1</code><a class="headerlink" href="#item-1_1" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<h6 id="the-following-properties-are-required_1"><a name="autogenerated_heading_3"></a>The following properties are required<a class="headerlink" href="#the-following-properties-are-required_1" title="Permanent link">&para;</a></h6>
+<ul>
+<li>documentation</li>
+</ul>
+<h5 id="item-2"><a name="tools_items_pattern1_pattern4_i2"></a><code>item 2</code><a class="headerlink" href="#item-2" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<h6 id="the-following-properties-are-required_2"><a name="autogenerated_heading_4"></a>The following properties are required<a class="headerlink" href="#the-following-properties-are-required_2" title="Permanent link">&para;</a></h6>
+<ul>
+<li>tool_dev_url</li>
+</ul>
+<h5 id="item-3"><a name="tools_items_pattern1_pattern4_i3"></a><code>item 3</code><a class="headerlink" href="#item-3" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>object</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<h6 id="the-following-properties-are-required_3"><a name="autogenerated_heading_5"></a>The following properties are required<a class="headerlink" href="#the-following-properties-are-required_3" title="Permanent link">&para;</a></h6>
+<ul>
+<li>doi</li>
+</ul>
+<h5 id="description_2"><a name="tools_items_pattern1_description"></a><code>description</code><a class="headerlink" href="#description_2" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Description of the tool</p>
+<h5 id="homepage"><a name="tools_items_pattern1_homepage"></a><code>homepage</code><a class="headerlink" href="#homepage" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td><code>uri</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Homepage URL</p>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^https?://.*$</code> <a href="https://regex101.com/?regex=%5Ehttps%3F%3A%2F%2F.%2A%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h5 id="documentation"><a name="tools_items_pattern1_documentation"></a><code>documentation</code><a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td><code>uri</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Documentation URL</p>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^(https?\|ftp)://.*$</code> <a href="https://regex101.com/?regex=%5E%28https%3F%7Cftp%29%3A%2F%2F.%2A%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h5 id="tool_dev_url"><a name="tools_items_pattern1_tool_dev_url"></a><code>tool_dev_url</code><a class="headerlink" href="#tool_dev_url" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Format</strong></td>
+<td><code>uri</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Development/source code URL</p>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^https?://.*$</code> <a href="https://regex101.com/?regex=%5Ehttps%3F%3A%2F%2F.%2A%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h5 id="doi"><a name="tools_items_pattern1_doi"></a><code>doi</code><a class="headerlink" href="#doi" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>combining</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Additional properties</strong></td>
+<td>Any type allowed</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> Digital Object Identifier for the tool's publication</p>
+<table>
+<thead>
+<tr>
+<th>One of(Option)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#tools_items_pattern1_doi_oneOf_i0">item 0</a></td>
+</tr>
+<tr>
+<td><a href="#tools_items_pattern1_doi_oneOf_i1">item 1</a></td>
+</tr>
+</tbody>
+</table>
+<h6 id="item-0_1"><a name="tools_items_pattern1_doi_oneOf_i0"></a><code>item 0</code><a class="headerlink" href="#item-0_1" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^10\.\d{4,9}\/[^,]+$</code> <a href="https://regex101.com/?regex=%5E10%5C.%5Cd%7B4%2C9%7D%5C%2F%5B%5E%2C%5D%2B%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<h6 id="item-1_2"><a name="tools_items_pattern1_doi_oneOf_i1"></a><code>item 1</code><a class="headerlink" href="#item-1_2" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>const</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Specific value: <code>"no DOI available"</code></p>
+<h5 id="licence"><a name="tools_items_pattern1_licence"></a><code>licence</code><a class="headerlink" href="#licence" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>array of string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> SPDX license identifier(s) for the tool</p>
+<table>
+<thead>
+<tr>
+<th>Each item of this array must be</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#tools_items_pattern1_licence_items">licence items</a></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h6 id="licence-items"><a name="tools_items_pattern1_licence_items"></a>licence items<a class="headerlink" href="#licence-items" title="Permanent link">&para;</a></h6>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h5 id="identifier"><a name="tools_items_pattern1_identifier"></a><code>identifier</code><a class="headerlink" href="#identifier" title="Permanent link">&para;</a></h5>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Type</strong></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><strong>Required</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Description:</strong> bio.tools identifier of the tool</p>
+<table>
+<thead>
+<tr>
+<th>Restrictions</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Must match regular expression</strong></td>
+<td><code>^(biotools:.*)?$</code> <a href="https://regex101.com/?regex=%5E%28biotools%3A.%2A%29%3F%24">Test</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Generated using <a href="https://github.com/coveooss/json-schema-for-humans">json-schema-for-humans</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../pipeline/v1/schema/" class="md-footer__link md-footer__link--next" aria-label="Next: Schema for Nextflow pipeline specs">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Schema for Nextflow pipeline specs
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../../../..","features":["announce.dismiss","content.action.edit","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.tabs","navigation.tabs.sticky","navigation.top","navigation.tracking","search.highlight","toc.follow"],"search":"../../../../assets/javascripts/workers/search.e2d2d235.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.00c35305.min.js"></script>
+      
+    
+  </body>
+</html>
