@@ -1,0 +1,7 @@
+{
+  "version": "lineage/v2",
+  "kind": "FileOutput",
+  "spec": {
+    "path": "/tmp/out.txt"
+  }
+}

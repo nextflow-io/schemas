@@ -1,0 +1,9 @@
+{
+  "path": "/tmp/out.txt",
+  "size": 42,
+  "checksum": {
+    "value": "abc",
+    "algorithm": "nextflow",
+    "mode": "standard"
+  }
+}

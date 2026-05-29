@@ -4,6 +4,8 @@ This repository contains the schemas used by Nextflow.
 
 The following schemas are currently defined:
 
+- `lineage`: Schema for lineage records
+- `module`: Schema for module specs
 - `pipeline`: Schema for pipeline specs
 - `plugin`: Schema for plugin specs
 
