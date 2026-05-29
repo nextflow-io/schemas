@@ -1,7 +1,89 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/lineage/v1beta1/schema.json",
-  "title": "Nextflow Lineage Model v1beta1",
+  "title": "Nextflow lineage schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "lineage/v1beta1"
+        },
+        "kind": {
+          "const": "WorkflowRun"
+        },
+        "spec": {
+          "$ref": "#/$defs/WorkflowRun"
+        }
+      },
+      "required": ["version", "kind", "spec"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "lineage/v1beta1"
+        },
+        "kind": {
+          "const": "WorkflowOutput"
+        },
+        "spec": {
+          "$ref": "#/$defs/WorkflowOutput"
+        }
+      },
+      "required": ["version", "kind", "spec"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "lineage/v1beta1"
+        },
+        "kind": {
+          "const": "TaskRun"
+        },
+        "spec": {
+          "$ref": "#/$defs/TaskRun"
+        }
+      },
+      "required": ["version", "kind", "spec"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "lineage/v1beta1"
+        },
+        "kind": {
+          "const": "TaskOutput"
+        },
+        "spec": {
+          "$ref": "#/$defs/TaskOutput"
+        }
+      },
+      "required": ["version", "kind", "spec"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "lineage/v1beta1"
+        },
+        "kind": {
+          "const": "FileOutput"
+        },
+        "spec": {
+          "$ref": "#/$defs/FileOutput"
+        }
+      },
+      "required": ["version", "kind", "spec"],
+      "additionalProperties": false
+    }
+  ],
   "$defs": {
     "Checksum": {
       "title": "Checksum",
@@ -310,103 +392,5 @@
         }
       }
     }
-  },
-  "oneOf": [
-    {
-      "type": "object",
-      "properties": {
-        "version": {
-          "const": "lineage/v1beta1"
-        },
-        "kind": {
-          "const": "WorkflowRun"
-        },
-        "spec": {
-          "$ref": "#/$defs/WorkflowRun"
-        }
-      },
-      "required": ["version", "kind", "spec"],
-      "additionalProperties": false
-    },
-    {
-      "type": "object",
-      "properties": {
-        "version": {
-          "const": "lineage/v1beta1"
-        },
-        "kind": {
-          "const": "WorkflowOutput"
-        },
-        "spec": {
-          "$ref": "#/$defs/WorkflowOutput"
-        }
-      },
-      "required": ["version", "kind", "spec"],
-      "additionalProperties": false
-    },
-    {
-      "type": "object",
-      "properties": {
-        "version": {
-          "const": "lineage/v1beta1"
-        },
-        "kind": {
-          "const": "Workflow"
-        },
-        "spec": {
-          "$ref": "#/$defs/Workflow"
-        }
-      },
-      "required": ["version", "kind", "spec"],
-      "additionalProperties": false
-    },
-    {
-      "type": "object",
-      "properties": {
-        "version": {
-          "const": "lineage/v1beta1"
-        },
-        "kind": {
-          "const": "TaskRun"
-        },
-        "spec": {
-          "$ref": "#/$defs/TaskRun"
-        }
-      },
-      "required": ["version", "kind", "spec"],
-      "additionalProperties": false
-    },
-    {
-      "type": "object",
-      "properties": {
-        "version": {
-          "const": "lineage/v1beta1"
-        },
-        "kind": {
-          "const": "TaskOutput"
-        },
-        "spec": {
-          "$ref": "#/$defs/TaskOutput"
-        }
-      },
-      "required": ["version", "kind", "spec"],
-      "additionalProperties": false
-    },
-    {
-      "type": "object",
-      "properties": {
-        "version": {
-          "const": "lineage/v1beta1"
-        },
-        "kind": {
-          "const": "FileOutput"
-        },
-        "spec": {
-          "$ref": "#/$defs/FileOutput"
-        }
-      },
-      "required": ["version", "kind", "spec"],
-      "additionalProperties": false
-    }
-  ]
+  }
 }
