@@ -1,0 +1,31 @@
+name: build documentation
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.x
+      - uses: astral-sh/setup-uv@v7
+      - run: uv run generate_schema_docs.py --all
+      - run: uv run zensical build --clean
+
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: site # The folder the action should deploy.

@@ -1,0 +1,290 @@
+# Nextflow plugin schema
+
+**Title:** Nextflow plugin schema
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `object`         |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+
+**Description:** Schema for Nextflow plugin specs
+
+| Property                      | Type  |
+| ----------------------------- | ----- |
+| - [definitions](#definitions) | array |
+
+## <a name="definitions"></a>`definitions`
+
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
+
+| Each item of this array must be         | Description |
+| --------------------------------------- | ----------- |
+| [definitions items](#definitions_items) | -           |
+
+### <a name="definitions_items"></a>definitions items
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `combining`      |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+
+| Any of(Option)                              |
+| ------------------------------------------- |
+| [config_scope](#definitions_items_anyOf_i0) |
+| [function](#definitions_items_anyOf_i1)     |
+
+#### <a name="definitions_items_anyOf_i0"></a>`config_scope`
+
+|                           |                      |
+| ------------------------- | -------------------- |
+| **Type**                  | `object`             |
+| **Required**              | No                   |
+| **Additional properties** | Any type allowed     |
+| **Defined in**            | #/$defs/config_scope |
+
+| Property                                   | Type             |
+| ------------------------------------------ | ---------------- |
+| - [type](#definitions_items_anyOf_i0_type) | enum (of string) |
+| - [spec](#definitions_items_anyOf_i0_spec) | object           |
+
+##### <a name="definitions_items_anyOf_i0_type"></a>`type`
+
+|              |                    |
+| ------------ | ------------------ |
+| **Type**     | `enum (of string)` |
+| **Required** | No                 |
+
+Must be one of:
+
+- "ConfigScope"
+
+##### <a name="definitions_items_anyOf_i0_spec"></a>`spec`
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `object`         |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+
+| Property                                                      | Type   |
+| ------------------------------------------------------------- | ------ |
+| - [name](#definitions_items_anyOf_i0_spec_name)               | string |
+| - [description](#definitions_items_anyOf_i0_spec_description) | string |
+| - [children](#definitions_items_anyOf_i0_spec_children)       | array  |
+
+###### <a name="definitions_items_anyOf_i0_spec_name"></a>`name`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i0_spec_description"></a>`description`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i0_spec_children"></a>`children`
+
+|              |         |
+| ------------ | ------- |
+| **Type**     | `array` |
+| **Required** | No      |
+
+| Each item of this array must be                                   | Description |
+| ----------------------------------------------------------------- | ----------- |
+| [children items](#definitions_items_anyOf_i0_spec_children_items) | -           |
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items"></a>children items
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `combining`      |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+
+| Any of(Option)                                                            |
+| ------------------------------------------------------------------------- |
+| [config_scope](#definitions_items_anyOf_i0_spec_children_items_anyOf_i0)  |
+| [config_option](#definitions_items_anyOf_i0_spec_children_items_anyOf_i1) |
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i0"></a>`config_scope`
+
+|                           |                                                           |
+| ------------------------- | --------------------------------------------------------- |
+| **Type**                  | `object`                                                  |
+| **Required**              | No                                                        |
+| **Additional properties** | Any type allowed                                          |
+| **Same definition as**    | [definitions_items_anyOf_i0](#definitions_items_anyOf_i0) |
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1"></a>`config_option`
+
+|                           |                       |
+| ------------------------- | --------------------- |
+| **Type**                  | `object`              |
+| **Required**              | No                    |
+| **Additional properties** | Any type allowed      |
+| **Defined in**            | #/$defs/config_option |
+
+| Property                                                                | Type             |
+| ----------------------------------------------------------------------- | ---------------- |
+| - [type](#definitions_items_anyOf_i0_spec_children_items_anyOf_i1_type) | enum (of string) |
+| - [spec](#definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec) | object           |
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_type"></a>`type`
+
+|              |                    |
+| ------------ | ------------------ |
+| **Type**     | `enum (of string)` |
+| **Required** | No                 |
+
+Must be one of:
+
+- "ConfigOption"
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec"></a>`spec`
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `object`         |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+
+| Property                                                                                   | Type   |
+| ------------------------------------------------------------------------------------------ | ------ |
+| - [name](#definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_name)               | string |
+| - [description](#definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_description) | string |
+| - [type](#definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_type)               | string |
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_name"></a>`name`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_description"></a>`description`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i0_spec_children_items_anyOf_i1_spec_type"></a>`type`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+#### <a name="definitions_items_anyOf_i1"></a>`function`
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `object`         |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+| **Defined in**            | #/$defs/function |
+
+| Property                                   | Type             |
+| ------------------------------------------ | ---------------- |
+| - [type](#definitions_items_anyOf_i1_type) | enum (of string) |
+| - [spec](#definitions_items_anyOf_i1_spec) | object           |
+
+##### <a name="definitions_items_anyOf_i1_type"></a>`type`
+
+|              |                    |
+| ------------ | ------------------ |
+| **Type**     | `enum (of string)` |
+| **Required** | No                 |
+
+Must be one of:
+
+- "Factory"
+- "Function"
+- "Operator"
+
+##### <a name="definitions_items_anyOf_i1_spec"></a>`spec`
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `object`         |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+
+| Property                                                      | Type            |
+| ------------------------------------------------------------- | --------------- |
+| - [name](#definitions_items_anyOf_i1_spec_name)               | string          |
+| - [description](#definitions_items_anyOf_i1_spec_description) | string          |
+| - [returnType](#definitions_items_anyOf_i1_spec_returnType)   | string          |
+| - [parameters](#definitions_items_anyOf_i1_spec_parameters)   | array of object |
+
+###### <a name="definitions_items_anyOf_i1_spec_name"></a>`name`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i1_spec_description"></a>`description`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i1_spec_returnType"></a>`returnType`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i1_spec_parameters"></a>`parameters`
+
+|              |                   |
+| ------------ | ----------------- |
+| **Type**     | `array of object` |
+| **Required** | No                |
+
+| Each item of this array must be                                       | Description |
+| --------------------------------------------------------------------- | ----------- |
+| [parameters items](#definitions_items_anyOf_i1_spec_parameters_items) | -           |
+
+###### <a name="definitions_items_anyOf_i1_spec_parameters_items"></a>parameters items
+
+|                           |                  |
+| ------------------------- | ---------------- |
+| **Type**                  | `object`         |
+| **Required**              | No               |
+| **Additional properties** | Any type allowed |
+
+| Property                                                         | Type   |
+| ---------------------------------------------------------------- | ------ |
+| - [name](#definitions_items_anyOf_i1_spec_parameters_items_name) | string |
+| - [type](#definitions_items_anyOf_i1_spec_parameters_items_type) | string |
+
+###### <a name="definitions_items_anyOf_i1_spec_parameters_items_name"></a>`name`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+###### <a name="definitions_items_anyOf_i1_spec_parameters_items_type"></a>`type`
+
+|              |          |
+| ------------ | -------- |
+| **Type**     | `string` |
+| **Required** | No       |
+
+---
+
+Generated using [json-schema-for-humans](https://github.com/coveooss/json-schema-for-humans)

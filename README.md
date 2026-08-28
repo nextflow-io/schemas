@@ -16,21 +16,30 @@ Each folder contains the schema (`schema.json`) and a `tests` folder with test c
 ### Prettier formatting
 
 We use [Prettier](https://prettier.io/) to format all files in this repository.
-We use [pre-commit](https://pre-commit.com/) to run Prettier on all files before committing.
+We use [prek](https://prek.j178.dev/) to run Prettier on all files before committing.
 
 To install the pre-commit hooks, run the following command:
 
 ```bash
-pre-commit install
+prek install
 ```
 
 To run Prettier on all files, run the following command:
 
 ```bash
-pre-commit run --all-files
+prek run --all-files
 ```
 
-This is done automatically when committing.
+### Building Documentation
+
+Serve documentation locally:
+
+```bash
+uv sync --dev
+uv run zensical serve
+```
+
+Then open `http://127.0.0.1:8000` in your browser.
 
 ### Testing schemas
 
