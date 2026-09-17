@@ -1,0 +1,10 @@
+# Should fail validation: `requires.modules` entries must be pinned to an exact
+# version -- ranges and constraints are not supported.
+name: nf-core/fastq-align
+version: 1.0.0
+kind: Workflow
+description: Trim and align FASTQ reads
+license: MIT
+requires:
+  modules:
+    - nf-core/fastp@>=1.2.0

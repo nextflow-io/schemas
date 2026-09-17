@@ -1,0 +1,6 @@
+# Should fail validation: `kind` must be either `Process` or `Workflow`.
+name: nf-core/fastq-align
+version: 1.0.0
+kind: Subworkflow
+description: Trim and align FASTQ reads
+license: MIT

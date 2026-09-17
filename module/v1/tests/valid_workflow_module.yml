@@ -1,0 +1,26 @@
+name: nf-core/fastq-align
+version: 1.0.0
+kind: Workflow
+description: Trim and align FASTQ reads
+license: MIT
+keywords:
+  - alignment
+  - fastq
+requires:
+  nextflow: ">=26.04.0"
+  modules:
+    - nf-core/fastp@1.2.0
+    - nf-core/bwa/mem@0.0.0-4e3e10e
+input:
+  - name: reads
+    type: channel
+    description: Channel of FASTQ read pairs
+  - name: index
+    type: value
+    description: BWA index directory
+output:
+  - name: bam
+    type: channel
+    description: Channel of aligned BAM files
+authors:
+  - "@ewels"
