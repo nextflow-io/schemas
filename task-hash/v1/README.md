@@ -11,12 +11,12 @@ changes over time. This directory is where it looks them up.
 
 ## Layout
 
-| Path                   | What it holds                                                               |
-| ---------------------- | --------------------------------------------------------------------------- |
-| `schema.json`           | the shape of a spec file                                                    |
-| `specs/<family>-vN.M.json` | one published version, keyed by its id                                   |
-| `legacy-releases.json`  | Nextflow release to version, for `std` records written before the id was recorded |
-| `tests/`                | schema test cases                                                           |
+| Path                       | What it holds                                                                     |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| `schema.json`              | the shape of a spec file                                                          |
+| `specs/<family>-vN.M.json` | one published version, keyed by its id                                            |
+| `legacy-releases.json`     | Nextflow release to version, for `std` records written before the id was recorded |
+| `tests/`                   | schema test cases                                                                 |
 
 There is no index of available versions, because nothing needs one: a record names its
 version, so a consumer fetches `specs/std-v1.7.json` by that name.
@@ -27,10 +27,10 @@ The part of an id before the slash is the **family**: the hasher that produced i
 families can hash the same task to different values, so a consumer must read the whole
 id, never the number alone.
 
-| Family | Who writes it            | How it differs                                                                                      |
-| ------ | ------------------------ | --------------------------------------------------------------------------------------------------- |
-| `std`  | Nextflow itself          | the baseline                                                                                        |
-| `glb`  | the Seqera global cache  | drops `SESSION_ID` and `PROCESS_NAME`, so a hash is shared across runs and pipelines; file inputs are hashed through the cache's file-identity strategy |
+| Family | Who writes it           | How it differs                                                                                                                                          |
+| ------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `std`  | Nextflow itself         | the baseline                                                                                                                                            |
+| `glb`  | the Seqera global cache | drops `SESSION_ID` and `PROCESS_NAME`, so a hash is shared across runs and pipelines; file inputs are hashed through the cache's file-identity strategy |
 
 ## Reading a spec
 
