@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/task-hash/v1/schema.json",
+  "title": "Nextflow task hash spec schema",
+  "description": "Schema for a task hash version: which keys are hashed, in what order, how each value is encoded, and which lineage record fields carry each key",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Identifier of this task hash version, e.g. std/v1.7",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*/v[0-9]+\\.[0-9]+$"
+    },
+    "note": {
+      "description": "What changed in this version, and which commit ended it",
+      "type": "string"
+    },
+    "function": {
+      "description": "Hash function applied to the key values",
+      "type": "string",
+      "enum": ["murmur3_128"]
+    },
+    "encoding": {
+      "$ref": "#/$defs/encoding"
+    },
+    "keys": {
+      "description": "The hashed keys, in the order they are fed to the hash function",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/key"
+      }
+    }
+  },
+  "required": ["id", "function", "encoding", "keys"],
+  "additionalProperties": false,
+  "$defs": {
+    "encoding": {
+      "description": "How values are serialised before hashing. Two versions can share a key set and still hash differently, so these are part of the version",
+      "type": "object",
+      "properties": {
+        "orderIndependentMaps": {
+          "description": "Hash a map by its entry set rather than by its values",
+          "type": "boolean"
+        },
+        "cacheFunnelFirst": {
+          "description": "Let an object hash itself before any other rule applies",
+          "type": "boolean"
+        },
+        "assetRootDetection": {
+          "description": "Treat a file under the assets root as a repository asset, not only one under the base directory",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "orderIndependentMaps",
+        "cacheFunnelFirst",
+        "assetRootDetection"
+      ],
+      "additionalProperties": false
+    },
+    "key": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "description": "Name of the hash key",
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$"
+        },
+        "contributor": {
+          "description": "Identifier of the code that produces this key's value",
+          "type": "string",
+          "minLength": 1
+        },
+        "lineage": {
+          "description": "Fields of the lineage TaskRun record that carry this key. An empty list means the key is not recorded, and a consumer must report it as unseen rather than as unchanged",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": ["key", "contributor", "lineage"],
+      "additionalProperties": false
+    }
+  }
+}

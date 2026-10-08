@@ -8,8 +8,10 @@ The following schemas are currently defined:
 - `module`: Schema for module specs
 - `pipeline`: Schema for pipeline specs
 - `plugin`: Schema for plugin specs
+- `task-hash`: Schema for task hash versions, plus the published versions themselves
 
 Each folder contains the schema (`schema.json`) and a `tests` folder with test cases.
+`task-hash` also serves data: see [its README](task-hash/v1/README.md).
 
 ## Development
 
