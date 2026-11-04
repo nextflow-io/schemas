@@ -1,0 +1,7 @@
+{
+  "version": "lineage/v1beta1",
+  "kind": "NotARealKind",
+  "spec": {
+    "path": "/tmp/out.txt"
+  }
+}
