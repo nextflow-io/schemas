@@ -76,3 +76,13 @@ produces a correct table rather than one guessed from version ordering.
 A spec file is **frozen** once published, and is a byte-identical copy of the resource
 shipped in the jar of whichever component owns the family. Editing one here changes the meaning of every task hash
 already recorded under it, with no symptom a user could see.
+
+`check-sync.sh` checks this against each producer: Nextflow `master` for `std`, so a new
+version is published before it is released, and the newest `xpack-platform` plugin release
+for `glb`, whose source is private. The `Task hash sync` workflow runs it daily, skipping
+the day when nothing changed, and on every change here:
+
+- a published spec that differs from the producer's fails the check, and the daily run
+  opens an issue;
+- a producer spec that is not published yet makes the daily run open a PR adding it;
+- a spec published here but not in the producer passes.

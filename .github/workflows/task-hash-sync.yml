@@ -1,0 +1,76 @@
+name: Task hash sync
+
+# Published task hash specs must match the ones in Nextflow master (std) and in the newest
+# xpack-platform release (glb). A changed spec fails the job and opens an issue; a new spec
+# opens a PR publishing it. Daily, because neither producer touches this repository.
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  push:
+    paths:
+      - "task-hash/**"
+      - ".github/workflows/task-hash-sync.yml"
+  pull_request:
+    paths:
+      - "task-hash/**"
+      - ".github/workflows/task-hash-sync.yml"
+  workflow_dispatch:
+    inputs:
+      nextflow_ref:
+        description: "Nextflow git ref to check instead of master"
+        required: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    env:
+      NEXTFLOW_REF: ${{ inputs.nextflow_ref }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: key
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          nextflow=$(gh api "repos/nextflow-io/nextflow/commits/${NEXTFLOW_REF:-master}" --jq .sha)
+          xpack=$(curl -fsSL https://registry.nextflow.io/api/v1/plugins/xpack-platform | jq -er '.plugin.releases[0].version')
+          echo "key=task-hash-sync-$nextflow-$xpack-$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+
+      # Skips a scheduled run when neither producer nor this repository changed since the last one.
+      - id: done
+        if: github.event_name == 'schedule'
+        uses: actions/cache/restore@v4
+        with:
+          path: done
+          key: ${{ steps.key.outputs.key }}
+          lookup-only: true
+
+      - id: check
+        if: steps.done.outputs.cache-hit != 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SYNC_OUT: ${{ runner.temp }}/sync
+        run: task-hash/v1/check-sync.sh
+
+      # Only scheduled and manual runs on the default branch open PRs and issues.
+      - id: report
+        if: always() && steps.check.outcome != 'skipped' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && github.ref_name == github.event.repository.default_branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          task-hash/v1/sync-report.sh "$RUNNER_TEMP/sync"
+
+      # Marks the commits as checked only when the result was reported, so a failed report runs again.
+      - if: always() && steps.report.outcome == 'success'
+        run: touch done
+      - if: always() && steps.report.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: done
+          key: ${{ steps.key.outputs.key }}
