@@ -1,0 +1,15 @@
+{
+  "id": "std/v1.0",
+  "function": "murmur3_128",
+  "encoding": {
+    "orderIndependentMaps": false,
+    "cacheFunnelFirst": false
+  },
+  "keys": [
+    {
+      "key": "SESSION_ID",
+      "contributor": "sessionId",
+      "lineage": ["sessionId"]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 shopt -s nullglob
 
-for folder in lineage/v1beta1 module/v1 pipeline/v1 plugin/v1 ; do
+for folder in lineage/v1beta1 module/v1 pipeline/v1 plugin/v1 task-hash/v1 ; do
   schema="$folder/schema.json"
 
   echo "Validating $schema ..."
@@ -29,6 +29,14 @@ for folder in lineage/v1beta1 module/v1 pipeline/v1 plugin/v1 ; do
     fi
     echo
   done
+done
+
+# the published task hash specs are data, not test cases, but must still match the schema
+echo "Validating published task hash specs..."
+for spec in task-hash/v1/specs/*.json ; do
+  echo "Testing $spec:"
+  check-jsonschema --schemafile task-hash/v1/schema.json "$spec" || failed=1
+  echo
 done
 
 exit $failed

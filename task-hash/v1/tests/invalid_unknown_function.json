@@ -1,0 +1,16 @@
+{
+  "id": "std/v1.0",
+  "function": "sha256",
+  "encoding": {
+    "orderIndependentMaps": false,
+    "cacheFunnelFirst": false,
+    "assetRootDetection": false
+  },
+  "keys": [
+    {
+      "key": "SESSION_ID",
+      "contributor": "sessionId",
+      "lineage": ["sessionId"]
+    }
+  ]
+}

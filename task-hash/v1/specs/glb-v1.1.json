@@ -1,0 +1,67 @@
+{
+  "id": "glb/v1.1",
+  "note": "The first global cache hash: std/v1.7 without the session id and the process name, with file inputs routed through the file-identity strategy.",
+  "function": "murmur3_128",
+  "encoding": {
+    "orderIndependentMaps": true,
+    "cacheFunnelFirst": true,
+    "assetRootDetection": true
+  },
+  "keys": [
+    {
+      "key": "TASK_SOURCE",
+      "contributor": "taskSource",
+      "lineage": ["codeChecksum"]
+    },
+    {
+      "key": "CONTAINER",
+      "contributor": "containerFingerprint",
+      "lineage": ["container"]
+    },
+    {
+      "key": "INPUTS",
+      "contributor": "inputs.fileIdentity",
+      "lineage": ["input"]
+    },
+    {
+      "key": "EVAL_OUTPUTS",
+      "contributor": "evalOutputs.rawMap",
+      "lineage": ["eval"]
+    },
+    {
+      "key": "SCRIPT_VARS",
+      "contributor": "scriptVars",
+      "lineage": ["globalVars"]
+    },
+    {
+      "key": "BIN_ENTRIES",
+      "contributor": "binEntries",
+      "lineage": ["binEntries"]
+    },
+    {
+      "key": "RESOURCES_BUNDLE",
+      "contributor": "resourcesBundleFingerprint",
+      "lineage": ["resourcesBundle"]
+    },
+    {
+      "key": "ENV_MODULES",
+      "contributor": "envModules",
+      "lineage": ["envModules"]
+    },
+    {
+      "key": "CONDA",
+      "contributor": "condaEnv",
+      "lineage": ["conda"]
+    },
+    {
+      "key": "SPACK",
+      "contributor": "spackEnvAndArch",
+      "lineage": ["spack", "architecture"]
+    },
+    {
+      "key": "STUB_MARKER",
+      "contributor": "stubMarker",
+      "lineage": ["codeChecksum"]
+    }
+  ]
+}
