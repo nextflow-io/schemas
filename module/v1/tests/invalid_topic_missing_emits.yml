@@ -1,0 +1,8 @@
+# Should fail validation: a named topic must declare what it `emits`.
+name: nf-core/samtools/stats
+version: 1.0.0
+description: Produces comprehensive statistics from SAM/BAM/CRAM file
+license: MIT
+topics:
+  - topic: versions
+    description: Versions of the tools used by the module

@@ -1,0 +1,12 @@
+# Should fail validation: a named topic only allows `topic`, `description` and `emits`.
+name: nf-core/samtools/stats
+version: 1.0.0
+description: Produces comprehensive statistics from SAM/BAM/CRAM file
+license: MIT
+topics:
+  - topic: versions
+    type: record
+    emits:
+      - name: version
+        type: string
+        description: The version of the tool

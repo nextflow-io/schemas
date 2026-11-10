@@ -91,7 +91,16 @@
       "type": "array",
       "description": "Topics of the module",
       "items": {
-        "$ref": "#/$defs/structuredParameter"
+        "if": {
+          "type": "object",
+          "required": ["topic"]
+        },
+        "then": {
+          "$ref": "#/$defs/topicSpec"
+        },
+        "else": {
+          "$ref": "#/$defs/structuredParameter"
+        }
       }
     },
     "tools": {
@@ -180,6 +189,27 @@
           "required": ["doi"]
         }
       ]
+    },
+    "topicSpec": {
+      "type": "object",
+      "description": "A value that the module sends to a named topic channel",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "Name of the topic channel (e.g., 'versions')",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of what is sent to the topic"
+        },
+        "emits": {
+          "$ref": "#/$defs/structuredParameter",
+          "description": "The value sent to the topic"
+        }
+      },
+      "required": ["topic", "emits"],
+      "additionalProperties": false
     },
     "structuredParameter": {
       "oneOf": [
