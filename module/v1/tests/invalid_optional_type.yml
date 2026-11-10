@@ -1,0 +1,10 @@
+# Should fail validation: `optional` must be a boolean.
+name: nf-core/samtools/stats
+version: 1.0.0
+description: Produces comprehensive statistics from SAM/BAM/CRAM file
+license: MIT
+input:
+  - name: fasta
+    type: file
+    description: Reference the CRAM was created with
+    optional: "yes"

@@ -1,0 +1,61 @@
+name: nf-core/samtools/stats
+version: 1.0.0
+kind: Process
+description: Produces comprehensive statistics from SAM/BAM/CRAM file
+license: MIT
+tools:
+  - samtools:
+      description: Tools for dealing with SAM, BAM and CRAM files
+      homepage: http://www.htslib.org/
+      licence: ["MIT"]
+      identifier: biotools:samtools
+input:
+  - - name: id
+      type: string
+      description: Sample identifier, used as the default output prefix
+    - name: meta
+      type: record
+      description: Pipeline-specific sample information, passed to the output
+      optional: true
+    - name: input
+      type: file
+      description: BAM/CRAM file from alignment
+      pattern: "*.{bam,cram}"
+      ontologies:
+        - edam: http://edamontology.org/format_2572
+    - name: input_index
+      type: file
+      description: BAI/CRAI index of the input file
+      pattern: "*.{bai,crai}"
+    - name: fasta
+      type: file
+      description: Reference the CRAM was created with
+      pattern: "*.{fa,fasta}"
+      optional: true
+output:
+  - - name: id
+      type: string
+      description: Sample identifier from the input record
+    - name: meta
+      type: record
+      description: The `meta` record from the input
+      optional: true
+    - name: stats
+      type: file
+      description: File containing samtools stats output
+      pattern: "*.stats"
+topics:
+  - topic: versions
+    description: Versions of the tools used by the module
+    emits:
+      - name: process
+        type: string
+        description: The name of the process
+      - name: tool
+        type: string
+        description: The name of the tool
+      - name: version
+        type: string
+        description: The version of the tool
+authors:
+  - "@drpatelh"

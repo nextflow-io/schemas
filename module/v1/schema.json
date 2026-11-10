@@ -224,6 +224,11 @@
           "type": "string",
           "description": "Human-readable description of the parameter"
         },
+        "optional": {
+          "type": "boolean",
+          "description": "Whether the parameter may be omitted or `null`, e.g. a nullable record field (`Path?`) or an output declared with `optional: true`",
+          "default": false
+        },
         "pattern": {
           "type": "string",
           "description": "Glob pattern for file/directory parameters"
