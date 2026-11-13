@@ -1,0 +1,11 @@
+# Should fail validation: optional is replaced by a nullable type (e.g. Path?)
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+input:
+  - name: adapters
+    type: Path
+    description: Adapter file
+    optional: true

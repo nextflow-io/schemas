@@ -1,0 +1,5 @@
+# Should fail validation: `$schema` is required, because Nextflow selects the schema version from it.
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT

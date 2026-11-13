@@ -1,0 +1,15 @@
+# Should fail validation: fields describe a bare Record; use a named type for records in a channel or collection
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+kind: Workflow
+output:
+  - name: bam
+    type: Channel<Record>
+    description: Aligned samples
+    fields:
+      - name: id
+        type: String
+        description: Sample identifier

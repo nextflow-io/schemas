@@ -1,0 +1,27 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+output:
+  - name: sample
+    type: Record
+    description: "Sample with grouped reads, from `record(id: ..., pair: tuple(...), ...)`"
+    fields:
+      - name: id
+        type: String
+        description: Sample identifier
+      - name: pair
+        type: Tuple
+        description: Read pair
+        components:
+          - type: Path
+            description: Read 1
+          - type: Path?
+            description: Read 2
+      - name: extras
+        type: List<Path?>
+        description: Extra files
+      - name: lookup
+        type: Map<String, List<Path>>
+        description: Files grouped by key

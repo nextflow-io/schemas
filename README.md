@@ -6,6 +6,8 @@ The following schemas are currently defined:
 
 - `lineage`: Schema for lineage records
 - `module`: Schema for module specs
+  - `v1`: legacy (DSL2) processes and workflows (frozen)
+  - `v2`: typed processes and typed workflows
 - `pipeline`: Schema for pipeline specs
 - `plugin`: Schema for plugin specs
 

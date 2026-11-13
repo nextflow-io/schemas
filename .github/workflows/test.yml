@@ -4,12 +4,14 @@ on:
   push:
     paths:
       - "**.json"
-      - ".github/workflows/test.yml"
+      - "**.yml"
+      - "**.yaml"
       - "validate.sh"
   pull_request:
     paths:
       - "**.json"
-      - ".github/workflows/test.yml"
+      - "**.yml"
+      - "**.yaml"
       - "validate.sh"
 
 jobs:

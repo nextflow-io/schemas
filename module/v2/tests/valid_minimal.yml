@@ -1,0 +1,5 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/fastqc
+version: 1.0.0
+description: Run FastQC on sequenced reads
+license: MIT

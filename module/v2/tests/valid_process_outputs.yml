@@ -1,0 +1,32 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+output:
+  - name: result
+    type: Record
+    description: Alignment results, as a plain record
+    fields:
+      - name: id
+        type: String
+        description: Sample identifier
+      - name: bam
+        type: Path
+        description: Aligned reads
+        pattern: "*.bam"
+      - name: log
+        type: Path?
+        description: "Log file, declared with `optional: true`"
+  - name: pair
+    type: Tuple
+    description: Identifier and stats
+    components:
+      - type: String
+        description: Sample identifier
+      - type: Path
+        description: Stats file
+  - name: plots
+    type: Set<Path>
+    description: Plots produced by `files()`
+    pattern: "*.png"

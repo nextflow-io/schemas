@@ -1,0 +1,42 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+kind: Process
+keywords:
+  - qc
+input:
+  - name: id
+    type: String
+    description: Sample identifier
+  - name: reads
+    type: List<Path>
+    description: FASTQ files
+    pattern: "*.fastq.gz"
+    ontologies:
+      - edam: http://edamontology.org/format_1930
+  - name: adapters
+    type: Path?
+    description: Optional adapter file
+  - name: min_length
+    type: Integer
+    description: Minimum read length
+  - name: options
+    type: Map<String, Integer>
+    description: Tool options
+  - name: timeout
+    type: Duration
+    description: Maximum run time
+output:
+  - name: html
+    type: Path
+    description: FastQC report
+    pattern: "*.html"
+tools:
+  - fastqc:
+      description: Quality control for sequencing data
+      homepage: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+      licence: ["GPL-2.0-only"]
+authors:
+  - "@drpatelh"
