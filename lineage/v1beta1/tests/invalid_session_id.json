@@ -1,0 +1,8 @@
+{
+  "version": "lineage/v1beta1",
+  "kind": "TaskRun",
+  "spec": {
+    "sessionId": "not-a-uuid",
+    "name": "FOO"
+  }
+}
