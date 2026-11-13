@@ -265,6 +265,12 @@
         "container": {
           "type": ["string", "null"]
         },
+        "eval": {
+          "type": ["object", "null"],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "globalVars": {
           "anyOf": [
             {
@@ -280,6 +286,9 @@
           "items": {
             "$ref": "#/$defs/Parameter"
           }
+        },
+        "moduleId": {
+          "type": ["string", "null"]
         },
         "name": {
           "type": ["string", "null"]
