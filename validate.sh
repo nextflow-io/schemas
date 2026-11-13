@@ -2,14 +2,14 @@
 
 shopt -s nullglob
 
+failed=0
 for folder in lineage/v1beta1 module/v1 pipeline/v1 plugin/v1 ; do
   schema="$folder/schema.json"
 
   echo "Validating $schema ..."
-  check-jsonschema --schemafile https://json-schema.org/draft/2020-12/schema "$schema"
+  check-jsonschema --schemafile https://json-schema.org/draft/2020-12/schema "$schema" || failed=1
 
   echo -e "\nValidating test cases..."
-  failed=0
   for spec in $folder/tests/*.json $folder/tests/*.yml ; do
     echo "Testing $spec:"
 
