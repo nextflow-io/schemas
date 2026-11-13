@@ -93,44 +93,23 @@
         "algorithm": {
           "title": "Checksum Algorithm",
           "description": "The algorithm used to compute the checksum",
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "enum": ["nextflow"]
-            }
-          ]
+          "type": ["string", "null"],
+          "enum": ["nextflow", null]
         },
         "mode": {
           "title": "Checksum Mode",
           "description": "The hashing mode used to compute the checksum",
           "examples": ["standard", "deep", "lenient", "sha256"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "enum": ["standard", "deep", "lenient", "sha256"]
-            }
-          ]
+          "type": ["string", "null"],
+          "enum": ["standard", "deep", "lenient", "sha256", null]
         },
         "value": {
           "title": "Checksum Value",
           "description": "The checksum value as a hexadecimal string",
           "examples": ["a1b2c3d4e5f6", "1234567890abcdef"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^[a-fA-F0-9]+$",
-              "minLength": 1
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^[a-fA-F0-9]+$",
+          "minLength": 1
         }
       }
     },
@@ -153,17 +132,13 @@
         },
         "path": {
           "title": "Data Path",
-          "description": "Real path of the data as a URI",
-          "examples": ["file:///path/to/script.nf", "s3://bucket/input.txt"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "format": "uri"
-            }
-          ]
+          "description": "Real path of the data as a local path or URI",
+          "examples": [
+            "https://github.com/user/repo/tree/<commit>/main.nf",
+            "work/ab/cdef12/input.txt",
+            "file:///path/to/script.nf"
+          ],
+          "type": ["string", "null"]
         }
       }
     },
@@ -218,17 +193,9 @@
         },
         "path": {
           "title": "Output Path",
-          "description": "Real path of the output data as a URI",
-          "examples": ["file:///path/to/output.txt", "s3://bucket/output.txt"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "format": "uri"
-            }
-          ]
+          "description": "Real path of the output data as a local path or URI",
+          "examples": ["/path/to/output.txt", "s3://bucket/output.txt"],
+          "type": ["string", "null"]
         },
         "size": {
           "title": "Output Size",
@@ -239,41 +206,20 @@
           "title": "Output Source",
           "description": "Entity that generated the data - lid:// URI",
           "examples": ["lid://1234567890abcdef", "lid://abc123/output.txt"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^lid://[a-fA-F0-9]+(/.*)?$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^lid://[a-fA-F0-9]+(/.*)?$"
         },
         "taskRun": {
           "title": "Task Run Reference",
           "description": "Reference to the task that generated the data (null for workflow-level outputs)",
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^lid://[a-fA-F0-9]+$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^lid://[a-fA-F0-9]+$"
         },
         "workflowRun": {
           "title": "Workflow Run Reference",
           "description": "Reference to the WorkflowRun that generated the data",
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^lid://[a-fA-F0-9]+$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^lid://[a-fA-F0-9]+$"
         }
       }
     },
@@ -297,17 +243,9 @@
         },
         "type": {
           "title": "Parameter Type",
-          "description": "The parameter type",
-          "examples": ["path", "val", "env", "String"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "enum": ["stdout", "stdin", "path", "val", "env", "eval", "each", "Path", "String", "Collection", "Map"]
-            }
-          ]
+          "description": "The parameter type: a process input/output qualifier (e.g. path, val) or the type name of the value (e.g. String, Boolean, Integer)",
+          "examples": ["path", "val", "String", "Boolean"],
+          "type": ["string", "null"]
         },
         "value": {
           "title": "Parameter Value",
@@ -351,28 +289,14 @@
         "taskRun": {
           "title": "Task Run Reference",
           "description": "Reference to the task that generated the output",
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^lid://[a-fA-F0-9]+$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^lid://[a-fA-F0-9]+$"
         },
         "workflowRun": {
           "title": "Workflow Run Reference",
           "description": "Reference to the WorkflowRun",
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^lid://[a-fA-F0-9]+$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^lid://[a-fA-F0-9]+$"
         }
       }
     },
@@ -451,15 +375,8 @@
           "title": "Session ID",
           "description": "Execution session identifier (UUID)",
           "examples": ["550e8400-e29b-41d4-a716-446655440000"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "spack": {
           "title": "Spack Environment",
@@ -469,15 +386,8 @@
         "workflowRun": {
           "title": "Workflow Run Reference",
           "description": "Workflow run associated to the task run",
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^lid://[a-fA-F0-9]+$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^lid://[a-fA-F0-9]+$"
         }
       }
     },
@@ -490,29 +400,15 @@
           "title": "Commit ID",
           "description": "Git commit identifier",
           "examples": ["a1b2c3d4e5f6789"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^[a-fA-F0-9]{6,40}$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^[a-fA-F0-9]{6,64}$"
         },
         "repository": {
           "title": "Repository",
           "description": "Workflow repository URL",
           "examples": ["https://github.com/user/workflow.git"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "format": "uri"
-            }
-          ]
+          "type": ["string", "null"],
+          "format": "uri"
         },
         "scriptFiles": {
           "title": "Script Files",
@@ -552,15 +448,8 @@
         "workflowRun": {
           "title": "Workflow Run Reference",
           "description": "Workflow run that generated the output",
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^lid://[a-fA-F0-9]+$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^lid://[a-fA-F0-9]+$"
         }
       }
     },
@@ -610,15 +499,8 @@
           "title": "Session ID",
           "description": "Execution session identifier (UUID)",
           "examples": ["550e8400-e29b-41d4-a716-446655440000"],
-          "anyOf": [
-            {
-              "type": "null"
-            },
-            {
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-            }
-          ]
+          "type": ["string", "null"],
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "workflow": {
           "title": "Workflow Definition",
