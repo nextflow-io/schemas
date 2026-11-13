@@ -15,6 +15,11 @@
       "description": "Semantic version of the module (MAJOR.MINOR.PATCH or MAJOR.MINOR.PATCH-SUFFIX).",
       "pattern": "^\\d+\\.\\d+\\.\\d+(-[\\w.-]+)?$"
     },
+    "kind": {
+      "type": "string",
+      "description": "Kind of module: a standalone process (the default when absent) or a standalone workflow.",
+      "enum": ["Process", "Workflow"]
+    },
     "description": {
       "type": "string",
       "description": "Description of the module"
@@ -55,6 +60,15 @@
         "nextflow": {
           "type": "string",
           "description": "Nextflow version constraint"
+        },
+        "modules": {
+          "type": "array",
+          "description": "Modules included by this module, as `scope/name@version` references. Each dependency is pinned to an exact version -- version ranges are not supported, so that a module resolves to the same dependency tree wherever it is installed.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9._-]+/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*@\\d+\\.\\d+\\.\\d+(-[\\w.-]+)?$"
+          },
+          "uniqueItems": true
         }
       },
       "additionalProperties": false
@@ -200,7 +214,10 @@
             "list",
             "map",
             "file",
-            "directory"
+            "directory",
+            "channel",
+            "value",
+            "record"
           ]
         },
         "description": {

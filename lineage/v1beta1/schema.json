@@ -340,6 +340,12 @@
           "description": "Container used for the task run",
           "type": ["string", "null"]
         },
+        "eval": {
+          "type": ["object", "null"],
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "globalVars": {
           "title": "Global Variables",
           "description": "Global variables defined in the task run",
@@ -359,6 +365,9 @@
           "items": {
             "$ref": "#/$defs/Parameter"
           }
+        },
+        "moduleId": {
+          "type": ["string", "null"]
         },
         "name": {
           "title": "Task Name",
