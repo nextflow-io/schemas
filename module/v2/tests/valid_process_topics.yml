@@ -1,0 +1,27 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+topics:
+  - topic: versions
+    type: Tuple
+    description: Tool version
+    components:
+      - type: String
+        description: Tool name
+      - type: String
+        description: Tool version
+  - topic: logs
+    type: Path
+    description: Log file
+  - topic: versions
+    type: Record
+    description: Tool version, as a record
+    fields:
+      - name: tool
+        type: String
+        description: Tool name
+      - name: version
+        type: String
+        description: Tool version

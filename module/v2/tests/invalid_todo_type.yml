@@ -1,0 +1,10 @@
+# Should fail validation: type still contains the placeholder from `nextflow module spec`
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+input:
+  - name: reads
+    type: "TODO: Add type"
+    description: Reads

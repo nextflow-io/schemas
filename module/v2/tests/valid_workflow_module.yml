@@ -1,0 +1,33 @@
+name: nf-core/fastq-align
+version: 1.0.0
+kind: Workflow
+description: Trim and align FASTQ reads
+license: MIT
+requires:
+  nextflow: ">=26.10.0"
+  modules:
+    - nf-core/fastp@1.2.0
+    - nf-core/bwa/mem@0.0.0-4e3e10e
+input:
+  - name: reads
+    type: Channel<Sample>
+    description: Channel of samples
+  - name: index
+    type: Value<Path>
+    description: BWA index directory
+output:
+  - name: bam
+    type: Channel<Record>
+    description: Channel of aligned samples
+types:
+  - name: Sample
+    kind: record
+    fields:
+      - name: id
+        type: String
+        description: Sample identifier
+      - name: reads
+        type: List<Path>
+        description: FASTQ files
+authors:
+  - "@ewels"

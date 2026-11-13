@@ -1,0 +1,37 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+input:
+  - name: sample
+    type: Sample
+    description: Sample to process
+  - name: references
+    type: List<Sample>
+    description: Reference samples
+  - name: platform
+    type: Platform
+    description: Sequencing platform
+output:
+  - name: sample
+    type: Sample
+    description: Processed sample, as a declared record type
+types:
+  - name: Sample
+    kind: record
+    description: A sequenced sample
+    fields:
+      - name: id
+        type: String
+        description: Sample identifier
+      - name: fastq_1
+        type: Path
+        description: Read 1
+      - name: fastq_2
+        type: Path?
+        description: Read 2, for paired-end samples
+  - name: Platform
+    kind: enum
+    description: Sequencing platform
+    values: [ILLUMINA, ONT, PACBIO]

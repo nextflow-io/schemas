@@ -1,0 +1,11 @@
+# Should fail validation: topic entries use topic, not name
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+topics:
+  - topic: versions
+    name: version
+    type: String
+    description: Tool version

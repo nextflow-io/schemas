@@ -1,0 +1,13 @@
+# Should fail validation: fields require type Record
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+input:
+  - type: Path
+    description: Reads
+    fields:
+      - name: id
+        type: String
+        description: Sample identifier

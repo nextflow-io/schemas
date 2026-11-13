@@ -1,0 +1,10 @@
+# Should fail validation: a record type must declare its fields
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+types:
+  - name: Sample
+    kind: record
+    description: A sequenced sample

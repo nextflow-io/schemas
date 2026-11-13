@@ -1,0 +1,12 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+x-nf-core:
+  subworkflows: []
+input:
+  - name: reads
+    type: Path
+    description: Reads
+    x-display: hidden

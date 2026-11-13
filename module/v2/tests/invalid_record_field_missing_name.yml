@@ -1,0 +1,12 @@
+# Should fail validation: record fields must be named
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+input:
+  - type: Record
+    description: Sample
+    fields:
+      - type: String
+        description: Sample identifier

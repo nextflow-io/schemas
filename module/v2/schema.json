@@ -1,0 +1,427 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json",
+  "title": "Nextflow module schema",
+  "description": "Schema for Nextflow module specs (v2). Describes modules written as typed processes or typed workflows. Legacy (DSL2) modules use module/v1.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "URI of the module spec schema"
+    },
+    "name": {
+      "type": "string",
+      "description": "Module name in `namespace/name` form (e.g., 'nf-core/fastqc', 'nf-core/gfatools/gfa2fa').",
+      "pattern": "^[a-zA-Z0-9._-]+/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the module (MAJOR.MINOR.PATCH or MAJOR.MINOR.PATCH-SUFFIX).",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[\\w.-]+)?$"
+    },
+    "kind": {
+      "type": "string",
+      "description": "Kind of module: a standalone process (the default when absent) or a standalone workflow.",
+      "enum": ["Process", "Workflow"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the module",
+      "minLength": 1
+    },
+    "keywords": {
+      "type": "array",
+      "description": "Keywords for the module",
+      "items": {
+        "type": "string",
+        "minLength": 2
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier for the module source code"
+    },
+    "authors": {
+      "type": "array",
+      "description": "Original authors of the module (GitHub handles preferred)",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "maintainers": {
+      "type": "array",
+      "description": "Current maintainers of the module (GitHub handles preferred)",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires": {
+      "type": "object",
+      "description": "Runtime requirements for the module",
+      "properties": {
+        "nextflow": {
+          "type": "string",
+          "description": "Nextflow version constraint"
+        },
+        "modules": {
+          "type": "array",
+          "description": "Modules included by this module, as `scope/name@version` references. Each dependency is pinned to an exact version -- version ranges are not supported, so that a module resolves to the same dependency tree wherever it is installed.",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9._-]+/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*@\\d+\\.\\d+\\.\\d+(-[\\w.-]+)?$"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "input": {
+      "type": "array",
+      "description": "Inputs of the module: process inputs, or workflow takes",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "output": {
+      "type": "array",
+      "description": "Outputs of the module: process outputs, or workflow emits",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    },
+    "topics": {
+      "type": "array",
+      "description": "Values sent to topic channels by the process",
+      "items": {
+        "$ref": "#/$defs/topicEntry"
+      }
+    },
+    "types": {
+      "type": "array",
+      "description": "Record and enum types referenced by the module interface. Types included from other scripts are copied here so the spec is self-contained.",
+      "items": {
+        "$ref": "#/$defs/typeDef"
+      }
+    },
+    "tools": {
+      "type": "array",
+      "description": "Tools used by the module",
+      "items": {
+        "type": "object",
+        "minProperties": 1,
+        "maxProperties": 1,
+        "patternProperties": {
+          "^[a-zA-Z][a-zA-Z0-9_-]*$": {
+            "$ref": "#/$defs/toolSpec"
+          }
+        }
+      }
+    }
+  },
+  "patternProperties": {
+    "^x-": {
+      "description": "Extension field, ignored by Nextflow"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["name", "version", "description", "license"],
+  "if": {
+    "properties": {
+      "kind": {
+        "const": "Workflow"
+      }
+    },
+    "required": ["kind"]
+  },
+  "then": {
+    "properties": {
+      "topics": false,
+      "tools": false
+    },
+    "description": "Workflow modules cannot declare topics or tools"
+  },
+  "$defs": {
+    "toolSpec": {
+      "type": "object",
+      "description": "Specification for a software tool used by the module",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the tool"
+        },
+        "homepage": {
+          "type": "string",
+          "format": "uri",
+          "description": "Homepage URL",
+          "pattern": "^https?://.*$"
+        },
+        "documentation": {
+          "type": "string",
+          "format": "uri",
+          "description": "Documentation URL",
+          "pattern": "^(https?|ftp)://.*$"
+        },
+        "tool_dev_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Development/source code URL",
+          "pattern": "^https?://.*$"
+        },
+        "doi": {
+          "description": "Digital Object Identifier for the tool's publication",
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^10\\.\\d{4,9}\\/[^,]+$"
+            },
+            {
+              "type": "string",
+              "const": "no DOI available"
+            }
+          ]
+        },
+        "licence": {
+          "type": "array",
+          "description": "SPDX license identifier(s) for the tool",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "identifier": {
+          "type": "string",
+          "description": "bio.tools identifier of the tool",
+          "pattern": "^(biotools:.*)?$"
+        }
+      },
+      "required": ["description"],
+      "anyOf": [
+        {
+          "required": ["homepage"]
+        },
+        {
+          "required": ["documentation"]
+        },
+        {
+          "required": ["tool_dev_url"]
+        },
+        {
+          "required": ["doi"]
+        }
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "const": "TODO: Add description"
+      },
+      "description": "Human-readable description"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+    },
+    "typeName": {
+      "type": "string",
+      "description": "Name of a record or enum type",
+      "pattern": "^[A-Z][a-zA-Z0-9_]*$"
+    },
+    "type": {
+      "type": "string",
+      "description": "Nextflow type, e.g. 'Path', 'Path?', 'List<Path>', 'Map<String,Integer>', 'Channel<Sample>', 'Record', 'Tuple', or the name of a type declared in `types`. A trailing '?' marks the type as nullable.",
+      "pattern": "^[A-Z][a-zA-Z0-9_]*(<[a-zA-Z0-9_?<>, ]+>)?\\??$"
+    },
+    "entryBase": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/type"
+        },
+        "description": {
+          "$ref": "#/$defs/description"
+        },
+        "pattern": {
+          "type": "string",
+          "description": "Glob pattern of the file name(s), for Path-like types"
+        },
+        "ontologies": {
+          "type": "array",
+          "description": "List of ontologies for the parameter",
+          "items": {
+            "type": "object",
+            "patternProperties": {
+              ".*": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https?://.*"
+              }
+            }
+          },
+          "uniqueItems": true
+        },
+        "fields": {
+          "type": "array",
+          "description": "Fields of a record (requires type 'Record')",
+          "items": {
+            "$ref": "#/$defs/namedEntry"
+          },
+          "minItems": 1
+        },
+        "components": {
+          "type": "array",
+          "description": "Components of a tuple, in order (requires type 'Tuple')",
+          "items": {
+            "$ref": "#/$defs/entry"
+          },
+          "minItems": 2
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension field, ignored by Nextflow"
+        }
+      },
+      "required": ["type", "description"],
+      "allOf": [
+        {
+          "if": {
+            "required": ["fields"]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "pattern": "^Record\\??$"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["components"]
+          },
+          "then": {
+            "properties": {
+              "type": {
+                "pattern": "^Tuple\\??$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "entry": {
+      "description": "An input, output, record field or tuple component. Destructured record/tuple inputs and a single unnamed output have no name.",
+      "$ref": "#/$defs/entryBase",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/identifier",
+          "description": "Name of the input, output, field or component"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "namedEntry": {
+      "$ref": "#/$defs/entry",
+      "required": ["name"]
+    },
+    "topicEntry": {
+      "description": "A value sent to a topic channel",
+      "$ref": "#/$defs/entryBase",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "Name of the topic channel (e.g. 'versions'). Must be a literal name.",
+          "minLength": 1
+        }
+      },
+      "required": ["topic"],
+      "unevaluatedProperties": false
+    },
+    "typeDef": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": ["record", "enum"]
+        }
+      },
+      "required": ["kind"],
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "record"
+          }
+        }
+      },
+      "then": {
+        "$ref": "#/$defs/recordType"
+      },
+      "else": {
+        "$ref": "#/$defs/enumType"
+      }
+    },
+    "recordType": {
+      "type": "object",
+      "description": "A record type (`record Name { ... }`)",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/typeName"
+        },
+        "kind": {
+          "const": "record"
+        },
+        "description": {
+          "$ref": "#/$defs/description"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/namedEntry"
+          },
+          "minItems": 1
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension field, ignored by Nextflow"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name", "kind", "fields"]
+    },
+    "enumType": {
+      "type": "object",
+      "description": "An enum type (`enum Name { A, B }`)",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/typeName"
+        },
+        "kind": {
+          "const": "enum"
+        },
+        "description": {
+          "$ref": "#/$defs/description"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "description": "Extension field, ignored by Nextflow"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["name", "kind", "values"]
+    }
+  }
+}

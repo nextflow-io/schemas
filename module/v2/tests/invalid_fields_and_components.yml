@@ -1,0 +1,18 @@
+# Should fail validation: an entry cannot have both fields and components
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
+name: nf-core/example
+version: 1.0.0
+description: Example module
+license: MIT
+input:
+  - type: Record
+    description: Sample
+    fields:
+      - name: id
+        type: String
+        description: Sample identifier
+    components:
+      - type: String
+        description: Sample identifier
+      - type: Path
+        description: Reads
