@@ -1,4 +1,4 @@
-# Should fail validation: a topic entry must name its topic
+# Should fail validation: a topic entry must have a `topic` key.
 $schema: https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json
 name: nf-core/example
 version: 1.0.0

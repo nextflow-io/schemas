@@ -3,9 +3,10 @@ name: nf-core/example
 version: 1.0.0
 description: Example module
 license: MIT
-input:
-  - type: Record
-    description: Sample with grouped reads
+output:
+  - name: sample
+    type: Record
+    description: "Sample with grouped reads, from `record(id: ..., pair: tuple(...), ...)`"
     fields:
       - name: id
         type: String
@@ -14,11 +15,9 @@ input:
         type: Tuple
         description: Read pair
         components:
-          - name: r1
-            type: Path
+          - type: Path
             description: Read 1
-          - name: r2
-            type: Path?
+          - type: Path?
             description: Read 2
       - name: extras
         type: List<Path?>

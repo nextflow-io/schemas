@@ -6,8 +6,11 @@
   "type": "object",
   "properties": {
     "$schema": {
-      "type": "string",
-      "description": "URI of the module spec schema"
+      "description": "URI of this schema. Required, because Nextflow selects the schema version from it.",
+      "enum": [
+        "https://raw.githubusercontent.com/nextflow-io/schemas/main/module/v2/schema.json",
+        "https://raw.githubusercontent.com/nextflow-io/schemas/refs/heads/main/module/v2/schema.json"
+      ]
     },
     "name": {
       "type": "string",
@@ -82,14 +85,38 @@
       "type": "array",
       "description": "Inputs of the module: process inputs, or workflow takes",
       "items": {
-        "$ref": "#/$defs/entry"
+        "$ref": "#/$defs/entry",
+        "if": {
+          "not": {
+            "anyOf": [
+              {
+                "required": ["fields"]
+              },
+              {
+                "required": ["components"]
+              }
+            ]
+          }
+        },
+        "then": {
+          "required": ["name"]
+        },
+        "description": "Inputs are named, except destructured record/tuple inputs"
       }
     },
     "output": {
       "type": "array",
-      "description": "Outputs of the module: process outputs, or workflow emits",
+      "description": "Outputs of the module: process outputs, or workflow emits. Outputs are named, except a single unnamed output.",
       "items": {
         "$ref": "#/$defs/entry"
+      },
+      "if": {
+        "minItems": 2
+      },
+      "then": {
+        "items": {
+          "required": ["name"]
+        }
       }
     },
     "topics": {
@@ -127,7 +154,7 @@
     }
   },
   "additionalProperties": false,
-  "required": ["name", "version", "description", "license"],
+  "required": ["$schema", "name", "version", "description", "license"],
   "if": {
     "properties": {
       "kind": {
@@ -233,12 +260,21 @@
     },
     "type": {
       "type": "string",
-      "description": "Nextflow type, e.g. 'Path', 'Path?', 'List<Path>', 'Map<String,Integer>', 'Channel<Sample>', 'Record', 'Tuple', or the name of a type declared in `types`. A trailing '?' marks the type as nullable.",
+      "description": "Nextflow type, e.g. 'Path', 'Path?', 'List<Path>', 'Map<String, Integer>', 'Channel<Sample>', 'Record', 'Tuple', or the name of a type declared in `types`. A trailing '?' marks the type as nullable. Canonical spelling matches Nextflow: one space after each comma in type arguments.",
       "pattern": "^[A-Z][a-zA-Z0-9_]*(<[a-zA-Z0-9_?<>, ]+>)?\\??$"
     },
     "entryBase": {
       "type": "object",
       "properties": {
+        "name": {
+          "$ref": "#/$defs/identifier",
+          "description": "Name of the input, output, field or component"
+        },
+        "topic": {
+          "type": "string",
+          "description": "Name of the topic channel (e.g. 'versions'). Must be a literal name.",
+          "minLength": 1
+        },
         "type": {
           "$ref": "#/$defs/type"
         },
@@ -286,6 +322,7 @@
           "description": "Extension field, ignored by Nextflow"
         }
       },
+      "additionalProperties": false,
       "required": ["type", "description"],
       "allOf": [
         {
@@ -318,12 +355,8 @@
       "description": "An input, output, record field or tuple component. Destructured record/tuple inputs and a single unnamed output have no name.",
       "$ref": "#/$defs/entryBase",
       "properties": {
-        "name": {
-          "$ref": "#/$defs/identifier",
-          "description": "Name of the input, output, field or component"
-        }
-      },
-      "unevaluatedProperties": false
+        "topic": false
+      }
     },
     "namedEntry": {
       "$ref": "#/$defs/entry",
@@ -333,14 +366,9 @@
       "description": "A value sent to a topic channel",
       "$ref": "#/$defs/entryBase",
       "properties": {
-        "topic": {
-          "type": "string",
-          "description": "Name of the topic channel (e.g. 'versions'). Must be a literal name.",
-          "minLength": 1
-        }
+        "name": false
       },
-      "required": ["topic"],
-      "unevaluatedProperties": false
+      "required": ["topic"]
     },
     "typeDef": {
       "type": "object",

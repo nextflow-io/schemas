@@ -1,3 +1,4 @@
+$schema: https://raw.githubusercontent.com/nextflow-io/schemas/refs/heads/main/module/v2/schema.json
 name: nf-core/fastq-align
 version: 1.0.0
 kind: Workflow
