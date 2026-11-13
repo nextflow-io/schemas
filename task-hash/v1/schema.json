@@ -6,7 +6,7 @@
   "type": "object",
   "properties": {
     "id": {
-      "description": "Identifier of this task hash version, e.g. std/v2",
+      "description": "Identifier of this task hash version, e.g. std/v1",
       "type": "string",
       "pattern": "^[a-z][a-z0-9-]*/v[0-9]+$"
     },

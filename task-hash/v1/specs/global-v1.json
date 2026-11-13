@@ -1,6 +1,6 @@
 {
   "id": "global/v1",
-  "note": "The Seqera global cache: std/v2 without the session id and the process name, so a hash is shared across runs and pipelines. File inputs are hashed by content identity.",
+  "note": "The Seqera global cache: std/v1 without the session id and the process name, so a hash is shared across runs and pipelines. File inputs are hashed by content identity.",
   "keys": [
     {
       "key": "TASK_SOURCE",

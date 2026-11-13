@@ -17,7 +17,7 @@ changes over time. This directory is where it looks them up.
 | `tests/`                 | schema test cases                      |
 
 There is no index of available versions, because nothing needs one: a record names its
-version, so a consumer fetches `specs/std-v2.json` by that name.
+version, so a consumer fetches `specs/std-v1.json` by that name.
 
 ## Families
 
@@ -36,11 +36,13 @@ A version is a set of keys and their lineage mapping, nothing more. Any change t
 is a new version, numbered with the next integer in its family. A published spec is never
 edited.
 
-| Version     | Releases                | Change                                        |
-| ----------- | ----------------------- | --------------------------------------------- |
-| `std/v1`    | 25.10.0 to 26.07.0-edge | the baseline                                  |
-| `std/v2`    | 26.08.0-edge onwards    | adds `RESOURCES_BUNDLE` (#6914)               |
-| `global/v1` | Seqera global cache     | `std/v2` without `SESSION_ID`, `PROCESS_NAME` |
+| Version     | Written by                                    | Keys                                          |
+| ----------- | --------------------------------------------- | --------------------------------------------- |
+| `std/v1`    | the first Nextflow release with `hashVersion` | the current task hash key set                 |
+| `global/v1` | the Seqera global cache                       | `std/v1` without `SESSION_ID`, `PROCESS_NAME` |
+
+Only versions that a record can name are published. The task hash changed before
+`hashVersion` existed, and that history is kept below for reference rather than as specs.
 
 ## Reading a spec
 
@@ -70,10 +72,29 @@ versions, and the version difference is then the explanation.
 
 ## Records with no version id
 
-A record written before Nextflow recorded `hashVersion` is read with the `std/v2` mapping.
-`std/v2` differs from `std/v1` only by `RESOURCES_BUNDLE`, which is not recorded, so every
-recorded field maps the same way under both. For an older run, the only inaccuracy is that
-`RESOURCES_BUNDLE` is reported as unseen when it was not hashed at all.
+A `std` record written before Nextflow recorded `hashVersion`, from 25.04.0 (the first
+release with lineage) onwards, is read with the `std/v1` mapping. Some keys of `std/v1`
+were not hashed by older releases, but the fields that carry them are also missing from
+those records, so they are reported as unseen, never as changed.
+
+| Releases                     | Task hash keys compared with `std/v1` | Lineage fields compared with `std/v1` |
+| ---------------------------- | ------------------------------------- | ------------------------------------- |
+| 25.04.0 to 25.06.0-edge      | no `EVAL_OUTPUTS`, `RESOURCES_BUNDLE` | no `eval`                             |
+| 25.07.0-edge to 26.04.x      | no `RESOURCES_BUNDLE`                 | no `eval`                             |
+| 26.05.0-edge to 26.07.0-edge | no `RESOURCES_BUNDLE`                 | same                                  |
+| 26.08.0-edge onwards         | same                                  | same                                  |
+
+`EVAL_OUTPUTS` entered the task hash in 25.07.0-edge, `eval` entered lineage in
+26.05.0-edge (nextflow-io/nextflow#7211), and `RESOURCES_BUNDLE` entered the task hash in
+26.08.0-edge (nextflow-io/nextflow#6914).
+
+Two caveats about older records:
+
+- 25.04.0 wrote lineage records without the `v1beta1` envelope, which arrived in 25.04.1.
+  The `TaskRun` fields are the same, but the record does not match `lineage/v1beta1`.
+- In a stub run before 26.05.0-edge, `codeChecksum` may not reflect the stub source
+  (nextflow-io/nextflow#7211 fixed how it is read), so a change to the stub may not show
+  in lineage.
 
 The global cache records its version from its first release, so this applies to `std` only.
 
