@@ -1,9 +1,8 @@
 # Task hash versions
 
-A **task hash version** describes how a task hash was computed: which keys were hashed,
-in what order, how each value was encoded, and which hash function was applied. A lineage
-`TaskRun` record carries the id of the version that produced its hash, in the
-`hashVersion` field.
+A **task hash version** lists the keys that feed a task hash, and which fields of the
+lineage `TaskRun` record carry each key. A lineage `TaskRun` record carries the id of the
+version that produced its hash, in the `hashVersion` field.
 
 A consumer that wants to explain why a task was not cached diffs two `TaskRun` records.
 To do that honestly it needs to know which record fields feed the hash, and that set
@@ -11,15 +10,15 @@ changes over time. This directory is where it looks them up.
 
 ## Layout
 
-| Path                       | What it holds                                                                     |
-| -------------------------- | --------------------------------------------------------------------------------- |
-| `schema.json`              | the shape of a spec file                                                          |
-| `specs/<family>-vN.M.json` | one published version, keyed by its id                                            |
-| `legacy-releases.json`     | Nextflow release to version, for `std` records written before the id was recorded |
-| `tests/`                   | schema test cases                                                                 |
+| Path                     | What it holds                                                                     |
+| ------------------------ | --------------------------------------------------------------------------------- |
+| `schema.json`            | the shape of a spec file                                                          |
+| `specs/<family>-vN.json` | one published version, keyed by its id                                            |
+| `legacy-releases.json`   | Nextflow release to version, for `std` records written before the id was recorded |
+| `tests/`                 | schema test cases                                                                 |
 
 There is no index of available versions, because nothing needs one: a record names its
-version, so a consumer fetches `specs/std-v1.7.json` by that name.
+version, so a consumer fetches `specs/std-v2.json` by that name.
 
 ## Families
 
@@ -27,28 +26,48 @@ The part of an id before the slash is the **family**: the hasher that produced i
 families can hash the same task to different values, so a consumer must read the whole
 id, never the number alone.
 
-| Family | Who writes it           | How it differs                                                                                                                                          |
-| ------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `std`  | Nextflow itself         | the baseline                                                                                                                                            |
-| `glb`  | the Seqera global cache | drops `SESSION_ID` and `PROCESS_NAME`, so a hash is shared across runs and pipelines; file inputs are hashed through the cache's file-identity strategy |
+| Family   | Who writes it           | How it differs                                                                       |
+| -------- | ----------------------- | ------------------------------------------------------------------------------------ |
+| `std`    | Nextflow itself         | the baseline                                                                         |
+| `global` | the Seqera global cache | drops `SESSION_ID` and `PROCESS_NAME`, so a hash is shared across runs and pipelines |
+
+## Versions
+
+A version is a set of keys and their lineage mapping, nothing more. Any change to either
+is a new version, numbered with the next integer in its family. A published spec is never
+edited.
+
+| Version     | Releases                | Change                                        |
+| ----------- | ----------------------- | --------------------------------------------- |
+| `std/v1`    | 25.10.0 to 26.07.0-edge | the baseline                                  |
+| `std/v2`    | 26.08.0-edge onwards    | adds `RESOURCES_BUNDLE` (#6914)               |
+| `global/v1` | Seqera global cache     | `std/v2` without `SESSION_ID`, `PROCESS_NAME` |
 
 ## Reading a spec
 
 ```json
 {
   "key": "SPACK",
-  "contributor": "spackEnvAndArch",
   "lineage": ["spack", "architecture"]
 }
 ```
 
 `lineage` names the fields of the lineage `TaskRun` record that carry this key. An empty
 list means the key is not recorded at all, and a consumer must report it as unseen rather
-than as unchanged.
+than as unchanged. A field that a record predates is missing from it, and must be treated
+the same way.
 
-Two versions can share a key set and still hash differently, because `encoding` decides
-how a value is serialised before hashing. That is why a record carries a version id and
-not just a list of fields.
+## Comparing two records
+
+For each key, compare the fields that carry it in each record:
+
+- a field that differs explains the cache miss;
+- a key that one record does not record is reported as unseen;
+- a key that only one of the two versions has is reported as such.
+
+Nextflow can change how it hashes a key's value without changing the key set, so two
+hashes can differ while every recorded field is equal. This only happens across Nextflow
+versions, and the version difference is then the explanation.
 
 ## Records with no version id
 
@@ -63,26 +82,16 @@ version of its run, through `legacy-releases.json`. Four things about that looku
   answer rather than the answer of its neighbour.
 - Anything before 25.10.0 cannot be identified and returns nothing.
 
-The table covers `std` only. Other families do not need it, because they record their
-version where it cannot be lost: a global cache stores it in the cache marker, and a
-marker without one means the first version, `glb/v1.1`.
+The table covers `std` only. The global cache records its version from its first release.
 
-The table is generated from the Nextflow repository with `git tag --contains` on the
-commit that ended each version, so a change backported into an older maintenance line
-produces a correct table rather than one guessed from version ordering.
+The table is generated from the Nextflow repository: a release maps to the newest version
+whose first commit it contains (`git tag --contains <commit>`), so a change backported into
+an older maintenance line produces a correct table rather than one guessed from version
+ordering. Releases are appended until Nextflow records `hashVersion`, after which the table
+is frozen.
 
-## Keeping these files true
+## Publishing a new version
 
-A spec file is **frozen** once published, and is a byte-identical copy of the resource
-shipped in the jar of whichever component owns the family. Editing one here changes the meaning of every task hash
-already recorded under it, with no symptom a user could see.
-
-`check-sync.sh` checks this against each producer: Nextflow `master` for `std`, so a new
-version is published before it is released, and the newest `xpack-platform` plugin release
-for `glb`, whose source is private. The `Task hash sync` workflow runs it daily, skipping
-the day when nothing changed, and on every change here:
-
-- a published spec that differs from the producer's fails the check, and the daily run
-  opens an issue;
-- a producer spec that is not published yet makes the daily run open a PR adding it;
-- a spec published here but not in the producer passes.
+A new version is due when Nextflow adds or removes a key from the task hash, or records a
+key in a different lineage field. Add `specs/<family>-v<N+1>.json` with the full key list,
+and add a row to the table above.

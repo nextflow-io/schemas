@@ -1,0 +1,50 @@
+{
+  "id": "global/v1",
+  "note": "The Seqera global cache: std/v2 without the session id and the process name, so a hash is shared across runs and pipelines. File inputs are hashed by content identity.",
+  "keys": [
+    {
+      "key": "TASK_SOURCE",
+      "lineage": ["codeChecksum"]
+    },
+    {
+      "key": "CONTAINER",
+      "lineage": ["container"]
+    },
+    {
+      "key": "INPUTS",
+      "lineage": ["input"]
+    },
+    {
+      "key": "EVAL_OUTPUTS",
+      "lineage": ["eval"]
+    },
+    {
+      "key": "SCRIPT_VARS",
+      "lineage": ["globalVars"]
+    },
+    {
+      "key": "BIN_ENTRIES",
+      "lineage": ["binEntries"]
+    },
+    {
+      "key": "RESOURCES_BUNDLE",
+      "lineage": []
+    },
+    {
+      "key": "ENV_MODULES",
+      "lineage": []
+    },
+    {
+      "key": "CONDA",
+      "lineage": ["conda"]
+    },
+    {
+      "key": "SPACK",
+      "lineage": ["spack", "architecture"]
+    },
+    {
+      "key": "STUB_MARKER",
+      "lineage": ["codeChecksum"]
+    }
+  ]
+}
