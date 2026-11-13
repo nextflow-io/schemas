@@ -87,15 +87,9 @@
       "items": {
         "$ref": "#/$defs/entry",
         "if": {
-          "not": {
-            "anyOf": [
-              {
-                "required": ["fields"]
-              },
-              {
-                "required": ["components"]
-              }
-            ]
+          "properties": {
+            "fields": false,
+            "components": false
           }
         },
         "then": {
@@ -290,12 +284,9 @@
           "description": "List of ontologies for the parameter",
           "items": {
             "type": "object",
-            "patternProperties": {
-              ".*": {
-                "type": "string",
-                "format": "uri",
-                "pattern": "^https?://.*"
-              }
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^https?://.*"
             }
           },
           "uniqueItems": true
@@ -324,32 +315,22 @@
       },
       "additionalProperties": false,
       "required": ["type", "description"],
-      "allOf": [
-        {
-          "if": {
-            "required": ["fields"]
-          },
-          "then": {
-            "properties": {
-              "type": {
-                "pattern": "^Record\\??$"
-              }
+      "dependentSchemas": {
+        "fields": {
+          "properties": {
+            "type": {
+              "pattern": "^Record\\??$"
             }
           }
         },
-        {
-          "if": {
-            "required": ["components"]
-          },
-          "then": {
-            "properties": {
-              "type": {
-                "pattern": "^Tuple\\??$"
-              }
+        "components": {
+          "properties": {
+            "type": {
+              "pattern": "^Tuple\\??$"
             }
           }
         }
-      ]
+      }
     },
     "entry": {
       "description": "An input, output, record field or tuple component. Destructured record/tuple inputs and a single unnamed output have no name.",
@@ -383,17 +364,27 @@
           "kind": {
             "const": "record"
           }
-        }
+        },
+        "required": ["kind"]
       },
       "then": {
         "$ref": "#/$defs/recordType"
       },
       "else": {
-        "$ref": "#/$defs/enumType"
+        "if": {
+          "properties": {
+            "kind": {
+              "const": "enum"
+            }
+          },
+          "required": ["kind"]
+        },
+        "then": {
+          "$ref": "#/$defs/enumType"
+        }
       }
     },
     "recordType": {
-      "type": "object",
       "description": "A record type (`record Name { ... }`)",
       "properties": {
         "name": {
@@ -413,16 +404,10 @@
           "minItems": 1
         }
       },
-      "patternProperties": {
-        "^x-": {
-          "description": "Extension field, ignored by Nextflow"
-        }
-      },
       "additionalProperties": false,
       "required": ["name", "kind", "fields"]
     },
     "enumType": {
-      "type": "object",
       "description": "An enum type (`enum Name { A, B }`)",
       "properties": {
         "name": {
@@ -441,11 +426,6 @@
           },
           "minItems": 1,
           "uniqueItems": true
-        }
-      },
-      "patternProperties": {
-        "^x-": {
-          "description": "Extension field, ignored by Nextflow"
         }
       },
       "additionalProperties": false,

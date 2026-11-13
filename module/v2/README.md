@@ -2,32 +2,15 @@
 
 Schema for the `meta.yml` of modules written as [typed processes](https://docs.seqera.io/nextflow/process-typed) or typed workflows. Modules written with legacy (DSL2) processes use [`v1`](../v1/schema.json), which is frozen.
 
-## Changes from v1
+## Model
 
-- Types are Nextflow types (`Path?`, `List<Path>`, `Channel<Sample>`) instead of a fixed vocabulary (`file`, `channel`).
-- Nullability is part of the type (`Path?`). There is no `optional` flag.
-- Records and tuples are objects with `fields` / `components` instead of nested lists.
-- Topic entries have the same shape as outputs, with `topic` instead of `name`.
-- Record and enum types used by the interface are declared in `types`.
-- `$schema` is required and must point to v2, since Nextflow selects the schema version from it.
-- The top level, entries and type definitions reject unknown keys, except extension keys prefixed with `x-`. Tool entries and `requires` are unchanged from v1.
-
-## Entries
-
-Inputs, outputs, record fields, tuple components and topic values are all described by an entry:
-
-| Key           | Description                                                                                                 |
-| ------------- | ----------------------------------------------------------------------------------------------------------- |
-| `name`        | Name of the input, output, field or component. Omitted for destructured inputs and a single unnamed output. |
-| `topic`       | Name of the topic channel (topic entries only, instead of `name`).                                          |
-| `type`        | Nextflow type. A trailing `?` marks the type as nullable.                                                   |
-| `description` | Human-readable description (required).                                                                      |
-| `pattern`     | Glob pattern of the file name(s), for `Path`-like types.                                                    |
-| `ontologies`  | Ontology terms, e.g. EDAM formats.                                                                          |
-| `fields`      | Fields of a record. Requires `type: Record`.                                                                |
-| `components`  | Components of a tuple, in order. Requires `type: Tuple`.                                                    |
-
-A record can be described inline (`type: Record` with `fields`) or by referencing a type declared in `types` (`type: Sample`).
+- **Types** are Nextflow types, spelled as Nextflow prints them: `Path`, `List<Path>`, `Map<String, Integer>`, `Channel<Sample>`. A trailing `?` marks a type as nullable. There is no `optional` flag.
+- **Entries** describe inputs, outputs, record fields, tuple components and topic values, with `name`, `type`, `description`, and optionally `pattern` and `ontologies`.
+- **Records and tuples** are entries with `type: Record` and `fields`, or `type: Tuple` and `components`. A record can also reference a type declared in `types` (`type: Sample`). Records inside channels and collections must use a declared type (`Channel<Sample>`), since `fields` only describes a bare `Record`.
+- **Topic entries** are entries with `topic` instead of `name`. Topic names are literal strings.
+- **Naming:** inputs are named except destructured record/tuple inputs. Outputs are named unless there is exactly one.
+- **`$schema`** is required and must point to v2, since Nextflow selects the schema version from it.
+- **Unknown keys** are rejected at the top level and in entries, except extension keys prefixed with `x-`.
 
 ## Example
 
@@ -102,13 +85,6 @@ types:
         type: Path?
         description: Read 2, for paired-end samples
 ```
-
-## Conventions
-
-- **Records in channels and collections** use a named type: `Channel<Sample>` with `Sample` declared in `types`. `fields` only describes a bare `Record`. `Channel<Record>` is allowed, but its fields can't be described.
-- **Type spelling** matches how Nextflow prints types: one space after each comma in type arguments (`Map<String, Integer>`).
-- **Topic names** must be literal strings. Topics whose name is computed at runtime can't be described in v2.
-- **Naming:** inputs are named except destructured record/tuple inputs, and outputs are named unless there is exactly one.
 
 ## Checks outside the schema
 
