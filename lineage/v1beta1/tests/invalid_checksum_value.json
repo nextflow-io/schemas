@@ -1,0 +1,12 @@
+{
+  "version": "lineage/v1beta1",
+  "kind": "FileOutput",
+  "spec": {
+    "path": "/tmp/out.txt",
+    "checksum": {
+      "value": "not-a-hex-string",
+      "algorithm": "nextflow",
+      "mode": "standard"
+    }
+  }
+}

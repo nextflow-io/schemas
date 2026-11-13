@@ -222,7 +222,8 @@
         },
         "description": {
           "type": "string",
-          "description": "Human-readable description of the parameter"
+          "description": "Human-readable description of the parameter",
+          "not": { "const": "TODO: Add description" }
         },
         "pattern": {
           "type": "string",

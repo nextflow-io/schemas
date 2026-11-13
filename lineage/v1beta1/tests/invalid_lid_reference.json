@@ -1,0 +1,8 @@
+{
+  "version": "lineage/v1beta1",
+  "kind": "FileOutput",
+  "spec": {
+    "path": "/tmp/out.txt",
+    "workflowRun": "49cdd59aeb45dde9bcdaecf488c1f442"
+  }
+}
