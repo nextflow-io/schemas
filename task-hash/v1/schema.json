@@ -15,7 +15,7 @@
       "type": "string"
     },
     "keys": {
-      "description": "The keys that feed the task hash. Their order is not significant",
+      "description": "The keys that feed the task hash, listed in the order Nextflow adds them to the hash. A consumer must not depend on the order",
       "type": "array",
       "minItems": 1,
       "items": {

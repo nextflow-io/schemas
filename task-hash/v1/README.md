@@ -102,6 +102,8 @@ The global cache records its version from its first release, so this applies to 
 
 A new version is due when Nextflow adds or removes a key from the task hash, or records a
 key in a different lineage field. Add `specs/<family>-v<N+1>.json` with the full key list,
-and add a row to the table above. If it changes the mapping of a recorded field, records
+and add a row to the table above. Keys are listed in the order Nextflow adds them to the
+task hash (`TaskHasher.compute()` for `std`), so a spec can be checked line by line against
+the code. A consumer must not depend on the order. If it changes the mapping of a recorded field, records
 with no version id can no longer all be read with one mapping, and need resolving from
 the Nextflow version of their run.
