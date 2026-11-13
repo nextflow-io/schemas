@@ -10,12 +10,11 @@ changes over time. This directory is where it looks them up.
 
 ## Layout
 
-| Path                     | What it holds                                                                     |
-| ------------------------ | --------------------------------------------------------------------------------- |
-| `schema.json`            | the shape of a spec file                                                          |
-| `specs/<family>-vN.json` | one published version, keyed by its id                                            |
-| `legacy-releases.json`   | Nextflow release to version, for `std` records written before the id was recorded |
-| `tests/`                 | schema test cases                                                                 |
+| Path                     | What it holds                          |
+| ------------------------ | -------------------------------------- |
+| `schema.json`            | the shape of a spec file               |
+| `specs/<family>-vN.json` | one published version, keyed by its id |
+| `tests/`                 | schema test cases                      |
 
 There is no index of available versions, because nothing needs one: a record names its
 version, so a consumer fetches `specs/std-v2.json` by that name.
@@ -71,27 +70,17 @@ versions, and the version difference is then the explanation.
 
 ## Records with no version id
 
-A `std` record written before Nextflow recorded the id is resolved from the Nextflow
-version of its run, through `legacy-releases.json`. Four things about that lookup matter:
+A record written before Nextflow recorded `hashVersion` is read with the `std/v2` mapping.
+`std/v2` differs from `std/v1` only by `RESOURCES_BUNDLE`, which is not recorded, so every
+recorded field maps the same way under both. For an older run, the only inaccuracy is that
+`RESOURCES_BUNDLE` is reported as unseen when it was not hashed at all.
 
-- It applies only where no id can exist. A record that names its version is always
-  resolved from the record.
-- The answer is **inferred**, not asserted. A patched or vendored build reports a version
-  whose hasher may not be the one it used.
-- Releases are listed exactly, never as ranges. A release that is not listed returns no
-  answer rather than the answer of its neighbour.
-- Anything before 25.10.0 cannot be identified and returns nothing.
-
-The table covers `std` only. The global cache records its version from its first release.
-
-The table is generated from the Nextflow repository: a release maps to the newest version
-whose first commit it contains (`git tag --contains <commit>`), so a change backported into
-an older maintenance line produces a correct table rather than one guessed from version
-ordering. Releases are appended until Nextflow records `hashVersion`, after which the table
-is frozen.
+The global cache records its version from its first release, so this applies to `std` only.
 
 ## Publishing a new version
 
 A new version is due when Nextflow adds or removes a key from the task hash, or records a
 key in a different lineage field. Add `specs/<family>-v<N+1>.json` with the full key list,
-and add a row to the table above.
+and add a row to the table above. If it changes the mapping of a recorded field, records
+with no version id can no longer all be read with one mapping, and need resolving from
+the Nextflow version of their run.
