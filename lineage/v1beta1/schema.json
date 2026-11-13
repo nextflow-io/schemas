@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/nextflow-io/schemas/main/lineage/v1beta1/schema.json",
   "title": "Nextflow lineage schema",
+  "description": "Schema for Nextflow lineage records, as stored in the lineage store and shown by `nextflow lineage view`",
   "oneOf": [
     {
       "type": "object",
@@ -91,22 +92,24 @@
       "type": "object",
       "properties": {
         "algorithm": {
-          "title": "Checksum Algorithm",
-          "description": "The algorithm used to compute the checksum",
+          "title": "Algorithm",
+          "description": "Algorithm used to compute the checksum",
           "type": ["string", "null"],
           "enum": ["nextflow", null]
         },
         "mode": {
-          "title": "Checksum Mode",
-          "description": "The hashing mode used to compute the checksum",
-          "examples": ["standard", "deep", "lenient", "sha256"],
+          "title": "Mode",
+          "description": "Hashing mode used to compute the checksum",
           "type": ["string", "null"],
           "enum": ["standard", "deep", "lenient", "sha256", null]
         },
         "value": {
-          "title": "Checksum Value",
-          "description": "The checksum value as a hexadecimal string",
-          "examples": ["a1b2c3d4e5f6", "1234567890abcdef"],
+          "title": "Value",
+          "description": "Checksum value as a hexadecimal string",
+          "examples": [
+            "3cf7a0e35e88bf747ad1a3d4ec34ebc5",
+            "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+          ],
           "type": ["string", "null"],
           "pattern": "^[a-fA-F0-9]+$",
           "minLength": 1
@@ -119,8 +122,8 @@
       "type": "object",
       "properties": {
         "checksum": {
-          "title": "Data Checksum",
-          "description": "Checksum of the data content",
+          "title": "Checksum",
+          "description": "Checksum of the file content",
           "anyOf": [
             {
               "type": "null"
@@ -131,12 +134,12 @@
           ]
         },
         "path": {
-          "title": "Data Path",
-          "description": "Real path of the data as a local path or URI",
+          "title": "Path",
+          "description": "Normalized path: relative to the work directory (`work/...`), repository source URL, or URI",
           "examples": [
-            "https://github.com/user/repo/tree/<commit>/main.nf",
-            "work/ab/cdef12/input.txt",
-            "file:///path/to/script.nf"
+            "https://github.com/nf-core/rnaseq/tree/3816d48abd9fab2eee41775b60b4eb8745e1fcaa/main.nf",
+            "work/3c/f7a0e35e88bf747ad1a3d4ec34ebc5/input.txt",
+            "file:///data/samplesheet.csv"
           ],
           "type": ["string", "null"]
         }
@@ -148,8 +151,8 @@
       "type": "object",
       "properties": {
         "checksum": {
-          "title": "Output Checksum",
-          "description": "Checksum of the output data",
+          "title": "Checksum",
+          "description": "Checksum of the file content",
           "anyOf": [
             {
               "type": "null"
@@ -161,7 +164,7 @@
         },
         "createdAt": {
           "title": "Created At",
-          "description": "Data creation date (ISO 8601 format)",
+          "description": "File creation time, from file system attributes",
           "anyOf": [
             {
               "type": "null"
@@ -173,7 +176,7 @@
         },
         "labels": {
           "title": "Labels",
-          "description": "Labels attached to the data",
+          "description": "Labels from the workflow output definition (published files only)",
           "type": ["array", "null"],
           "items": {
             "type": "string"
@@ -181,7 +184,7 @@
         },
         "modifiedAt": {
           "title": "Modified At",
-          "description": "Data last modified date (ISO 8601 format)",
+          "description": "File last-modified time, from file system attributes",
           "anyOf": [
             {
               "type": "null"
@@ -192,75 +195,87 @@
           ]
         },
         "path": {
-          "title": "Output Path",
-          "description": "Real path of the output data as a local path or URI",
-          "examples": ["/path/to/output.txt", "s3://bucket/output.txt"],
+          "title": "Path",
+          "description": "Absolute path or URI of the file",
+          "examples": [
+            "/data/results/versions.yml",
+            "s3://bucket/results/versions.yml"
+          ],
           "type": ["string", "null"]
         },
         "size": {
-          "title": "Output Size",
-          "description": "Size of the data in bytes",
+          "title": "Size",
+          "description": "File size in bytes",
           "type": "integer"
         },
         "source": {
-          "title": "Output Source",
-          "description": "Entity that generated the data - lid:// URI",
-          "examples": ["lid://1234567890abcdef", "lid://abc123/output.txt"],
+          "title": "Source",
+          "description": "lid:// reference to the entity that generated the file: a task run, a workflow run, or a file output (`lid://<hash>/<path>`)",
+          "examples": [
+            "lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5",
+            "lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5/versions.yml"
+          ],
           "type": ["string", "null"],
           "pattern": "^lid://[a-fA-F0-9]+(/.*)?$"
         },
         "taskRun": {
           "title": "Task Run Reference",
-          "description": "Reference to the task that generated the data (null for workflow-level outputs)",
+          "description": "lid:// reference to the task run that generated the file (null for files not produced by a task)",
           "type": ["string", "null"],
-          "pattern": "^lid://[a-fA-F0-9]+$"
+          "pattern": "^lid://[a-fA-F0-9]+$",
+          "examples": ["lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5"]
         },
         "workflowRun": {
           "title": "Workflow Run Reference",
-          "description": "Reference to the WorkflowRun that generated the data",
+          "description": "lid:// reference to the workflow run that generated the file",
           "type": ["string", "null"],
-          "pattern": "^lid://[a-fA-F0-9]+$"
+          "pattern": "^lid://[a-fA-F0-9]+$",
+          "examples": ["lid://49cdd59aeb45dde9bcdaecf488c1f442"]
         }
       }
     },
     "Map": {
+      "title": "Map",
+      "description": "Arbitrary key-value map",
       "type": "object"
     },
     "OffsetDateTime": {
+      "title": "OffsetDateTime",
+      "description": "Timestamp with UTC offset (ISO 8601)",
       "type": "string",
       "format": "date-time"
     },
     "Parameter": {
       "title": "Parameter",
-      "description": "Models a workflow or task parameter.",
+      "description": "Models a workflow or task parameter, input or output.",
       "type": "object",
       "properties": {
         "name": {
-          "title": "Parameter Name",
-          "description": "The parameter name",
-          "examples": ["input_file", "output_dir", "sample_id"],
+          "title": "Name",
+          "description": "Parameter, input or output name (null for unnamed outputs)",
+          "examples": ["input", "meta", "reads"],
           "type": ["string", "null"]
         },
         "type": {
-          "title": "Parameter Type",
-          "description": "The parameter type: a process input/output qualifier (e.g. path, val) or the type name of the value (e.g. String, Boolean, Integer)",
+          "title": "Type",
+          "description": "Process input/output qualifier (e.g. path, val) or type name of the value (e.g. String, Boolean, Integer)",
           "examples": ["path", "val", "String", "Boolean"],
           "type": ["string", "null"]
         },
         "value": {
-          "title": "Parameter Value",
-          "description": "The parameter value"
+          "title": "Value",
+          "description": "Parameter value; paths are normalized and task file outputs are lid:// references"
         }
       }
     },
     "TaskOutput": {
       "title": "TaskOutput",
-      "description": "Models task results.",
+      "description": "Models the results of a task execution.",
       "type": "object",
       "properties": {
         "createdAt": {
           "title": "Created At",
-          "description": "Creation date of this task output (ISO 8601 format)",
+          "description": "Time this record was created",
           "anyOf": [
             {
               "type": "null"
@@ -271,16 +286,16 @@
           ]
         },
         "labels": {
-          "title": "Task Output Labels",
-          "description": "Labels attached to the task output",
+          "title": "Labels",
+          "description": "Labels attached to the task output (currently not populated)",
           "type": ["array", "null"],
           "items": {
             "type": "string"
           }
         },
         "output": {
-          "title": "Task Output Parameters",
-          "description": "Output of the task",
+          "title": "Output",
+          "description": "Task outputs; file outputs are lid:// references to file output records",
           "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
@@ -288,15 +303,17 @@
         },
         "taskRun": {
           "title": "Task Run Reference",
-          "description": "Reference to the task that generated the output",
+          "description": "lid:// reference to the task run that generated the output",
           "type": ["string", "null"],
-          "pattern": "^lid://[a-fA-F0-9]+$"
+          "pattern": "^lid://[a-fA-F0-9]+$",
+          "examples": ["lid://3cf7a0e35e88bf747ad1a3d4ec34ebc5"]
         },
         "workflowRun": {
           "title": "Workflow Run Reference",
-          "description": "Reference to the WorkflowRun",
+          "description": "lid:// reference to the workflow run that executed the task",
           "type": ["string", "null"],
-          "pattern": "^lid://[a-fA-F0-9]+$"
+          "pattern": "^lid://[a-fA-F0-9]+$",
+          "examples": ["lid://49cdd59aeb45dde9bcdaecf488c1f442"]
         }
       }
     },
@@ -307,12 +324,12 @@
       "properties": {
         "architecture": {
           "title": "Architecture",
-          "description": "Architecture defined in the Spack environment",
+          "description": "CPU architecture from the `arch` directive (used for Spack environments)",
           "type": ["string", "null"]
         },
         "binEntries": {
-          "title": "Binary Entries",
-          "description": "Binaries used in the task run",
+          "title": "Bin Scripts",
+          "description": "Scripts from the project `bin` directory referenced by the task script",
           "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/DataPath"
@@ -350,7 +367,7 @@
         },
         "globalVars": {
           "title": "Global Variables",
-          "description": "Global variables defined in the task run",
+          "description": "Global (script-level) variables referenced by the task, mapped by name",
           "anyOf": [
             {
               "type": "null"
@@ -361,8 +378,8 @@
           ]
         },
         "input": {
-          "title": "Task Input Parameters",
-          "description": "Task run input",
+          "title": "Input",
+          "description": "Task inputs",
           "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
@@ -375,13 +392,16 @@
           "type": ["string", "null"]
         },
         "name": {
-          "title": "Task Name",
-          "description": "Task name as defined in the workflow",
-          "examples": ["FASTQC", "BWA_MEM", "SAMTOOLS_SORT"],
+          "title": "Name",
+          "description": "Task name: process name followed by the tag or index",
+          "examples": [
+            "NFCORE_RNASEQ:PREPARE_GENOME:CUSTOM_GETCHROMSIZES (genome_gfp.fasta)",
+            "FASTQC (2)"
+          ],
           "type": ["string", "null"]
         },
         "script": {
-          "title": "Task Script",
+          "title": "Script",
           "description": "Resolved task script",
           "type": ["string", "null"]
         },
@@ -399,9 +419,10 @@
         },
         "workflowRun": {
           "title": "Workflow Run Reference",
-          "description": "Workflow run associated to the task run",
+          "description": "lid:// reference to the workflow run that executed the task",
           "type": ["string", "null"],
-          "pattern": "^lid://[a-fA-F0-9]+$"
+          "pattern": "^lid://[a-fA-F0-9]+$",
+          "examples": ["lid://49cdd59aeb45dde9bcdaecf488c1f442"]
         }
       }
     },
@@ -413,20 +434,20 @@
         "commitId": {
           "title": "Commit ID",
           "description": "Git commit identifier",
-          "examples": ["a1b2c3d4e5f6789"],
+          "examples": ["3816d48abd9fab2eee41775b60b4eb8745e1fcaa"],
           "type": ["string", "null"],
           "pattern": "^[a-fA-F0-9]{6,64}$"
         },
         "repository": {
           "title": "Repository",
           "description": "Workflow repository URL",
-          "examples": ["https://github.com/user/workflow.git"],
+          "examples": ["https://github.com/nf-core/rnaseq"],
           "type": ["string", "null"],
           "format": "uri"
         },
         "scriptFiles": {
           "title": "Script Files",
-          "description": "List of script files defining a workflow",
+          "description": "Script files that define the workflow",
           "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/DataPath"
@@ -441,7 +462,7 @@
       "properties": {
         "createdAt": {
           "title": "Created At",
-          "description": "Creation date of the workflow output (ISO 8601 format)",
+          "description": "Time this record was created, at workflow completion",
           "anyOf": [
             {
               "type": "null"
@@ -452,8 +473,8 @@
           ]
         },
         "output": {
-          "title": "Workflow Output Parameters",
-          "description": "Workflow output",
+          "title": "Output",
+          "description": "Workflow outputs declared in the `output` block",
           "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
@@ -461,9 +482,10 @@
         },
         "workflowRun": {
           "title": "Workflow Run Reference",
-          "description": "Workflow run that generated the output",
+          "description": "lid:// reference to the workflow run that generated the output",
           "type": ["string", "null"],
-          "pattern": "^lid://[a-fA-F0-9]+$"
+          "pattern": "^lid://[a-fA-F0-9]+$",
+          "examples": ["lid://49cdd59aeb45dde9bcdaecf488c1f442"]
         }
       }
     },
@@ -474,7 +496,7 @@
       "properties": {
         "config": {
           "title": "Configuration",
-          "description": "Resolved configuration",
+          "description": "Resolved configuration, with secrets hidden",
           "anyOf": [
             {
               "type": "null"
@@ -485,8 +507,8 @@
           ]
         },
         "metadata": {
-          "title": "Workflow Run Metadata",
-          "description": "Raw workflow execution metadata",
+          "title": "Metadata",
+          "description": "Workflow metadata (`workflow.*`)",
           "anyOf": [
             {
               "type": "null"
@@ -497,13 +519,14 @@
           ]
         },
         "name": {
-          "title": "Workflow Run Name",
-          "description": "Workflow run name",
-          "type": ["string", "null"]
+          "title": "Name",
+          "description": "Run name, set with `-name` or auto-generated",
+          "type": ["string", "null"],
+          "examples": ["voluminous_bardeen"]
         },
         "params": {
-          "title": "Workflow Parameters",
-          "description": "Workflow parameters",
+          "title": "Parameters",
+          "description": "Pipeline parameters (`params`)",
           "type": ["array", "null"],
           "items": {
             "$ref": "#/$defs/Parameter"
@@ -517,8 +540,8 @@
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "workflow": {
-          "title": "Workflow Definition",
-          "description": "Workflow definition including script files and repository information",
+          "title": "Workflow",
+          "description": "Workflow definition, including script files and repository",
           "anyOf": [
             {
               "type": "null"
