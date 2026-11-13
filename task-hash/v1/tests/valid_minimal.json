@@ -1,0 +1,9 @@
+{
+  "id": "std/v1",
+  "keys": [
+    {
+      "key": "SESSION_ID",
+      "lineage": ["sessionId"]
+    }
+  ]
+}

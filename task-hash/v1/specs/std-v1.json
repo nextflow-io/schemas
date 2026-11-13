@@ -1,0 +1,58 @@
+{
+  "id": "std/v1",
+  "note": "The task hash key set of Nextflow from 26.08.0-edge onwards, and the first version Nextflow records in hashVersion.",
+  "keys": [
+    {
+      "key": "SESSION_ID",
+      "lineage": ["sessionId"]
+    },
+    {
+      "key": "PROCESS_NAME",
+      "lineage": ["name"]
+    },
+    {
+      "key": "TASK_SOURCE",
+      "lineage": ["codeChecksum"]
+    },
+    {
+      "key": "CONTAINER",
+      "lineage": ["container"]
+    },
+    {
+      "key": "INPUTS",
+      "lineage": ["input"]
+    },
+    {
+      "key": "EVAL_OUTPUTS",
+      "lineage": ["eval"]
+    },
+    {
+      "key": "SCRIPT_VARS",
+      "lineage": ["globalVars"]
+    },
+    {
+      "key": "BIN_ENTRIES",
+      "lineage": ["binEntries"]
+    },
+    {
+      "key": "RESOURCES_BUNDLE",
+      "lineage": []
+    },
+    {
+      "key": "ENV_MODULES",
+      "lineage": []
+    },
+    {
+      "key": "CONDA",
+      "lineage": ["conda"]
+    },
+    {
+      "key": "SPACK",
+      "lineage": ["spack", "architecture"]
+    },
+    {
+      "key": "STUB_MARKER",
+      "lineage": ["codeChecksum"]
+    }
+  ]
+}
