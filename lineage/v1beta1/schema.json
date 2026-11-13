@@ -258,8 +258,8 @@
         },
         "type": {
           "title": "Type",
-          "description": "Process input/output qualifier (e.g. path, val) or type name of the value (e.g. String, Boolean, Integer)",
-          "examples": ["path", "val", "String", "Boolean"],
+          "description": "Type name of the value (e.g. String, Boolean, Path)",
+          "examples": ["String", "Boolean", "Path", "Record"],
           "type": ["string", "null"]
         },
         "value": {
